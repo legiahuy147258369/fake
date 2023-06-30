@@ -1,30 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from './redux/counter/counterSlice'
-function App() {
-  const count = useSelector((state) => state.counter.value)
-  const dispatch = useDispatch()
 
+
+import './App.scss';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import MainLayout from './layout/MainLayout';
+import AdminLayout from './layout/AdminLayout';
+import Home from './pages/home'
+import NotFound from './components/NotFound';
+import ShopPage from './pages/shop';
+function App() {
+  const dispatch = useDispatch();
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <MainLayout />,
+      errorElement: <NotFound />,
+      children: [
+        { index: true, element: <Home /> },
+        { path: 'shop', element: <ShopPage />, },
+      ],
+    }
+  ]);
   return (
     <div>
-      <div>
-        <button
-          aria-label="Increment value"
-          onClick={() => dispatch(increment())}
-        >
-          Increment
-        </button>
-        <span>{count}</span>
-        <button
-          aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
-        >
-          Decrement
-        </button>
-      </div>
+      <RouterProvider router={router} />
     </div>
   )
 }

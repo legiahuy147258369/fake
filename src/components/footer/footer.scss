@@ -1,0 +1,72 @@
+.footer {
+    background: white;
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 10px;
+    height: auto;
+    overflow: hidden;
+
+    .container {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+
+
+        .left {
+            padding: 25px;
+            font-size: 13px;
+            line-height: 25px;
+
+            p {
+                color: rgb(89, 89, 89);
+                word-wrap: break-word;
+            }
+
+            .area-icon {
+                margin-top: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                width: 30%;
+
+            }
+        }
+
+        .right {
+            padding: 25px;
+
+            &>div {
+
+                .footer-static-title {
+                    font-weight: 700;
+                }
+
+                ul {
+                    margin-top: 10px;
+
+                    li {
+
+                        list-style: none;
+                        font-size: 13px;
+
+                        line-height: 25px;
+
+                        &>a {
+                            color: rgb(45, 45, 45);
+                        }
+                    }
+                }
+            }
+        }
+
+
+    }
+}
+
+.row-contact {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgb(45, 45, 45);
+    font-weight: 500;
+}
