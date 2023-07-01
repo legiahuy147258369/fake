@@ -80,9 +80,9 @@ const Footer = () => {
                         </Col>
                     </Row>
                     <Row gutter={[8, 16]} className='mt-4'>
-                        <Col span={8} ><a className='row-contact'><BiMap /> 60-62 Lê Lợi, Q.1, TP. HCM</a></Col>
-                        <Col span={8} ><a className='row-contact'><CiMail />cskh@fahasa.com.vn</a></Col>
-                        <Col span={8} ><a className='row-contact'> <LuSmartphone />1900636467</a></Col>
+                        <Col xs={24} xl={8} ><a className='row-contact'><BiMap /> 60-62 Lê Lợi, Q.1, TP. HCM</a></Col>
+                        <Col xs={24} xl={8} ><a className='row-contact'><CiMail />cskh@fahasa.com.vn</a></Col>
+                        <Col xs={24} xl={8} ><a className='row-contact'> <LuSmartphone />1900636467</a></Col>
                     </Row>
                 </Col>
             </Row>

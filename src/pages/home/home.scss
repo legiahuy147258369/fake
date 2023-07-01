@@ -1,0 +1,36 @@
+@mixin chung {
+    font-weight: 600;
+    column-gap: 20px;
+    padding: 20px;
+
+    img {
+        border-radius: 50%;
+        width: 40px;
+    }
+}
+
+.home-area {
+    width: 80%;
+    margin: 0 auto;
+
+    .topView {
+        margin: 10px 0;
+
+        .title-view {
+            @include chung;
+            background: #fce9df;
+        }
+    }
+
+    .title-new {
+        @include chung;
+        background: #ffede3;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .home-area {
+        width: 100%;
+        margin: 0 auto;
+    }
+}

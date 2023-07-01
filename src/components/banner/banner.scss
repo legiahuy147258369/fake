@@ -1,0 +1,145 @@
+@mixin fl {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 50%;
+    background: white;
+    color: grey;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.banner-area {
+    margin: 0 auto;
+    display: flex;
+    column-gap: 10px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.banner-area_slide {
+    width: 70%;
+    border-radius: 10px;
+    position: relative;
+}
+
+
+.review-swiper-button-next {
+    @include fl;
+    right: 0px;
+    top: 45%;
+    transition: transform 0.2s;
+
+
+    &:hover {
+        transform: scale(1.2);
+        font-size: 15px;
+    }
+}
+
+.review-swiper-button-prev {
+    @include fl;
+    left: 0px;
+    top: 45%;
+    transition: transform 0.2s;
+
+
+    &:hover {
+        transform: scale(1.2);
+        font-size: 15px;
+    }
+}
+
+.mySwiper {
+    img {
+        width: 100%;
+        height: 320px;
+        border-radius: 10px;
+    }
+}
+
+.banner-area_qc {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+    &>div {
+        height: 50%;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+            border-radius: 10px;
+        }
+    }
+}
+
+.banner-bottom {
+    background: white;
+    border-radius: 10px;
+    display: flex;
+    margin: 10px 0px;
+    column-gap: 15px;
+}
+
+.cms-area {
+    margin: 10px 0;
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+
+    &>div>div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        span {
+            padding-top: 5px;
+        }
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .banner-area_slide {
+        width: 100% !important;
+    }
+
+    .banner-bottom {
+        padding: 0px 15px;
+    }
+
+    .banner-area_qc {
+        display: none !important
+    }
+
+    .mySwiper {
+        img {
+            width: auto;
+            height: auto;
+            margin: auto;
+        }
+    }
+
+    .review-swiper-button-next {
+        display: none !important
+    }
+
+    .review-swiper-button-prev {
+        display: none !important
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    // .cms {
+    //     justify-content: space-evenly;
+    // }
+
+    .banner-bottom {
+        display: none;
+    }
+}
