@@ -17,16 +17,17 @@
         .left-box-shop {
 
 
-            .box-container-cat {
+            .box-container {
                 width: 95%;
                 height: 100vh;
                 background: #ffffff;
             }
 
             .title-filter {
-                font-size: 20px;
+                font-size: 18px;
                 padding: 10px 10px 10px 35px;
                 font-weight: 700;
+                color: rgb(63, 63, 63);
             }
 
             .box-filter {
@@ -59,12 +60,55 @@
                     background-color: #5c21c9 !important;
                 }
 
+                .btn-apply {
+                    background: #5c21c9;
+                    color: #fff;
+                    width: 100%;
+                    text-align: center;
+                    padding: 12px 0px;
+                    margin-top: 30px;
+                    font-size: 15px;
+                    font-weight: 600;
+                }
+            }
+
+            .rate-area {
+                width: 80%;
+            }
+
+            .refresh {
+                margin: 20px 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #C92127;
+                padding: 15px;
+                font-size: 16px;
+                color: #fff;
             }
         }
 
         .right-box-shop {
-            border: 1px solid red;
             overflow: hidden;
+
+            .box-area-sort {
+                align-items: center;
+                background: #fff;
+                padding: 10px;
+                margin-bottom: 6px;
+
+                .box-total>div {
+                    padding-left: 10px;
+                }
+
+                .box-sort {
+                    display: flex;
+                    align-items: center;
+                    justify-content: end;
+
+                }
+
+            }
 
             .box-area-product {
                 border: 1px solid greenyellow;

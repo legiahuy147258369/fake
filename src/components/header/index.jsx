@@ -7,20 +7,25 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Input, Dropdown, Space, Drawer, Button, Col } from 'antd';
 import { LayoutTwoTone } from '@ant-design/icons';
 import { callCategory } from '../../services/api';
+import { Link, createSearchParams } from 'react-router-dom';
+import useQueryConfig from '../../hooks/useQueryConfig';
 
 const Header = () => {
     const [items, setItems] = useState([]);
     const [widthImage, setWidthImage] = useState(150);
     const [open, setOpen] = useState(false);
-
+    const queryConfig = useQueryConfig();
     const getData = async () => {
         let data = (await callCategory()).map(item => ({
             key: item.id,
-            label: (
-                <a className='item-cat'>
-                    {item.name}
-                </a>
-            )
+            label: (<Link className='item-cat' to={{
+                pathname: 'shop', search: createSearchParams({
+                    ...queryConfig,
+                    category: item.id
+                }).toString()
+            }}>
+                {item.name}
+            </Link>)
         }));
         setItems(data);
     };
@@ -56,7 +61,7 @@ const Header = () => {
                 <a className='logo'> <img src={logo} width={widthImage} /></a>
 
                 <div className='nav_search'>
-                    <Dropdown overlayClassName='container-category'
+                    <Dropdown overlayClassName='container-category '
                         menu={{
                             items,
                         }}
@@ -64,7 +69,7 @@ const Header = () => {
                         <div className='nav_category  me-4'>
                             <a onClick={(e) => handleBoxCat(e)}>
                                 <Space>
-                                    <BiCategoryAlt size={30} />
+                                    <BiCategoryAlt size={35} />
                                 </Space>
                             </a>
                         </div>

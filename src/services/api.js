@@ -15,6 +15,8 @@ export const callTopNew = () => {
 export const callCategory = () => {
     return axios.get(`/api/category`);
 };
-export const callProductPagination = () => {
-    return axios.get(`http://localhost:8888/api/product`);
+export const callProductPagination = (query) => {
+    const queryParams = { ...query };
+    console.log(queryParams);
+    return axios.get('http://localhost:8888/api/product', { params: queryParams });
 };

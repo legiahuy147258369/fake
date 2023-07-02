@@ -51,6 +51,7 @@
             display: flex;
             column-gap: 20px;
 
+
             .nav-icon {
                 @include fl;
                 flex-direction: column;
@@ -63,6 +64,7 @@
 .container-category {
     top: 84px !important;
     width: 300px;
+    left: 25% !important;
 
     .ant-dropdown-menu-item {
         padding: 10px 15px !important;
@@ -123,12 +125,12 @@
     }
 
     .item-cat {
-        padding: 10px;
 
-        a {
-            font-size: large;
-            font-weight: 500;
-            color: rgb(82, 78, 78);
-        }
+        padding: 10px;
+        margin: 10px;
+        font-size: large;
+        font-weight: 500;
+        color: rgb(82, 78, 78);
+
     }
 }
