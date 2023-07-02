@@ -18,6 +18,7 @@ function App() {
       children: [
         { index: true, element: <Home /> },
         { path: 'shop', element: <ShopPage />, },
+
       ],
     }
   ]);

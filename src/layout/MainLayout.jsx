@@ -10,7 +10,10 @@ const MainLayout = () => {
     return (
         <div className="layout_app">
             <Header />
-            <Outlet />
+            <main className='container-fluid'>
+                <Outlet />
+            </main>
+
             <Footer />
 
         </div>

@@ -61,6 +61,10 @@ body {
     margin: 25px 0;
 }
 
+.mx-auto {
+    margin: 0 auto;
+}
+
 .mt-1 {
     margin-top: 5px;
 }
@@ -145,6 +149,14 @@ body {
     font-weight: 500;
 }
 
+.fw-6 {
+    font-weight: 700;
+}
+
+.fw-7 {
+    font-weight: 700;
+}
+
 .fw-4 {
     font-weight: 400;
 }
@@ -156,4 +168,34 @@ body {
 
 .xt {
     text-decoration: line-through;
+}
+
+.cs {
+    cursor: pointer;
+}
+
+.text-end {
+    text-align: right;
+}
+
+.over-hidden {
+    overflow: hidden;
+}
+
+.border {
+    border: 1px solid blue;
+}
+
+.fs-1 {
+    font-size: 10px;
+}
+
+.fs-2 {
+    font-size: 20px;
+}
+
+.fl-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

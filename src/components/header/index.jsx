@@ -3,53 +3,36 @@ import './header.scss';
 import logo from '../../assets/logo.png';
 import { BiCategoryAlt, BiUser } from 'react-icons/bi';
 import { AiOutlineSearch, AiOutlineShoppingCart, AiOutlineHeart } from 'react-icons/ai';
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Input, Dropdown, Space, Drawer, Button, Col } from 'antd';
 import { LayoutTwoTone } from '@ant-design/icons';
-const items = [
-    {
-        key: '1',
-        label: (
-            <a target="_blank" className='item-cat' rel="noopener noreferrer" >
-                1st menu item
-            </a>
-        ),
-    },
-    {
-        key: '2',
-        label: (
-            <a target="_blank" className='item-cat' rel="noopener noreferrer" >
-                1st menu item
-            </a>
-        ),
-    },
-    {
-        key: '3',
-        label: (
-            <a target="_blank" className='item-cat' rel="noopener noreferrer" >
-                1st menu item
-            </a>
-        ),
-    },
-    {
-        key: '4',
-        label: (
-            <a target="_blank" className='item-cat' rel="noopener noreferrer" >
-                1st menu item
-            </a>
-        ),
-    }
-];
-const Header = () => {
+import { callCategory } from '../../services/api';
 
+const Header = () => {
+    const [items, setItems] = useState([]);
     const [widthImage, setWidthImage] = useState(150);
     const [open, setOpen] = useState(false);
+
+    const getData = async () => {
+        let data = (await callCategory()).map(item => ({
+            key: item.id,
+            label: (
+                <a className='item-cat'>
+                    {item.name}
+                </a>
+            )
+        }));
+        setItems(data);
+    };
+    useEffect(() => {
+        getData()
+    }, [])
 
     const onClose = () => {
         setOpen(false);
     };
 
-    const handdelBoxxCat = (e) => {
+    const handleBoxCat = (e) => {
         if (window.innerWidth < 768) {
             setOpen(true);
         } else {
@@ -68,8 +51,8 @@ const Header = () => {
     });
 
     return (
-        <div className='header-area'>
-            <div className='header-area__container'>
+        <div className='header-area '>
+            <div className='header-area__container cs'>
                 <a className='logo'> <img src={logo} width={widthImage} /></a>
 
                 <div className='nav_search'>
@@ -79,7 +62,7 @@ const Header = () => {
                         }}
                     >
                         <div className='nav_category  me-4'>
-                            <a onClick={(e) => handdelBoxxCat(e)}>
+                            <a onClick={(e) => handleBoxCat(e)}>
                                 <Space>
                                     <BiCategoryAlt size={30} />
                                 </Space>

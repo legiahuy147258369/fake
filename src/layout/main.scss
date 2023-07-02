@@ -1,3 +1,15 @@
 .layout_app {
     width: 100%;
 }
+
+
+.container-fluid {
+    width: 80%;
+    margin: 0 auto;
+}
+
+@media only screen and (max-width: 1024px) {
+    .container-fluid {
+        width: 100%;
+    }
+}

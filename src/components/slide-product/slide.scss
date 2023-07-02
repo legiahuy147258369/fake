@@ -22,6 +22,7 @@
             height: 100%;
             object-fit: cover;
             padding: 15px 20px;
+            cursor: pointer;
         }
     }
 
@@ -47,16 +48,17 @@
             align-items: center;
             text-align: center;
 
+            .price-cover {
+                text-align: end;
+                text-decoration: line-through;
+            }
+
             .price {
                 text-align: left;
                 font-size: 18px;
                 color: #C92127;
                 font-weight: 600;
             }
-
-
-
-
         }
 
         .box-cart {
@@ -74,17 +76,59 @@
                     border-radius: 50%;
                     font-weight: 500;
                     font-size: 12px;
+                    transition: 0.6s;
+
+                    &:hover {
+                        transform: scale(1.5);
+                    }
                 }
 
             }
 
-
-            .ant-rate {
-                font-size: 10px;
+            .ant-col {
                 text-align: right;
+
+                .ant-rate {
+                    font-size: 10px;
+
+                    .ant-rate-star {
+                        margin-inline-end: 4px
+                    }
+                }
             }
 
         }
+    }
+
+}
+
+@media screen and (max-width: 767px) {
+    .mySwiper2 {
+        .box-price {
+            .price-cover {
+                font-size: 18px;
+            }
+
+            .price {
+                font-size: 24px !important;
+            }
+
+        }
+
+        .box-cart {
+            &>div {
+                font-size: 20px;
+            }
+
+            .cart {
+                transform: scale(1.8);
+            }
+
+            .ant-col .ant-rate {
+                font-size: 18px !important;
+            }
+        }
+
     }
 
 }

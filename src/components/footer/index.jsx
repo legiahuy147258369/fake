@@ -71,19 +71,19 @@ const Footer = () => {
                                 </ul>
                             </div>
                         </Col>
-                        <Col xs={24} md={12} lg={8}>
+                        <Col xs={24} md={12} lg={24}>
 
                             <div className="footer-static-title">
                                 <h3>Liên hệ</h3>
                             </div>
-
+                            <Row gutter={[8, 16]} className='mt-4'>
+                                <Col xs={24} xl={8} ><a className='row-contact'><BiMap /> 60-62 Lê Lợi, Q.1, TP. HCM</a></Col>
+                                <Col xs={24} xl={8} ><a className='row-contact'><CiMail />cskh@fahasa.com.vn</a></Col>
+                                <Col xs={24} xl={8} ><a className='row-contact'> <LuSmartphone />1900636467</a></Col>
+                            </Row>
                         </Col>
                     </Row>
-                    <Row gutter={[8, 16]} className='mt-4'>
-                        <Col xs={24} xl={8} ><a className='row-contact'><BiMap /> 60-62 Lê Lợi, Q.1, TP. HCM</a></Col>
-                        <Col xs={24} xl={8} ><a className='row-contact'><CiMail />cskh@fahasa.com.vn</a></Col>
-                        <Col xs={24} xl={8} ><a className='row-contact'> <LuSmartphone />1900636467</a></Col>
-                    </Row>
+
                 </Col>
             </Row>
         </div>

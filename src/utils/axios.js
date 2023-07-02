@@ -3,7 +3,7 @@ import axios from "axios";
 const baseUrl = import.meta.env.VITE_BACKEND_URL;
 console.log(baseUrl);
 const instance = axios.create({
-    baseURL: baseUrl,
+    baseURL: baseUrl
 });
 
 instance.interceptors.request.use(function (config) {

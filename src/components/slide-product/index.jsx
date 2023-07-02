@@ -6,29 +6,16 @@ import { BsCartPlus } from 'react-icons/bs'
 import SwiperCore, { EffectCoverflow, Pagination, Autoplay, Navigation } from "swiper";
 import { Row, Col, Rate } from 'antd';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
-import { callTopNew, callTopView } from '../../services/api';
+
 import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";
 import './slide.scss';
 SwiperCore.use([EffectCoverflow, Pagination]);
 const SlideProduct = (props) => {
-    const [data, setData] = useState([])
+    const { data } = props;
+    console.log(data);
     const swiperRef = useRef();
-    const getData = async () => {
-        if (props.topNew) {
-            const view = await callTopView();
-            setData(view)
-        }
-        if (props.topView) {
-            const moi = await callTopNew();
-            setData(moi)
-        }
 
-
-    }
-    useEffect(() => {
-        getData()
-    }, [])
     return (
         <>
             <Swiper
@@ -70,12 +57,12 @@ const SlideProduct = (props) => {
                                 <div className='product'>
                                     <img src={item.thumbnail} />
                                     <p>{item.name}</p>
-                                    <div><Row className='box-price'> <Col className='price' xs={12}>{formatGia(item.price)}</Col> <Col xs={12} className='xt'>{formatGia(item.price * 1.1)} </Col> </Row></div>
-                                    <div>
+                                    <div><Row className='box-price'> <Col className='price' xs={12}>{formatGia(item.price)}</Col> <Col xs={12} className='price-cover'>{formatGia(item.price * 1.1)} </Col> </Row></div>
+                                    <div className='my-3'>
                                         <Row className='box-cart'>
-                                            <Col className='fl' lg={10}> <div >Add to cart</div></Col>
-                                            <Col className='cart' lg={4}> <span className='icon-cart'><BsCartPlus /></span></Col>
-                                            <Col lg={10}><Rate defaultValue={item.rating} /></Col>
+                                            <Col className='fl cs' xs={10} lg={10}> Add to cart</Col>
+                                            <Col className='cart cs' xs={4} lg={4}> <span className='icon-cart'><BsCartPlus /></span></Col>
+                                            <Col className='rating' xs={10} lg={10}><Rate defaultValue={item.rating} /></Col>
                                         </Row>
                                     </div>
                                 </div>
@@ -83,7 +70,6 @@ const SlideProduct = (props) => {
                         )
                     })
                 }
-
 
                 <button className='review-swiper-button-next' onClick={() => swiperRef.current?.slideNext()}><AiOutlineArrowRight size={20} /></button>
 
