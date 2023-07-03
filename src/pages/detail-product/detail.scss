@@ -1,0 +1,201 @@
+@mixin chung {
+    font-weight: 600;
+    column-gap: 20px;
+    padding: 20px;
+
+    img {
+        border-radius: 50%;
+        width: 40px;
+    }
+}
+
+
+.product-essential {
+    .layout-detail {
+
+        .box-img_row {
+            width: 100%;
+            background: white;
+
+            .thumbnail1 {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                row-gap: 15px;
+
+                img {
+                    width: 70px;
+                    border-radius: 10px;
+                    margin: 0 auto;
+                }
+            }
+
+            .thumbnail2 {
+
+                img {
+                    max-width: 100%;
+                    max-height: 350px;
+                    object-fit: cover;
+                }
+            }
+
+        }
+
+        .box-mota {
+            width: 90%;
+            margin: 0 auto;
+            background: white;
+
+            h1 {
+                margin: 20px 0px;
+                font-size: 20px;
+                font-weight: 600;
+            }
+
+            .des-author {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 20px;
+
+                &>div {
+                    font-size: 13px;
+                    font-weight: 500;
+                    color: grey;
+
+                    span {
+                        color: black;
+                    }
+                }
+
+
+            }
+
+            &__rate {
+                margin: 20px 0px;
+                font-size: 13px;
+                font-weight: 500;
+            }
+
+            &__price {
+                display: flex;
+                align-items: center;
+                column-gap: 20px;
+
+                .current_price {
+                    font-size: 30px;
+                    font-weight: 700;
+                    color: #C92127;
+                }
+
+                .price-percent {
+                    background: #C92127;
+                    color: #ffffff;
+                    padding: 7px 10px;
+                    border-radius: 5px;
+                    font-size: 15px;
+                    font-weight: 600;
+                }
+            }
+
+            .box-mota_qty {
+                margin: 20px 0px;
+                display: flex;
+                align-items: center;
+                font-size: 16px;
+
+                .box-qty {
+                    margin-left: 30px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 2px solid grey;
+                    border-radius: 5px;
+                    font-size: 14px;
+
+                    .input-qty {
+                        padding-left: 5px;
+                        width: 20px;
+                        border: unset;
+                    }
+
+                    span {
+                        padding: 10px 15px;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .add-to-cart {
+                padding: 10px 15px;
+                background: #ffffff;
+                color: #C92127;
+                border: 1px solid #C92127;
+                border-radius: 5px;
+                font-size: 16px;
+                font-weight: 600;
+            }
+
+            .shop-now {
+                margin-left: 20px;
+                padding: 10px 15px;
+                color: #ffffff;
+                background: #C92127;
+                border: 1px solid #C92127;
+                border-radius: 5px;
+                font-size: 16px;
+                font-weight: 600;
+                text-align: center;
+            }
+        }
+
+
+
+
+
+    }
+}
+
+.product-topview {
+
+    margin: 10px 0;
+
+    .title-view {
+        @include chung;
+        background: #fce9df;
+    }
+
+}
+
+.product-info {
+    background: #ffffff;
+    padding: 20px;
+    height: auto;
+    margin: 20px 0;
+
+    .text {
+        margin-top: 10px;
+        color: grey;
+        line-height: 30px;
+    }
+
+    .see-view {
+        width: 150px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #ffffff;
+        color: #C92127;
+        border: 2px solid #C92127;
+        border-radius: 3px;
+        margin: 0 auto;
+    }
+}
+
+.product-review {
+    background: #ffffff;
+    padding: 20px;
+    height: auto;
+    margin: 20px 0;
+}

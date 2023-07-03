@@ -15,6 +15,9 @@ export const callTopNew = () => {
 export const callCategory = () => {
     return axios.get(`/api/category`);
 };
+export const callProductDetail = (id) => {
+    return axios.get(`/api/product/detail/${id}`);
+};
 export const callProductPagination = (query) => {
     const queryParams = { ...query };
     console.log(queryParams);

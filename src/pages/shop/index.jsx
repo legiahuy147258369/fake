@@ -10,6 +10,7 @@ import useQueryConfig from '../../hooks/useQueryConfig';
 import { useQuery } from '@tanstack/react-query';
 import { Navigate, createSearchParams, useNavigate } from 'react-router-dom';
 import { omit } from 'lodash';
+import Product from '../../components/product';
 const ShopPage = () => {
     const queryConfig = useQueryConfig();
     const navigate = useNavigate();
@@ -125,10 +126,10 @@ const ShopPage = () => {
 
                     </Col>
                     <Col className='right-box-shop' xs={24} lg={18}  >
-                        <Row justify={'center'} gutter={[8, 8]} className='box-area-sort'>
-                            <Col className='box-total' xs={12}><div className='fs-1-5 fw-5'>Tổng: {products?.total} sản phẩm </div></Col>
-                            <Col className='box-sort fs-1-5 fw-5' xs={12}>
-                                Sắp xếp theo giá :
+                        <Row gutter={[8, 8]} justify={'center'} className='box-area-sort'>
+                            <Col className='box-total' md={12} ><div className='fs-1-5 fw-5'>Tổng: {products?.total} sản phẩm </div></Col>
+                            <Col className='box-sort fs-1-5 fw-5' md={12}  >
+                                <div className='text-des'>Sắp xếp theo giá :</div>
                                 <Select className='ps-2 '
                                     defaultValue="asc"
                                     style={{
@@ -152,18 +153,7 @@ const ShopPage = () => {
                                 products && products.data && products.data.map((item, i) => {
                                     return (
                                         <Col xs={12} md={6} key={i}>
-                                            <div className='product'>
-                                                <img src={item.thumbnail} className='pt-2' />
-                                                <p>{item.name}</p>
-                                                <div><Row className='box-price'> <Col className='price' xs={12}>{formatGia(item.price)}</Col> <Col xs={12} className='price-cover'>{formatGia(item.price * 1.1)} </Col> </Row></div>
-                                                <div className='my-3'>
-                                                    <Row className='box-cart'>
-                                                        <Col className='fl cs text-cart' xl={10} xs={0}> Add to cart</Col>
-                                                        <Col className='cart cs' xs={6} lg={6} xl={4}> <span className='icon-cart'><BsCartPlus /></span></Col>
-                                                        <Col className='rating' xs={18} lg={18} xl={10}><Rate defaultValue={item.rating} /></Col>
-                                                    </Row>
-                                                </div>
-                                            </div>
+                                            <Product item={item} />
                                         </Col>
                                     )
                                 })
