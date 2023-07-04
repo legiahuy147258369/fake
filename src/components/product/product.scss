@@ -8,6 +8,10 @@
     margin: 10px auto;
 }
 
+.text-none {
+    text-decoration: none;
+}
+
 .product {
     border-radius: 10px;
     background: #fff;
@@ -15,6 +19,7 @@
     overflow: hidden;
 
     p {
+        color: black;
         height: 40px;
         @include con;
         text-align: left;
@@ -82,5 +87,11 @@
             }
         }
 
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .text-cart {
+        display: none !important;
     }
 }

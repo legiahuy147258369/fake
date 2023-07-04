@@ -1,7 +1,40 @@
-import { configureStore } from '@reduxjs/toolkit'
-import counterReducer from './counter/counterSlice'
-export const store = configureStore({
-    reducer: {
-        counter: counterReducer,
-    },
+
+import counterReducer from './counter/counterSlice';
+import cartReducer from './cart/cartSlice';
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import {
+    persistStore,
+    persistReducer,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+} from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+
+const persistConfig = {
+    key: 'root',
+    version: 1,
+    storage,
+}
+const rootReducer = combineReducers({
+    counter: counterReducer,
+    cart: cartReducer
 })
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+            },
+        }),
+})
+
+const persistor = persistStore(store);
+
+export { store, persistor }

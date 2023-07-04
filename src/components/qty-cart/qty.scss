@@ -1,0 +1,51 @@
+@mixin fl {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-qty {
+    margin-left: 30px;
+    @include fl;
+    border: 2px solid rgb(226, 226, 226);
+    border-radius: 3px;
+    width: 120px;
+    height: 35px;
+
+    .input-qty {
+        width: 2.5rem;
+        border: unset;
+    }
+
+    .ant-input-number-input {
+        text-align: center;
+    }
+
+    span {
+        padding: 15px 10px;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 16px;
+        height: 100%;
+        @include fl;
+
+        &:nth-child(1) {
+            border-right: 2px solid rgb(209, 209, 209);
+
+        }
+
+        &:nth-child(3) {
+            border-left: 2px solid rgb(209, 209, 209);
+        }
+    }
+}
+
+@media only screen and (max-width: 667px) {
+    // .box-qty {
+
+    //     input {
+    //         width: 1rem;
+    //     }
+
+    // }
+}

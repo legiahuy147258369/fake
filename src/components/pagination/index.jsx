@@ -17,7 +17,7 @@ const PaginationComponent = (props) => {
         })
     };
     const itemRender = (page, type, originalElement) => {
-        console.log(page, type, originalElement);
+
 
         if (type === 'jump-prev') {
             return <Link to={{

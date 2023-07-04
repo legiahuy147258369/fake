@@ -3,13 +3,16 @@ import React from 'react'
 import { formatGia } from '../../utils/format'
 import { BsCartPlus } from 'react-icons/bs';
 import './product.scss';
+import { Link } from 'react-router-dom';
 const Product = (props) => {
-    const { item } = props
+    const { item } = props;
     return (
         <>
             <div className='product'>
-                <img src={item.thumbnail} className='pt-2' />
-                <p>{item.name}</p>
+                <Link className='text-none' to={`/${item.id}`}>
+                    <img src={item.thumbnail} className='pt-2' />
+                    <p>{item.name}</p>
+                </Link>
                 <div><Row className='box-price'> <Col className='price' xs={12}>{formatGia(item.price)}</Col> <Col xs={12} className='price-cover'>{formatGia(item.price * 1.1)} </Col> </Row></div>
                 <div className='my-3'>
                     <Row className='box-cart'>

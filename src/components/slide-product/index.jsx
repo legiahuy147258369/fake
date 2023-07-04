@@ -10,10 +10,10 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";
 import './slide.scss';
+import Product from '../product';
 SwiperCore.use([EffectCoverflow, Pagination]);
 const SlideProduct = (props) => {
     const { data } = props;
-    console.log(data);
     const swiperRef = useRef();
 
     return (
@@ -54,18 +54,8 @@ const SlideProduct = (props) => {
                     data.map(item => {
                         return (
                             <SwiperSlide key={item.price}>
-                                <div className='product'>
-                                    <img src={item.thumbnail} />
-                                    <p>{item.name}</p>
-                                    <div><Row className='box-price'> <Col className='price' xs={12}>{formatGia(item.price)}</Col> <Col xs={12} className='price-cover'>{formatGia(item.price * 1.1)} </Col> </Row></div>
-                                    <div className='my-3'>
-                                        <Row className='box-cart'>
-                                            <Col className='fl cs' xs={10} lg={10}> Add to cart</Col>
-                                            <Col className='cart cs' xs={4} lg={4}> <span className='icon-cart'><BsCartPlus /></span></Col>
-                                            <Col className='rating' xs={10} lg={10}><Rate defaultValue={item.rating} /></Col>
-                                        </Row>
-                                    </div>
-                                </div>
+                                <Product item={item} />
+
                             </SwiperSlide>
                         )
                     })
