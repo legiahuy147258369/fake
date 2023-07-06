@@ -1,6 +1,7 @@
 
 import counterReducer from './counter/counterSlice';
 import cartReducer from './cart/cartSlice';
+import accountReducer from './account/accountSlice';
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import {
     persistStore,
@@ -21,7 +22,8 @@ const persistConfig = {
 }
 const rootReducer = combineReducers({
     counter: counterReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    account: accountReducer
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 

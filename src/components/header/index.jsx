@@ -7,10 +7,11 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Input, Dropdown, Space, Drawer, Button, Col } from 'antd';
 import { LayoutTwoTone } from '@ant-design/icons';
 import { callCategory } from '../../services/api';
-import { Link, createSearchParams } from 'react-router-dom';
+import { Link, createSearchParams, useNavigate } from 'react-router-dom';
 import useQueryConfig from '../../hooks/useQueryConfig';
 
 const Header = () => {
+    const navigate = useNavigate();
     const [items, setItems] = useState([]);
     const [widthImage, setWidthImage] = useState(150);
     const [open, setOpen] = useState(false);
@@ -88,8 +89,11 @@ const Header = () => {
                         <span className='nav-cover-text'>Giỏ hàng</span>
                     </div>
                     <div className="nav-icon"  >
-                        <BiUser size={25} />
+
+                        <BiUser size={25} onClick={() => navigate('/login')} />
                         <span className='nav-cover-text'>Tài Khoản</span>
+
+
                     </div>
                 </div>
             </div>

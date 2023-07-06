@@ -65,6 +65,18 @@ body {
     line-height: 25px;
 }
 
+.height1 {
+    height: 10px;
+}
+
+.height2 {
+    height: 20px;
+}
+
+.h1 {
+    height: 10px;
+}
+
 .w-100 {
     width: 100%;
 }
@@ -258,6 +270,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.fl-end {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end
 }
 
 .fl-center {

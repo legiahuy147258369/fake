@@ -18,6 +18,15 @@ export const callCategory = () => {
 export const callProductDetail = (id) => {
     return axios.get(`/api/product/detail/${id}`);
 };
+export const callRegister = (data) => {
+    return axios.post(`/api/user/register`, { ...data });
+};
+export const callLogin = (data) => {
+    return axios.post(`/api/user/login`, { ...data });
+};
+export const callFetchAccount = () => {
+    return axios.get('/api/user/account');
+};
 export const callProductPagination = (query) => {
     const queryParams = { ...query };
     console.log(queryParams);

@@ -1,0 +1,25 @@
+.register-area {
+    max-width: 100%;
+    height: 100%;
+
+
+    .box-register {
+        margin-top: 20px;
+        min-height: 300px;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        border: 2px solid #ffffff;
+
+        .btn-register {
+            padding: 10px 15px;
+            color: #C92127;
+            border: 1px solid #C92127;
+            border-radius: 5px;
+        }
+
+        label {
+            margin-top: 20px;
+        }
+    }
+}
