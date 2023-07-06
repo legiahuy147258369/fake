@@ -230,6 +230,12 @@ body {
     align-items: center;
 }
 
+.fl-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .xt {
     text-decoration: line-through;
 }

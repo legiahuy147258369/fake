@@ -27,6 +27,9 @@ export const callLogin = (data) => {
 export const callFetchAccount = () => {
     return axios.get('/api/user/account');
 };
+export const callLogout = () => {
+    return axios.get('/api/user/logout');
+};
 export const callProductPagination = (query) => {
     const queryParams = { ...query };
     console.log(queryParams);

@@ -50,12 +50,18 @@
             padding-left: 10px;
             display: flex;
             column-gap: 20px;
-
+            align-items: center;
 
             .nav-icon {
                 @include fl;
                 flex-direction: column;
                 gap: 10px;
+
+                .space-avatar {
+                    @include fl;
+                    flex-direction: column;
+                    gap: 8px;
+                }
             }
         }
     }
