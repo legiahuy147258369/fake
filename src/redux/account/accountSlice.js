@@ -11,8 +11,7 @@ const initialState = {
         avatar: '',
         address: '',
         id: '',
-    },
-    status: 'idle',
+    }
 };
 
 export const accountSlide = createSlice({
@@ -27,7 +26,7 @@ export const accountSlide = createSlice({
         getAccountAction: (state, action) => {
             state.isAuthenticated = true;
             state.isLoading = false;
-            state.user = action.payload.user;
+            state.user = action.payload;
         },
         doLogoutAction: (state, action) => {
             localStorage.removeItem('access_token');

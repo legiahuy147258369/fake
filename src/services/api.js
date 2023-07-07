@@ -32,6 +32,17 @@ export const callLogout = () => {
 };
 export const callProductPagination = (query) => {
     const queryParams = { ...query };
-    console.log(queryParams);
-    return axios.get('http://localhost:8888/api/product', { params: queryParams });
+    return axios.get('/api/product', { params: queryParams });
+};
+
+export const callTinh = async () => {
+    const res = await fetch('https://provinces.open-api.vn/api/');
+    return await res.json();
+}
+export const callHuyen = async (ip) => {
+    const res = await fetch(`https://provinces.open-api.vn/api/p/${ip}?depth=2`);
+    return await res.json();
+}
+export const callCreateOrder = (data) => {
+    return axios.post('/api/order', { ...data });
 };

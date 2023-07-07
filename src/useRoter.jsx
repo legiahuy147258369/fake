@@ -9,28 +9,23 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAccountAction } from "./redux/account/accountSlice";
+import { doLogoutAction, getAccountAction } from "./redux/account/accountSlice";
 import { callFetchAccount } from "./services/api";
 import AdminLayout from './layout/AdminLayout';
 import { ProtectedRoute, RoleRoute } from "./components/guardRouter";
+import Checkout from "./pages/checkout";
 export default function useRouteElements() {
     const dispatch = useDispatch();
     const isLoading = useSelector((state) => state.account.isLoading);
     const isAuthenticated = useSelector((state) => state.account.isAuthenticated);
 
     const getAccount = async () => {
-        if (
-            window.location.pathname === '/login' ||
-            window.location.pathname === '/register' ||
-            window.location.pathname === '' ||
-            window.location.pathname.startsWith('/shop')
-        )
-            return;
-        const res = await callFetchAccount();
-        if (res && res.data) {
-            console.log(res);
-            dispatch(getAccountAction(res.data));
-            return;
+        if (isAuthenticated) {
+            const res = await callFetchAccount();
+            if (res && res.success !== false) {
+                dispatch(getAccountAction(res));
+                return;
+            }
         }
     };
     useEffect(() => {
@@ -46,7 +41,8 @@ export default function useRouteElements() {
                 { index: true, element: <Home /> },
                 { path: 'shop', element: <ShopPage />, },
                 { path: '/:id', element: <DetailProduct />, },
-                { path: 'cart', element: <ProtectedRoute> <CartPage /></ProtectedRoute>, }
+                { path: 'cart', element: <CartPage /> },
+                { path: 'checkout', element: <ProtectedRoute> <Checkout /></ProtectedRoute>, }
 
             ],
         },

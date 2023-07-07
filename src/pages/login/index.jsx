@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './login.scss';
 import Header from '../../components/header';
 import { Col, Row, notification, message } from 'antd';
-import CustomInput from '../../components/input';
+import CustomInput from '../../components/Input';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '../../utils/rule'

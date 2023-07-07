@@ -4,8 +4,14 @@ import { formatGia } from '../../utils/format'
 import { BsCartPlus } from 'react-icons/bs';
 import './product.scss';
 import { Link } from 'react-router-dom';
+import { addToCart } from '../../redux/cart/cartSlice';
+import { useDispatch } from 'react-redux';
 const Product = (props) => {
+    const dispatch = useDispatch();
     const { item } = props;
+    const handAddToCart = () => {
+        dispatch(addToCart({ qty: 1, detail: item }));
+    }
     return (
         <>
             <div className='product'>
@@ -17,7 +23,7 @@ const Product = (props) => {
                 <div className='my-3'>
                     <Row className='box-cart'>
                         <Col className='fl cs text-cart' xl={10} xs={0}> Add to cart</Col>
-                        <Col className='cart cs' xs={6} lg={6} xl={4}> <span className='icon-cart'><BsCartPlus /></span></Col>
+                        <Col className='cart cs' xs={6} lg={6} xl={4}> <span onClick={handAddToCart} className='icon-cart'><BsCartPlus /></span></Col>
                         <Col className='rating' xs={18} lg={18} xl={10}><Rate defaultValue={item.rating} /></Col>
                     </Row>
                 </div>

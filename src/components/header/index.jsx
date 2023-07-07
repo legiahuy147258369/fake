@@ -4,14 +4,15 @@ import logo from '../../assets/logo.png';
 import { BiCategoryAlt, BiUser } from 'react-icons/bi';
 import { AiOutlineSearch, AiOutlineShoppingCart, AiOutlineHeart } from 'react-icons/ai';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Input, Dropdown, Space, Drawer, Button, Col, Avatar, Menu, message } from 'antd';
+import { Input, Dropdown, Space, Drawer, Popover, Col, Avatar, Menu, message, Badge } from 'antd';
 import { LayoutTwoTone, UserOutlined } from '@ant-design/icons';
 import { callCategory, callLogout } from '../../services/api';
 import { Link, createSearchParams, useNavigate } from 'react-router-dom';
 import useQueryConfig from '../../hooks/useQueryConfig';
 import { useDispatch, useSelector } from 'react-redux';
 import { doLogoutAction } from '../../redux/account/accountSlice';
-
+import { formatGia } from '../../utils/format';
+import PopoverCustom from '../popover';
 const Header = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -37,7 +38,6 @@ const Header = () => {
             </Link>)
         }));
         setItems(data);
-        console.log(data);
     };
     const handleLogout = async () => {
         const res = await callLogout();
@@ -48,6 +48,7 @@ const Header = () => {
             navigate('/');
         }
     };
+
     useEffect(() => {
         getData()
     }, [])
@@ -138,17 +139,24 @@ const Header = () => {
                         <AiOutlineHeart size={25} />
                         <span className='nav-cover-text'>Yêu thích</span>
                     </div>
-                    <div className="nav-icon">
-                        <AiOutlineShoppingCart size={25} />
-                        <span className='nav-cover-text'>Giỏ hàng</span>
-                    </div>
+                    <PopoverCustom cart={cart}>
+                        <div className="nav-icon">
 
+
+                            <Badge count={cart?.length ?? 0} size={'small'}>
+                                <AiOutlineShoppingCart color='grey' size={25} onClick={() => navigate('/cart')} />
+                            </Badge>
+
+                            <span className='nav-cover-text'>Giỏ hàng</span>
+
+                        </div>
+                    </PopoverCustom>
                     <div className="nav-icon "  >
-                        {isAuthenticated ? (
+                        {isAuthenticated && user?.name ? (
                             <Dropdown menu={{ items: itemsAccount }} trigger={['click']} placement="bottomRight" >
                                 <div className='space-avatar'>
                                     <Avatar icon={<UserOutlined />} size={25} />
-                                    <span className='nav-cover-text' >{user.name}</span>
+                                    <span className='nav-cover-text' >{user?.name}</span>
                                 </div>
                             </Dropdown>
                         ) : (
