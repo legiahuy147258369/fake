@@ -33,4 +33,5 @@ const schema = yup.object({
         .min(5, 'Độ dài kí tự từ 5-150 kí tự')
         .max(120, 'Độ dài 5-150 kí tự'),
 })
+
 export { schema };

@@ -11,16 +11,16 @@ import { Link, createSearchParams, useNavigate } from 'react-router-dom';
 import useQueryConfig from '../../hooks/useQueryConfig';
 import { useDispatch, useSelector } from 'react-redux';
 import { doLogoutAction } from '../../redux/account/accountSlice';
-import { formatGia } from '../../utils/format';
 import PopoverCustom from '../popover';
+import { omit } from 'lodash';
 const Header = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [items, setItems] = useState([]);
+    const [search, setSearch] = useState('');
     const [widthImage, setWidthImage] = useState(150);
     const [open, setOpen] = useState(false);
     const queryConfig = useQueryConfig();
-
     const isAuthenticated = useSelector((state) => state.account.isAuthenticated);
     const user = useSelector((state) => state.account.user);
     const cart = useSelector((state) => state.cart.cart);
@@ -111,6 +111,31 @@ const Header = () => {
         last = scrollTop;
     });
 
+    const onSubmitSearch = (e) => {
+        console.log(search);
+
+        if (search.length > 0) {
+
+            const config = queryConfig.sort
+                ? omit(
+                    {
+                        ...queryConfig,
+                        search: search
+                    },
+                    ['sort', 'filterMinPrice', 'filterMaxPrice']
+                )
+                : {
+                    ...queryConfig,
+                    search: search
+                }
+            setSearch('');
+            navigate({
+                pathname: '/shop',
+                search: createSearchParams(config).toString()
+            })
+        }
+    }
+
     return (
         <div className='header-area '>
             <div className='header-area__container cs'>
@@ -130,8 +155,13 @@ const Header = () => {
                             </a>
                         </div>
                     </Dropdown>
-                    <Input placeholder="Tìm kiếm sản phẩm" />
-                    <span className='box-search'><AiOutlineSearch /></span>
+
+
+
+                    <Input placeholder="Tìm kiếm sản phẩm" value={search} onPressEnter={(e) => onSubmitSearch(e)} onChange={(e) => setSearch(e.target.value)} />
+                    <button className='box-search' onClick={() => onSubmitSearch('submit')}><AiOutlineSearch /></button>
+
+
 
                 </div>
                 <div className="nav-area-icon ps-2">

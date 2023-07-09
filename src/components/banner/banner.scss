@@ -27,31 +27,7 @@
 }
 
 
-.review-swiper-button-next {
-    @include fl;
-    right: 0px;
-    top: 45%;
-    transition: transform 0.2s;
 
-
-    &:hover {
-        transform: scale(1.2);
-        font-size: 15px;
-    }
-}
-
-.review-swiper-button-prev {
-    @include fl;
-    left: 0px;
-    top: 45%;
-    transition: transform 0.2s;
-
-
-    &:hover {
-        transform: scale(1.2);
-        font-size: 15px;
-    }
-}
 
 .mySwiper {
     img {
@@ -125,19 +101,12 @@
         }
     }
 
-    .review-swiper-button-next {
-        display: none !important
-    }
 
-    .review-swiper-button-prev {
-        display: none !important
-    }
 }
 
 @media only screen and (max-width: 767px) {
-    // .cms {
-    //     justify-content: space-evenly;
-    // }
+
+
 
     .banner-bottom {
         display: none;

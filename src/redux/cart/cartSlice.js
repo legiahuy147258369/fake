@@ -27,16 +27,18 @@ export const cartSlice = createSlice({
             let index = cart.findIndex((ele) => ele.detail.id === item.id);
             if (index > -1) {
                 cart[index].qty = item.qty;
-                console.log(cart[index].detail);
             }
             state.cart = cart;
         },
         delIdCart: (state, action) => {
             state.cart = state.cart.filter((item) => item.detail.id !== action.payload.id);
+        },
+        delAllCart: (state, action) => {
+            state.cart = []
         }
     },
 })
 
-export const { addToCart, delIdCart, updateCart } = cartSlice.actions
+export const { addToCart, delIdCart, updateCart, delAllCart } = cartSlice.actions
 
 export default cartSlice.reducer;

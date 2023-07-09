@@ -1,16 +1,20 @@
 
 
 import './App.scss';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { RouterProvider } from 'react-router-dom';
+import { useRef } from 'react';
+import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
 import useRouteElements from './useRoter';
+import ScrollToTop from './components/onscrollTop';
+
 
 function App() {
-  const dispatch = useDispatch();
-  const router = useRouteElements()
+  const router = useRouteElements();
+
   return (
     <div>
-      <RouterProvider router={router} />
+      <ScrollToTop>{router}</ScrollToTop>
+
     </div>
   )
 }

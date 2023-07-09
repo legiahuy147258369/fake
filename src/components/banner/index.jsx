@@ -1,54 +1,46 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './banner.scss';
-import SwiperCore, { EffectCoverflow, Pagination, Autoplay, Navigation } from "swiper";
+import { Autoplay, Pagination, Navigation, EffectFade, Parallax } from 'swiper/modules';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper-bundle.min.css";
-import "swiper/swiper.min.css";
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 import { Row, Col, Rate } from 'antd';
 import { callBanner } from '../../services/api';
-SwiperCore.use([EffectCoverflow, Pagination]);
+import { useQuery } from '@tanstack/react-query';
 const Banner = () => {
-    const [slides, setSlides] = useState([]);
-    const swiperRef = useRef();
-    const getData = async () => {
-        const data = (await callBanner()).map(item => item.url)
-        setSlides(data)
-    }
-    useEffect(() => {
-        getData()
-    }, [])
+
+    const { data: slides } = useQuery({
+        queryKey: ['banner'],
+        queryFn: () => {
+            return callBanner()
+        }
+    });
+
     return (
         <>
             <div className='banner-area'>
                 <div className="banner-area_slide">
                     <Swiper
+                        modules={[Autoplay, Navigation, Pagination]}
+                        loop={false}
                         spaceBetween={30}
-                        centeredSlides={true}
-                        autoplay={{
-                            delay: 5000,
-                            disableOnInteraction: true,
-                        }}
                         pagination={{
                             clickable: true,
                         }}
-                        modules={[Autoplay, Pagination, Navigation]}
+                        autoplay={{
+                            delay: 2500
+                        }}
                         className="mySwiper"
-                        navigation={{
-                            nextEl: '.review-swiper-button-next',
-                            prevEl: '.review-swiper-button-prev',
-                        }}
-                        onBeforeInit={(swiper) => {
-                            swiperRef.current = swiper;
-                        }}
                     >
-                        <button className='review-swiper-button-prev' onClick={() => swiperRef.current?.slidePrev()}> <AiOutlineArrowLeft size={20} /></button>
-                        {slides.map((slideContent, index) => (
-                            <SwiperSlide key={slideContent} virtualIndex={index}>
-                                <img src={slideContent} />
+                        {slides?.map((slideContent, index) => (
+                            <SwiperSlide key={index}>
+                                <img src={slideContent.url} />
                             </SwiperSlide>
                         ))}
-                        <button className='review-swiper-button-next' onClick={() => swiperRef.current?.slideNext()}><AiOutlineArrowRight size={20} /></button>
+
                     </Swiper>
                 </div>
                 <div className='banner-area_qc'>
@@ -59,7 +51,7 @@ const Banner = () => {
                         <img src="https://cdn0.fahasa.com/media/wysiwyg/Thang-06-2023/PNJT6_392x156.png" alt="" />
                     </div>
                 </div>
-            </div>
+            </div >
             <div className="banner-bottom">
                 <div><img src="https://cdn0.fahasa.com/media/wysiwyg/Thang-06-2023/SubBannerT6_Coupon_310x210-06.png" /></div>
                 <div><img src="https://cdn0.fahasa.com/media/wysiwyg/Thang-06-2023/TrangBalo_Resize_310x210.png" /></div>
@@ -109,4 +101,34 @@ const Banner = () => {
     )
 }
 
-export default Banner
+export default Banner;
+{/* <button className='review-swiper-button-prev1' onClick={() => swiperRef.current?.slidePrev()}> <AiOutlineArrowLeft size={20} /></button> */ }
+{/* {slides.map((slideContent, index) => (
+                            <SwiperSlide key={index} virtualIndex={index}>
+                                <img src={slideContent} />
+
+                            </SwiperSlide>
+                        ))} */}
+{/* <button className='review-swiper-button-next1' onClick={() => swiperRef.current?.slideNext()}><AiOutlineArrowRight size={20} /></button> */ }
+{/* <Swiper
+
+    autoplay={{
+        delay: 5000,
+        disableOnInteraction: true,
+    }}
+    pagination={{
+        clickable: true,
+    }}
+    // modules={[Autoplay, Pagination, Navigation, EffectCoverflow]}
+    // className="mySwiper -h-400"
+    // navigation={{
+    //     nextEl: '.review-swiper-button-next1',
+    //     prevEl: '.review-swiper-button-prev1',
+    // }}
+    navigation={true}
+    modules={[Lazy, Pagination, Navigation]}
+
+    className="mySwiper"
+>
+
+</Swiper> */}

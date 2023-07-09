@@ -4,18 +4,21 @@ import Banner from '../../components/banner';
 import './home.scss'
 import SlideProduct from '../../components/slide-product';
 import { callTopNew, callTopView } from '../../services/api';
+import { useQuery } from '@tanstack/react-query';
 const Home = () => {
-    const [topView, setTopView] = useState([]);
-    const [topNew, setTopNew] = useState([]);
-    const getData = async () => {
-        const view = await callTopView();
-        const moi = await callTopNew();
-        setTopNew(view);
-        setTopView(moi);
-    }
-    useEffect(() => {
-        getData();
-    }, [])
+
+    const { data: topView } = useQuery({
+        queryKey: ['TopView'],
+        queryFn: () => {
+            return callTopView()
+        }
+    })
+    const { data: topNew } = useQuery({
+        queryKey: ['topNew'],
+        queryFn: () => {
+            return callTopNew()
+        }
+    })
     return (
         <div className='home-area'>
             <Banner />

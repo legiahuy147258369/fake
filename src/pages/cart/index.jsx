@@ -21,7 +21,6 @@ const CartPage = () => {
             return a + b.detail.price * b.qty
         }, 0);
     }
-    console.log(cart);
     return (
         <div className='cart-area'>
             <BreadcrumbCom />

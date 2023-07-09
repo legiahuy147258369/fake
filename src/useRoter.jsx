@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, useRoutes } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
 import NotFound from "./components/NotFound";
 import Home from "./pages/home";
@@ -7,14 +7,16 @@ import DetailProduct from "./pages/detail-product";
 import CartPage from "./pages/cart";
 import Login from "./pages/login";
 import Register from "./pages/register";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { doLogoutAction, getAccountAction } from "./redux/account/accountSlice";
 import { callFetchAccount } from "./services/api";
 import AdminLayout from './layout/AdminLayout';
 import { ProtectedRoute, RoleRoute } from "./components/guardRouter";
 import Checkout from "./pages/checkout";
+import ScrollToTop from "./components/onscrollTop";
 export default function useRouteElements() {
+
     const dispatch = useDispatch();
     const isLoading = useSelector((state) => state.account.isLoading);
     const isAuthenticated = useSelector((state) => state.account.isAuthenticated);
@@ -32,7 +34,7 @@ export default function useRouteElements() {
         getAccount();
     }, []);
 
-    const router = createBrowserRouter([
+    const router = useRoutes([
         {
             path: '/',
             element: <MainLayout />,
@@ -42,6 +44,7 @@ export default function useRouteElements() {
                 { path: 'shop', element: <ShopPage />, },
                 { path: '/:id', element: <DetailProduct />, },
                 { path: 'cart', element: <CartPage /> },
+
                 { path: 'checkout', element: <ProtectedRoute> <Checkout /></ProtectedRoute>, }
 
             ],
