@@ -1,20 +1,26 @@
 import { Col, Divider, Rate, Row } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { SlideshowLightbox } from 'lightbox.js-react';
-import 'lightbox.js-react/dist/index.css';
+import React, { useEffect, useRef, useState } from 'react';
+
 import './detail.scss';
 
 import { formatGia } from '../../utils/format';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from "react-router-dom";
 import { callProductDetail, callTopView } from '../../services/api';
-import _ from 'lodash'
+import _ from 'lodash';
 import Loading from '../../components/Loading';
 import SlideProduct from '../../components/slide-product';
 import { useDispatch } from 'react-redux';
-import moment from 'moment'
+import moment from 'moment';
 import { addToCart } from '../../redux/cart/cartSlice';
 import QtyCart from '../../components/qty-cart';
+import ThumbsSwiper from '../../components/thumb';
+import { AiOutlinePlus } from 'react-icons/ai';
+import { addToWishList } from '../../redux/wish/wishSlide';
+import BreadcrumbCom from '../../components/breadcrumb';
+
+
+
 const DetailProduct = () => {
     const [qty, setQty] = useState(1);
     const [showFullDescription, setFullDescription] = useState(false);
@@ -26,6 +32,7 @@ const DetailProduct = () => {
             return callProductDetail(id);
         }
     });
+
     useEffect(() => {
         window.scrollTo(0, 0)
         setQty(1);
@@ -49,31 +56,17 @@ const DetailProduct = () => {
         dispatch(addToCart({ qty: quantity, detail: data }));
         setQty(1)
     };
+    let img = ['https://cdn0.fahasa.com/media/catalog/product/c/o/combo-9786043129359-9786043356670.jpg', 'https://cdn0.fahasa.com/media/catalog/product/z/4/z4389778470937_2bf23e326e5ca521f95725baa0fd063d.jpg']
     return (
         <div className='product-detail-area'>
+            <BreadcrumbCom />
             {_.isUndefined(data) ? <Loading /> :
                 <>
                     <div className="product-essential mt-2">
                         <Row className='layout-detail pt-2'>
                             <Col className=' fl-between' md={24} lg={10}>
-                                <Row className='box-img_row' >
-                                    <Col className='left-box' xs={6} >
-                                        {data && (
-                                            <SlideshowLightbox theme='night' showThumbnails="false" showControls={true} className="thumbnail1 " >
-                                                <img src={data.thumbnail} />
-                                                <img src={data.thumbnail} />
-                                                <img src={data.thumbnail} />
-                                                <img src={data.thumbnail} />
-                                                <img src={data.thumbnail} />
-                                                <img src={data.thumbnail} />
-                                            </SlideshowLightbox>)
-                                        }
-                                    </Col>
-                                    <Col xs={18} className='w-100 fl-center'>
-                                        <SlideshowLightbox className="thumbnail2 ">
-                                            <img src={data.thumbnail} />
-                                        </SlideshowLightbox>
-                                    </Col>
+                                <Row className='box-img_row ' >
+                                    {data.thumbnail.length > 0 && <ThumbsSwiper images={img} />}
                                 </Row>
                             </Col>
                             <Col xs={24} md={24} lg={14} className='bg-white'>
@@ -110,7 +103,7 @@ const DetailProduct = () => {
                                         <div className='add-to-cart' onClick={() => handleAddToCart(qty, data)}>Thêm vào giỏ hàng</div>
                                         <div className='shop-now'>Mua ngay</div>
                                     </Col>
-
+                                    <Col xs={24} > <div className='add-wishlist' onClick={() => dispatch(addToWishList(data))}><AiOutlinePlus /> Danh sách yêu thích </div> </Col>
                                 </Row>
                             </Col>
                         </Row>
@@ -157,4 +150,20 @@ const DetailProduct = () => {
     )
 }
 
-export default DetailProduct
+export default DetailProduct;
+
+{/* <Col className='left-box' xs={6} >
+                                {data && (
+                                            <SlideshowLightbox theme='night' open={iShow} showThumbnails="false" showControls={true} className="thumbnail1 " >
+                                                <img src={data.thumbnail} />
+                                                <img src={data.thumbnail} />
+                                                <img src={data.thumbnail} />
+                                                <img src={data.thumbnail} />
+                                                <img src={data.thumbnail} />
+                                                <img src={data.thumbnail} />
+                                            </SlideshowLightbox>)
+                                        }
+                                    </Col>
+                                    <Col xs={18} className='w-100 fl-center'>
+                                        <img className="thumbnail2" onClick={handLightBox} src={data.thumbnail} />
+                                    </Col> */}

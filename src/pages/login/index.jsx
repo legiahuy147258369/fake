@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import './login.scss';
 import Header from '../../components/header';
-import { Col, Row, notification, message } from 'antd';
+import { Col, Row, notification, message, Divider } from 'antd';
 import CustomInput from '../../components/Input';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -48,7 +48,9 @@ const Login = () => {
                             <CustomInput type={'password'} register={register} name='password' placeholder='Nhập mật khẩu' errorMessage={errors.password?.message} />
 
                         </div>
-                        <Row> <Col className='fl' xs={12}><Link to={'/login'} >Quên mật khẩu</Link></Col> <Col className='fl-end ' xs={12}><button className='btn-register'>Đăng nhập</button> </Col></Row>
+                        <Row> <Col className='fl' xs={12}><Link to={'/login'} >Quên mật khẩu</Link></Col> <Col className='fl-end ' xs={12}><button className='btn-dangnhap'>Đăng nhập</button> </Col></Row>
+                        <Divider />
+                        <div className='btn-dangki' onClick={() => navigate('/register')}>Đăng kí</div>
                     </form>
 
                 </Col>

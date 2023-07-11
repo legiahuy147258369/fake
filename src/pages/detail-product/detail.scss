@@ -9,6 +9,14 @@
     }
 }
 
+// .box-thumbnail {
+//     .left-slide-lightbox {
+//         width: 70px;
+//         height: 70px;
+//         border-radius: 10px;
+//         margin: 0 auto;
+//     }
+// }
 
 .product-essential {
     .layout-detail {
@@ -19,27 +27,7 @@
             width: 100%;
             background: white;
 
-            .thumbnail1 {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                row-gap: 15px;
 
-                img {
-                    width: 70px;
-                    border-radius: 10px;
-                    margin: 0 auto;
-                }
-            }
-
-            .thumbnail2 {
-
-                img {
-                    max-width: 100%;
-                    max-height: 350px;
-                    object-fit: cover;
-                }
-            }
 
         }
 
@@ -131,6 +119,23 @@
                 text-align: center;
                 cursor: pointer;
             }
+
+            .add-wishlist {
+                cursor: pointer;
+                margin-top: 10px;
+                width: 200px;
+                height: 40px;
+                border: 1px solid #e8e8e8;
+                border-radius: 5px;
+                display: flex;
+                justify-content: start;
+                align-items: center;
+                column-gap: 10px;
+                padding-left: 10px;
+                font-size: 14px;
+                color: #000000;
+                font-weight: 500;
+            }
         }
 
 
@@ -176,6 +181,11 @@
         margin: 20px auto;
         cursor: pointer;
     }
+}
+
+.img-over {
+    width: 20px;
+    height: 20px;
 }
 
 .product-review {
@@ -235,3 +245,25 @@
 
 
 }
+
+// .thumbnail1 {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//     row-gap: 15px;
+
+//     img {
+//         width: 70px;
+//         border-radius: 10px;
+//         margin: 0 auto;
+//     }
+// }
+
+// .thumbnail2 {
+
+//     img {
+//         max-width: 100%;
+//         max-height: 350px;
+//         object-fit: cover;
+//     }
+// }

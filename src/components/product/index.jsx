@@ -15,7 +15,7 @@ const Product = (props) => {
     return (
         <>
             <div className='product'>
-                <Link className='text-none' to={`/${item.id}`}>
+                <Link className='text-none' to={`/book/${item.id}`}>
                     <img src={item.thumbnail} className='pt-2' />
                     <p>{item.name}</p>
                 </Link>

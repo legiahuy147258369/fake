@@ -4,28 +4,31 @@ import { BiHomeAlt2 } from 'react-icons/bi';
 import { RiArrowRightSLine } from 'react-icons/ri';
 import { Link, useLocation } from 'react-router-dom';
 import './bread.scss'
-const BreadcrumbCom = () => {
-    const location = useLocation();
+import { initRoute } from '../../useRoter';
 
-    const them = location.pathname.split('/').filter((i) => i !== '')
-        .map(item => {
-            return {
-                title: <Link to={''}>{item.toUpperCase()}</Link>,
-                key: item,
-            }
-        });
+const BreadcrumbCom = () => {
+    const { pathname } = useLocation();
+    let parts = pathname.split("/");
+    let currentPath = "/" + parts[1];
+
+    const them = (initRoute[0].children.filter(item => item.key === currentPath)).map(item => {
+        return {
+            title: <Link to={''}>{item.cap}</Link>,
+            key: item.key,
+        }
+    });
+
     const breadcrumbItems = [
         {
-            title: <Link to='/'> HOME </Link>,
+            title: <Link to='/'> Trang chủ </Link>,
             key: 'home',
-        },
-    ].concat(them);
+        }
+    ].concat(them)
     return (
         <div className='breadcrumb-area'>
             <Breadcrumb separator={<RiArrowRightSLine size={20} />} items={breadcrumbItems} />
         </div>
-
-    )
-}
+    );
+};
 
 export default BreadcrumbCom;

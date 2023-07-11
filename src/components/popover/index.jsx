@@ -8,7 +8,6 @@ const PopoverCustom = (props) => {
     const { children, cart } = props;
     const navigate = useNavigate();
     const headerPop = () => {
-
         return (
             <div className="pop-cart-header">
                 <div className='pop-cart-header__text' >Sản phẩm đã thêm</div>

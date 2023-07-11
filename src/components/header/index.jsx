@@ -24,7 +24,7 @@ const Header = () => {
     const isAuthenticated = useSelector((state) => state.account.isAuthenticated);
     const user = useSelector((state) => state.account.user);
     const cart = useSelector((state) => state.cart.cart);
-
+    const wish = useSelector((state) => state.wish.product);
     const getData = async () => {
         let data = (await callCategory()).map(item => ({
             key: item.id,
@@ -166,14 +166,17 @@ const Header = () => {
                 </div>
                 <div className="nav-area-icon ps-2">
                     <div className="nav-icon  wish-list">
-                        <AiOutlineHeart size={25} />
+                        <Badge count={wish?.length ?? 0} size={'small'} overflowCount={10}>
+                            <AiOutlineHeart size={25} onClick={() => navigate('/wish')} />
+                        </Badge>
+
                         <span className='nav-cover-text'>Yêu thích</span>
                     </div>
                     <PopoverCustom cart={cart}>
                         <div className="nav-icon">
 
 
-                            <Badge count={cart?.length ?? 0} size={'small'}>
+                            <Badge count={cart?.length ?? 0} size={'small'} overflowCount={10}>
                                 <AiOutlineShoppingCart color='grey' size={25} onClick={() => navigate('/cart')} />
                             </Badge>
 

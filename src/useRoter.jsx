@@ -15,6 +15,35 @@ import AdminLayout from './layout/AdminLayout';
 import { ProtectedRoute, RoleRoute } from "./components/guardRouter";
 import Checkout from "./pages/checkout";
 import ScrollToTop from "./components/onscrollTop";
+import WishList from "./pages/wish";
+
+export const initRoute = [
+    {
+        path: '/',
+        element: <MainLayout />,
+        errorElement: <NotFound />,
+        children: [
+            { index: true, element: <Home />, key: '/' },
+            { path: 'shop', element: <ShopPage />, key: '/shop', cap: 'Trang của hàng' },
+            { path: 'book/:id', element: <DetailProduct />, key: '/book', cap: 'Chi Tiết Sản Phẩm' },
+            { path: 'cart', element: <CartPage />, key: '/cart', cap: ' Giỏ hàng' },
+            { path: 'wish', element: <WishList />, key: '/wish', cap: 'Danh sách yêu thích' },
+            { path: 'checkout', key: '/checkout', element: <ProtectedRoute> <Checkout /></ProtectedRoute>, cap: 'Thanh toán' }
+        ],
+    },
+    {
+        path: '/login',
+        element: <Login />,
+    },
+    {
+        path: '/register',
+        element: <Register />,
+    },
+    {
+        path: '/admin',
+        element: <RoleRoute> <AdminLayout /> </RoleRoute>,
+    },
+]
 export default function useRouteElements() {
 
     const dispatch = useDispatch();
@@ -34,33 +63,6 @@ export default function useRouteElements() {
         getAccount();
     }, []);
 
-    const router = useRoutes([
-        {
-            path: '/',
-            element: <MainLayout />,
-            errorElement: <NotFound />,
-            children: [
-                { index: true, element: <Home /> },
-                { path: 'shop', element: <ShopPage />, },
-                { path: '/:id', element: <DetailProduct />, },
-                { path: 'cart', element: <CartPage /> },
-
-                { path: 'checkout', element: <ProtectedRoute> <Checkout /></ProtectedRoute>, }
-
-            ],
-        },
-        {
-            path: '/login',
-            element: <Login />,
-        },
-        {
-            path: '/register',
-            element: <Register />,
-        },
-        {
-            path: '/admin',
-            element: <RoleRoute> <AdminLayout /> </RoleRoute>,
-        },
-    ]);
+    const router = useRoutes(initRoute);
     return router
 }
