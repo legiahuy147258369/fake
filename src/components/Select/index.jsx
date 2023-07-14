@@ -2,6 +2,8 @@ import React, { useRef, useState } from 'react';
 import { Select } from 'antd';
 const CustomSelect = (props) => {
     const { errorMessage, className, placeholder, name, register, handleChange, items, ...rest } = props;
+    console.log(errorMessage);
+    console.log(register(name));
     const options = [{ label: placeholder, value: '' }];
     for (let i = 0; i < items?.length - 1; i++) {
         options.push({
@@ -15,6 +17,7 @@ const CustomSelect = (props) => {
         }
         return false
     }
+
     return (
         <div>
             <Select
@@ -32,19 +35,6 @@ const CustomSelect = (props) => {
             <div className={`color-main pt-1 mb-4`}>{errorMessage}</div>
         </div>
     );
-    // return (
-    //     <div>
-    //         <select placeholder={placeholder} className='select-custom'  {...rest} {...registerResult} disabled={show()} onChange={(v) => handleChange(v, name)}>
-    //             <option value="">{placeholder}</option>
-    //             {items && items.length > 0 && items?.map((item, i) => {
-    //                 return (
-    //                     <option key={item.code} value={item.code} data={item.name}>{item.name}</option>
-    //                 );
-    //             })}
-    //         </select>
-    //         <div className={`color-main pt-1 mb-4`}>{errorMessage}</div>
-    //     </div>
-    // );
 };
 
 

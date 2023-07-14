@@ -40,17 +40,17 @@ const Login = () => {
                 <Col className='box-register' xs={18} md={12} lg={8}>
                     <form onSubmit={onSubmit} noValidate >
                         <h2 className='fs-2 mb-3 text-center'>Đăng nhập</h2>
-                        <div className='box-input'>
+                        <Row className='box-input' gutter={[0, 12]}>
+                            <Col xs={24}><label className='pb-2'>Email</label> </Col>
+                            <Col xs={24}> <CustomInput type={'text'} register={register} name='email' placeholder='Nhập email' errorMessage={errors.email?.message} /></Col>
+                            <Col xs={24}> <label className='pb-2'>Mật khẩu</label></Col>
+                            <Col xs={24}><CustomInput type={'password'} register={register} name='password' placeholder='Nhập mật khẩu' errorMessage={errors.password?.message} /></Col>
 
-                            <label >Email</label>
-                            <CustomInput type={'text'} register={register} name='email' placeholder='Nhập email' errorMessage={errors.email?.message} />
-                            <label >Mật khẩu</label>
-                            <CustomInput type={'password'} register={register} name='password' placeholder='Nhập mật khẩu' errorMessage={errors.password?.message} />
 
-                        </div>
-                        <Row> <Col className='fl' xs={12}><Link to={'/login'} >Quên mật khẩu</Link></Col> <Col className='fl-end ' xs={12}><button className='btn-dangnhap'>Đăng nhập</button> </Col></Row>
+                        </Row>
+                        <Row> <Col className='fl' xs={12}><Link to={'/login'} >Quên mật khẩu</Link></Col> <Col className='fl-end ' xs={12}><div className='btn-dangki' onClick={() => navigate('/register')}>Đăng kí</div> </Col></Row>
                         <Divider />
-                        <div className='btn-dangki' onClick={() => navigate('/register')}>Đăng kí</div>
+                        <button className='btn-dangnhap' >Đăng nhập</button>
                     </form>
 
                 </Col>

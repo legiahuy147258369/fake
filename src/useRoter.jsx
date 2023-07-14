@@ -1,4 +1,5 @@
-import { createBrowserRouter, useRoutes } from "react-router-dom";
+
+import { useRoutes } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
 import NotFound from "./components/NotFound";
 import Home from "./pages/home";
@@ -14,38 +15,12 @@ import { callFetchAccount } from "./services/api";
 import AdminLayout from './layout/AdminLayout';
 import { ProtectedRoute, RoleRoute } from "./components/guardRouter";
 import Checkout from "./pages/checkout";
-import ScrollToTop from "./components/onscrollTop";
 import WishList from "./pages/wish";
+import AccountUser from "./pages/user";
 
-export const initRoute = [
-    {
-        path: '/',
-        element: <MainLayout />,
-        errorElement: <NotFound />,
-        children: [
-            { index: true, element: <Home />, key: '/' },
-            { path: 'shop', element: <ShopPage />, key: '/shop', cap: 'Trang của hàng' },
-            { path: 'book/:id', element: <DetailProduct />, key: '/book', cap: 'Chi Tiết Sản Phẩm' },
-            { path: 'cart', element: <CartPage />, key: '/cart', cap: ' Giỏ hàng' },
-            { path: 'wish', element: <WishList />, key: '/wish', cap: 'Danh sách yêu thích' },
-            { path: 'checkout', key: '/checkout', element: <ProtectedRoute> <Checkout /></ProtectedRoute>, cap: 'Thanh toán' }
-        ],
-    },
-    {
-        path: '/login',
-        element: <Login />,
-    },
-    {
-        path: '/register',
-        element: <Register />,
-    },
-    {
-        path: '/admin',
-        element: <RoleRoute> <AdminLayout /> </RoleRoute>,
-    },
-]
+
+
 export default function useRouteElements() {
-
     const dispatch = useDispatch();
     const isLoading = useSelector((state) => state.account.isLoading);
     const isAuthenticated = useSelector((state) => state.account.isAuthenticated);
@@ -59,10 +34,43 @@ export default function useRouteElements() {
             }
         }
     };
+
     useEffect(() => {
         getAccount();
     }, []);
 
-    const router = useRoutes(initRoute);
-    return router
+    const router = useRoutes([
+        {
+            path: '/',
+            element: <MainLayout />,
+            errorElement: <NotFound />,
+            children: [
+                { index: true, element: <Home />, key: '/' },
+                { path: 'shop', element: <ShopPage />, key: '/shop', cap: 'Trang của hàng' },
+                { path: 'book/:id', element: <DetailProduct />, key: '/book', cap: 'Chi Tiết Sản Phẩm' },
+                { path: 'cart', element: <CartPage />, key: '/cart', cap: ' Giỏ hàng' },
+                { path: 'wish', element: <WishList />, key: '/wish', cap: 'Danh sách yêu thích' },
+                { path: 'checkout', key: '/checkout', element: <ProtectedRoute> <Checkout /></ProtectedRoute>, cap: 'Thanh toán' },
+                { path: 'user/*', key: '/user', cap: 'Tài khoản', element: <ProtectedRoute> <AccountUser /> </ProtectedRoute> },
+
+            ],
+        },
+        {
+            path: '/login',
+            element: <Login />,
+        },
+        {
+            path: '/register',
+            element: <Register />,
+        },
+        {
+            path: '/admin',
+            element: <RoleRoute> <AdminLayout /> </RoleRoute>,
+        },
+        {
+            path: '*',
+            element: <NotFound />,
+        },
+    ]);
+    return router;
 }

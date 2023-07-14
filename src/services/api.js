@@ -30,6 +30,25 @@ export const callFetchAccount = () => {
 export const callLogout = () => {
     return axios.get('/api/user/logout');
 };
+export const callUpdateCurrent = (body) => {
+    return axios.put('/api/user/current', body);
+};
+export const callUpdateCurrentPass = (body) => {
+    return axios.put('/api/user/current/pass', body);
+};
+export const callUploadAvatar = (fileImg) => {
+    const bodyFormData = new FormData();
+    bodyFormData.append('file', fileImg);
+    return axios({
+        method: 'put',
+        url: '/api/user/current/avatar',
+        data: bodyFormData,
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            'upload-type': 'avatar',
+        },
+    });
+};
 export const callProductPagination = (query) => {
     const queryParams = { ...query };
     return axios.get('/api/product', { params: queryParams });

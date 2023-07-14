@@ -6,10 +6,8 @@ import moment from 'moment';
 import { useNavigate } from 'react-router';
 const Order = (props) => {
     const { donhang } = props;
-    const navigate = useNavigate()
-    console.log(donhang);
+    const navigate = useNavigate();
     const cart = JSON.parse(donhang.cart);
-    console.log(cart);
     const total = (cart) => {
         console.log(cart);
         return +cart.reduce((a, b) => a + b.quantity * b.price, 0)

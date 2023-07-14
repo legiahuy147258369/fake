@@ -114,8 +114,18 @@ body {
     color: #C92127;
 }
 
+.text-message {
+    font-size: 14px;
+    color: #C92127;
+    font-weight: 400;
+}
+
 .text-dark {
     color: #000;
+}
+
+.h-15 {
+    height: 15px;
 }
 
 .my-1 {
@@ -232,6 +242,10 @@ body {
 
 .pt-3 {
     padding-top: 15px;
+}
+
+.pb-2 {
+    padding-bottom: 10px;
 }
 
 .p-4 {

@@ -17,8 +17,6 @@ const PaginationComponent = (props) => {
         })
     };
     const itemRender = (page, type, originalElement) => {
-
-
         if (type === 'jump-prev') {
             return <Link to={{
                 pathname: '', search: createSearchParams({

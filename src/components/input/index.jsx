@@ -18,7 +18,7 @@ const CustomInput = (props) => {
     }
     return (
         <>
-            <div className='pt-2  box-input-custom'>
+            <div className='box-input-custom'>
                 <input className='input-custom' {...rest} {...registerResult} type={handleType()} />
                 {type === 'password' && openEye && (
                     <EyeTwoTone className='icon' onClick={toggleEye} />

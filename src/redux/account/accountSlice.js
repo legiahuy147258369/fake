@@ -46,7 +46,7 @@ export const accountSlide = createSlice({
             state.user.fullName = action.payload.fullName;
         },
         doUpdateAvatarAction: (state, action) => {
-            state.tempAvatar = action.payload.avatar;
+            state.user.avatar = action.payload.avatar;
         },
     },
 

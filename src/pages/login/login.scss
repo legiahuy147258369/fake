@@ -1,4 +1,4 @@
-.btn-dangki {
+.btn-dangnhap {
     width: 150px;
     height: 35px;
     background: #7843E6;
@@ -11,11 +11,14 @@
     font-weight: 500;
 }
 
-.btn-dangnhap {
+.btn-dangki {
     border: 1px solid #7843E6;
     color: #7843E6;
     font-weight: 500;
     border-radius: 10px;
     width: 120px;
     height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

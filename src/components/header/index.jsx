@@ -55,7 +55,7 @@ const Header = () => {
     const itemsAccount = [
         {
             label: (
-                <label>
+                <label onClick={() => navigate('/user')}>
                     Quản lý tài khoản
                 </label>
             ),
@@ -155,14 +155,8 @@ const Header = () => {
                             </a>
                         </div>
                     </Dropdown>
-
-
-
                     <Input placeholder="Tìm kiếm sản phẩm" value={search} onPressEnter={(e) => onSubmitSearch(e)} onChange={(e) => setSearch(e.target.value)} />
                     <button className='box-search' onClick={() => onSubmitSearch('submit')}><AiOutlineSearch /></button>
-
-
-
                 </div>
                 <div className="nav-area-icon ps-2">
                     <div className="nav-icon  wish-list">
@@ -188,7 +182,7 @@ const Header = () => {
                         {isAuthenticated && user?.name ? (
                             <Dropdown menu={{ items: itemsAccount }} trigger={['click']} placement="bottomRight" >
                                 <div className='space-avatar'>
-                                    <Avatar icon={<UserOutlined />} size={25} />
+                                    <Avatar src={user.avatar} size={25} />
                                     <span className='nav-cover-text' >{user?.name}</span>
                                 </div>
                             </Dropdown>
