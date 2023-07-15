@@ -51,9 +51,17 @@
         }
     }
 
+
     .box-cart {
         @include con;
         justify-content: space-between;
+
+        .btn-wish {
+            background: #ffffff;
+            color: #000;
+            font-weight: 500
+        }
+
 
         .cart {
             @include fl;
@@ -91,7 +99,7 @@
 }
 
 @media only screen and (max-width: 1024px) {
-    .text-cart {
+    .text-wish {
         display: none !important;
     }
 }

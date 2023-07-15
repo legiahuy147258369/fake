@@ -24,6 +24,7 @@ const Login = () => {
         setLoading(false);
         if (success) {
             message.success('Đăng nhập thành công');
+            console.log(accessToken);
             localStorage.setItem('access_token', accessToken);
             dispatch(doLoginAction(account))
             navigate('/');

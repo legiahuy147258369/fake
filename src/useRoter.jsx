@@ -17,6 +17,7 @@ import { ProtectedRoute, RoleRoute } from "./components/guardRouter";
 import Checkout from "./pages/checkout";
 import WishList from "./pages/wish";
 import AccountUser from "./pages/user";
+import Dashboard from "./admin/page/Dashboard";
 
 
 
@@ -25,19 +26,20 @@ export default function useRouteElements() {
     const isLoading = useSelector((state) => state.account.isLoading);
     const isAuthenticated = useSelector((state) => state.account.isAuthenticated);
 
-    const getAccount = async () => {
-        if (isAuthenticated) {
-            const res = await callFetchAccount();
-            if (res && res.success !== false) {
-                dispatch(getAccountAction(res));
-                return;
-            }
-        }
-    };
+    // const getAccount = async () => {
+    //     if (isAuthenticated) {
+    //         const res = await callFetchAccount();
+    //         console.log(res);
+    //         if (res && res.success !== false) {
+    //             dispatch(getAccountAction(res));
+    //             return;
+    //         }
+    //     }
+    // };
 
-    useEffect(() => {
-        getAccount();
-    }, []);
+    // useEffect(() => {
+    //     getAccount();
+    // });
 
     const router = useRoutes([
         {
@@ -66,6 +68,10 @@ export default function useRouteElements() {
         {
             path: '/admin',
             element: <RoleRoute> <AdminLayout /> </RoleRoute>,
+            children: [
+                { index: true, element: <Dashboard />, key: '/' }
+
+            ],
         },
         {
             path: '*',

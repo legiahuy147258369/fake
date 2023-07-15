@@ -13,3 +13,41 @@
         width: 100%;
     }
 }
+
+.layout_admin_area {
+    height: 100vh;
+    background: #F1F1F1;
+
+
+    .ant-menu {
+        .ant-menu-item {
+            &:first-child {
+                margin-top: 20px;
+            }
+
+            color: gray;
+            font-size: 16px;
+        }
+
+        .ant-menu-item-selected {
+            background: #7843E6;
+            border: 1px solid #7843E6;
+            font-weight: 600;
+            color: white;
+            font-size: 18px;
+        }
+    }
+}
+
+.header-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+
+    &__name {
+        color: #000000;
+        font-size: 16px;
+        font-weight: 600;
+    }
+}

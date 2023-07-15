@@ -10,12 +10,11 @@ export const wishSlide = createSlice({
     reducers: {
         addToWishList: (state, action) => {
             const index = state.product.findIndex(item => item.id === action.payload.id);
-
             if (index > -1) {
                 message.warning('Sản phẩm đã có trong danh sách');
             } else {
                 state.product.push(action.payload)
-                message.success('Sản phẩm đã được thêm vào giỏ hàng');
+                message.success('Sản phẩm đã được thêm vào danh sách yêu thích');
             }
         },
         delIdWishList: (state, action) => {

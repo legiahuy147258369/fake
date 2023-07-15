@@ -14,6 +14,7 @@ const handleRefreshToken = async () => {
 
 const NO_RETRY_HEADER = 'x-no-retry';
 instance.defaults.headers.common = { Authorization: `Bearer ${localStorage.getItem('access_token')}` };
+
 instance.interceptors.request.use(function (config) {
     return config;
 }, function (error) {

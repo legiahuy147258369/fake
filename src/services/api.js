@@ -9,11 +9,17 @@ export const callBanner = () => {
 export const callTopView = () => {
     return axios.get(`/api/product/topview`);
 };
+export const callTopSold = () => {
+    return axios.get(`/api/product/top_sold`);
+};
 export const callTopNew = () => {
     return axios.get(`/api/product/topnew`);
 };
 export const callCategory = () => {
     return axios.get(`/api/category`);
+};
+export const callChartPieProduct = () => {
+    return axios.get(`/api/category/chart/pie`);
 };
 export const callProductDetail = (id) => {
     return axios.get(`/api/product/detail/${id}`);
@@ -29,6 +35,9 @@ export const callFetchAccount = () => {
 };
 export const callLogout = () => {
     return axios.get('/api/user/logout');
+};
+export const callAllOrder = () => {
+    return axios.get('/api/order/');
 };
 export const callUpdateCurrent = (body) => {
     return axios.put('/api/user/current', body);

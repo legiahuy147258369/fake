@@ -41,7 +41,6 @@ const Header = () => {
     };
     const handleLogout = async () => {
         const res = await callLogout();
-        console.log(res);
         if (res) {
             dispatch(doLogoutAction());
             message.success('Đăng xuất thành công');
