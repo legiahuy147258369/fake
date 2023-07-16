@@ -12,10 +12,13 @@ const handleRefreshToken = async () => {
     else null;
 };
 
-const NO_RETRY_HEADER = 'x-no-retry';
-instance.defaults.headers.common = { Authorization: `Bearer ${localStorage.getItem('access_token')}` };
+
 
 instance.interceptors.request.use(function (config) {
+    const accessToken = localStorage.getItem('access_token') || '';
+    if (accessToken) {
+        config.headers['Authorization'] = `Bearer ${accessToken}`;
+    }
     return config;
 }, function (error) {
     return Promise.reject(error);
@@ -25,7 +28,12 @@ instance.interceptors.request.use(function (config) {
 instance.interceptors.response.use(function (response) {
     return response.data && response?.data?.data ? response?.data?.data : response?.data;
 }, async function (error) {
-    // console.log(error);
+
+    return error.response?.data ?? Promise.reject(error);
+});
+export default instance;
+
+// console.log(error);
     // if (
     //     error.config &&
     //     error.response &&
@@ -49,6 +57,3 @@ instance.interceptors.response.use(function (response) {
     //     console.log(error);
     //     window.location.href = '/login';
     // }
-    return error.response?.data ?? Promise.reject(error);
-});
-export default instance;
