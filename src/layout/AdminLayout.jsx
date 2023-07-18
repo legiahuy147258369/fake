@@ -3,9 +3,6 @@ import logo from '../assets/logo.png'
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
-    UploadOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
 } from '@ant-design/icons';
 
 import { Layout, Menu, Button, Avatar, theme, Badge, Col, Row } from 'antd';
@@ -13,8 +10,13 @@ const { Header, Sider, Content } = Layout;
 import './main.scss';
 import { Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux';
-import { BsBellFill } from 'react-icons/bs';
-import { AiFillSetting } from 'react-icons/ai';
+import { BsFillBellFill } from 'react-icons/bs';
+import { BiCategoryAlt } from 'react-icons/bi';
+import { RiBillLine } from 'react-icons/ri';
+import { LiaComment } from 'react-icons/lia';
+import { FaUserFriends } from 'react-icons/fa';
+
+import { AiFillSetting, AiOutlineBook } from 'react-icons/ai';
 const LayoutAdmin = () => {
     const [collapsed, setCollapsed] = useState(false);
     const {
@@ -51,13 +53,28 @@ const LayoutAdmin = () => {
                         },
                         {
                             key: '4',
-                            icon: <VideoCameraOutlined />,
+                            icon: <AiOutlineBook />,
                             label: 'Sản phẩm',
                         },
                         {
                             key: '5',
-                            icon: <UploadOutlined />,
+                            icon: <BiCategoryAlt />,
                             label: 'Thể loại',
+                        },
+                        {
+                            key: '6',
+                            icon: <RiBillLine />,
+                            label: 'Đơn hàng',
+                        },
+                        {
+                            key: '7',
+                            icon: <LiaComment />,
+                            label: 'Bình luận',
+                        },
+                        {
+                            key: '8',
+                            icon: <FaUserFriends />,
+                            label: 'Khách hàng',
                         },
                     ]}
                 />
@@ -86,7 +103,7 @@ const LayoutAdmin = () => {
                         <Col lg={6} className='header-right'>
                             <span className='header-right__name'>{user.name}</span>
                             <Avatar src={user.avatar} size={40} />
-                            <BsBellFill />
+                            <BsFillBellFill />
                             <AiFillSetting />
 
 

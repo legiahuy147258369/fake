@@ -10,6 +10,25 @@ export const convertDate = (params) => {
 export const formatNgay = (params) => {
     return moment(params).format('DD-MM-YYYY');
 }
+export const formatTimeAgo = (timestamp) => {
+    const now = moment();
+    const time = moment(timestamp);
+
+    const minutes = now.diff(time, 'minutes');
+    if (minutes < 1) {
+        return 'Bây giờ';
+    } else if (minutes < 60) {
+        return `${minutes} phút trước`;
+    }
+
+    const hours = now.diff(time, 'hours');
+    if (hours < 24) {
+        return `${hours} giờ trước`;
+    }
+
+    const days = now.diff(time, 'days');
+    return `${days} ngày trước`;
+}
 export const dataDate = () => {
     let ngay = [
         {

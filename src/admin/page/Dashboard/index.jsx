@@ -102,7 +102,7 @@ const Dashboard = () => {
                     <Col xs={6}>
                         <Card.Grid className='card-area__row__col'>
                             <Col span={17} className='col-1'>
-                                <Statistic title="Phản hồi" value={13} />
+                                <Statistic title="Bình luận" value={13} />
                             </Col>
                             <Col span={7} className='col-2'>
                                 <AiOutlineComment className='icon' size={30} />

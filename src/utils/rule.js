@@ -42,6 +42,10 @@ const schema = yup.object({
     thang: yup.string().required('Chọn tháng.'),
     nam: yup.string().required('Chọn năm.'),
     gender: yup.number().required('Chọn giới tính.'),
+    content: yup.string().required('Vui lòng nội dung ')
+        .min(5, 'Độ dài kí tự từ 5-00 kí tự'),
+    rate: yup.string().required('Đánh giá sao'),
+
 
 })
 

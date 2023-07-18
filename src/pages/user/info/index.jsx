@@ -35,8 +35,6 @@ const beforeUpload = (file) => {
 };
 const Info = () => {
     const dispatch = useDispatch();
-
-
     const registerSchema = schema.pick(['email', 'name', 'ngay', 'thang', 'nam', 'phone', 'gender', 'address'])
     const methods = useForm({ resolver: yupResolver(registerSchema) });
     const navigate = useNavigate();

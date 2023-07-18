@@ -1,11 +1,11 @@
 import axios from "axios";
-
 const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 const instance = axios.create({
     baseURL: baseUrl,
     withCredentials: true
 });
+
 const handleRefreshToken = async () => {
     const res = await instance.get('/api/user/refresh');
     if (res && res.data) return res.data.access_token;

@@ -288,6 +288,10 @@ body {
     cursor: pointer;
 }
 
+.text-grey {
+    color: grey;
+}
+
 .text-end {
     text-align: right;
 }
@@ -381,8 +385,19 @@ body {
     }
 }
 
+.text_title_comment {
+    font-size: 12px;
+    line-height: 23px;
+}
+
 .popover-cart-over {
     top: 85px !important;
+}
+
+.collapse__reply {
+    .ant-collapse-header {
+        padding: 0px !important;
+    }
 }
 
 .pop-cart-header {

@@ -188,51 +188,132 @@
     height: 20px;
 }
 
-.product-review {
+.product__review {
     background: #ffffff;
-    padding: 20px;
-    height: auto;
-    margin: 20px 0;
 
-    .box-review {
-        margin-top: 20px;
+    &__box {
+        padding: 20px;
+        height: auto;
+        margin: 20px 0;
 
-        .box-review__detail {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            justify-content: center;
-            align-items: center;
+        .box-review {
+            margin-top: 20px;
 
-            span {
-                font-size: 20px;
-                font-weight: 500;
+            .box-review__detail {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                justify-content: center;
+                align-items: center;
 
-                b {
-                    font-size: 35px;
-                    color: black;
-                    font-weight: 700;
+                span {
+                    font-size: 20px;
+                    font-weight: 500;
+
+                    b {
+                        font-size: 35px;
+                        color: black;
+                        font-weight: 700;
+                    }
+                }
+
+            }
+
+            .btn-review {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+
+                div {
+                    border: 2px solid #C92127;
+                    color: #C92127;
+                    font-size: 16px;
+                    font-weight: 500;
+                    padding: 0.8rem 2rem;
+                    border-radius: 3px;
                 }
             }
 
-        }
 
-        .btn-review {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            div {
-                border: 2px solid #C92127;
-                color: #C92127;
-                font-size: 16px;
-                font-weight: 500;
-                padding: 0.8rem 2rem;
-                border-radius: 3px;
-            }
         }
     }
 
+    &__list {
+        overflow: hidden;
+
+        &__row {
+            min-height: 50px;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            width: 100%;
+            border-bottom: 2px solid rgb(241, 236, 236);
+            background: #ffffff;
+
+
+            &__left {
+                padding: 10px;
+                width: 20%;
+
+                .name {
+                    text-transform: capitalize;
+                    font-size: 1rem;
+                    font-weight: 500;
+                    padding: 10px 0px;
+                }
+
+                .date {
+                    color: grey;
+                    font-size: 12px;
+                    padding: 10px 0px;
+                }
+            }
+
+            &__right {
+                width: 75%;
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                row-gap: 10px;
+
+                .content {
+                    font-size: 0.8rem;
+                    min-height: 30px;
+                    line-height: 20px;
+                    color: rgb(16, 15, 15);
+                    font-weight: 520;
+                }
+
+                .box__feed {
+                    display: flex;
+                    column-gap: 40px;
+
+                    &__rep {
+                        font-size: 12px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .box-pagination {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            height: 50px;
+            padding-right: 1em;
+        }
+
+    }
+}
+
+.btn-comment {
+    background: #C92127;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    float: right;
 }
 
 @media screen and (max-width: 668px) {
@@ -242,6 +323,29 @@
         justify-content: center;
     }
 
+    .product__review__list__row {
+        display: flex;
+        flex-wrap: wrap;
+
+        &__left {
+            width: 100%;
+            display: flex;
+
+            .name {
+                width: 50%;
+                font-weight: 550;
+            }
+
+            .date {
+                width: 50%;
+                text-align: end;
+            }
+        }
+
+        &__right {
+            width: 100%;
+        }
+    }
 
 
 }

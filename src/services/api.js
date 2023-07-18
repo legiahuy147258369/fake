@@ -62,7 +62,11 @@ export const callProductPagination = (query) => {
     const queryParams = { ...query };
     return axios.get('/api/product', { params: queryParams });
 };
-
+export const callComments = async (re) => {
+    const params = new URLSearchParams(re);
+    const url = `/api/comment?${params}`;
+    return axios.get(url);
+}
 export const callTinh = async () => {
     const res = await fetch('https://provinces.open-api.vn/api/');
     return await res.json();
@@ -73,4 +77,10 @@ export const callHuyen = async (ip) => {
 }
 export const callCreateOrder = (data) => {
     return axios.post('/api/order', { ...data });
+};
+export const callCreateComment = (data) => {
+    return axios.post(`/api/comment`, data);
+};
+export const callLike = (data) => {
+    return axios.post(`/api/comment/like`, data);
 };
