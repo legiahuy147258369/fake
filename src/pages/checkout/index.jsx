@@ -1,28 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import BreadcrumbCom from '../../components/breadcrumb';
 import OrderStep from '../../components/order-step';
-import { Col, Row, message, notification } from 'antd';
+import { Col, Row, message, notification, Switch, Checkbox, Divider } from 'antd';
 import { callCreateOrder, callHuyen, callTinh } from '../../services/api'
 import CustomInput from '../../components/Input';
 import { schema } from '../../utils/rule';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import CustomSelect from '../../components/Select';
 import { useQuery } from '@tanstack/react-query';
 import './checkout.scss';
 import Order from '../../components/Order';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 import { delAllCart } from '../../redux/cart/cartSlice';
+import CustomSelectV2 from '../../components/Select/SelectV2';
+import CustomInputV2 from '../../components/Input/InputV2';
+import CustomTextArea from '../../components/TextArea';
+import { convertOPtion, formatGia } from '../../utils/format';
+import { useRef } from 'react';
+
 const Checkout = () => {
     const [step, setStep] = useState(1);
     const [district, setDistrict] = useState([]);
     const cartRedux = useSelector((state) => state.cart.cart);
     const accountRedux = useSelector((state) => state.account.user);
+
     const dispatch = useDispatch();
     const [donhang, setDonhang] = useState([]);
-    const checkoutS = schema.pick(['name', 'phone', 'province', 'district', 'dc'])
-    const { register, clearErrors, setError, reset, resetField, handleSubmit, setValue, formState: { errors } } = useForm({ resolver: yupResolver(checkoutS) });
+    const [addressDefault, setAddressDefault] = useState({ default: false, rule: [] });
+
+    const checkoutS = schema.pick(addressDefault.rule);
+    const methods = useForm({ resolver: yupResolver(checkoutS) });
 
     const { data: tinh } = useQuery({
         queryKey: ['province'],
@@ -30,107 +38,156 @@ const Checkout = () => {
             return callTinh()
         }
     });
-
-    useEffect(() => {
-        setValue('name', accountRedux?.name);
-        setValue('phone', accountRedux?.phone);
-    }, []);
-
-    const handleChange = async (v, o, name) => {
-        if (name === 'province') {
-            const data = await callHuyen(v);
-            setDistrict(data.districts);
-            if (v) {
-                setValue('province', o.label)
-                clearErrors('province');
-            } else {
-                setValue('province', '')
-                setDistrict([])
-                setValue('district', '')
-                setError('province', { type: 'custom', message: 'Vui lòng chọn tỉnh' });
-            }
+    const setAddress = () => {
+        if (accountRedux.address) {
+            setAddressDefault({ default: true, rule: ['name', 'phone', 'dc'] });
+            methods.setValue('name', accountRedux?.name);
+            methods.setValue('phone', accountRedux?.phone);
+            methods.setValue('dc', accountRedux?.address);
         } else {
-            if (v) {
-                setValue('district', o.label)
-                clearErrors('district');
-            } else {
-                setValue('district', '')
-                setError('district', { type: 'custom', message: 'Vui lòng chọn quận huyện' });
-            }
+            setAddressDefault({ default: false, rule: ['name', 'phone', 'province', 'district', 'dc'] });
         }
     }
 
-    const onSubmit = handleSubmit(async (data) => {
-        if (cartRedux) {
-            data.address = `${data.dc} , ${data.district} , ${data.province} `
-            const cart = cartRedux.map(item => ({
-                quantity: item.qty,
-                cart: {
-                    id: item.detail.id,
-                    price: item.detail.price,
-                    name: item.detail.name
-                }
-            }));
-
-            data.user_id = accountRedux.id;
-            const order = { data, cart };
-            console.log(data);
-            const result = (await callCreateOrder(order))[0];
-            if (result) {
-                setStep(2);
-                message.success('Đặt hàng thành công');
-                setDonhang(result);
-                reset();
-                dispatch(delAllCart())
-            } else {
-                notification.error({
-                    message: "Có lỗi xảy ra",
-                });
-            }
+    useEffect(() => {
+        setAddress();
+    }, [accountRedux.address, setAddressDefault, methods]);
+    const onChangeCheckAddress = (checked) => {
+        setAddressDefault({ default: !checked, rule: ['name', 'phone', 'province', 'district', 'dc'] });
+        methods.setValue('dc', '');
+    };
+    const handleChange = async (value, option, name) => {
+        if (name === 'province') {
+            const data = await callHuyen(value);
+            setDistrict(data.districts);
+            methods.setValue('province', option.label);
         }
+        if (name === 'district') {
+            methods.setValue('district', option.label);
+        }
+    }
+
+    const onSubmit = (async (data) => {
+        console.log(data);
+        // if (cartRedux) {
+        //     data.address = `${data.dc} , ${data.district} , ${data.province} `
+        //     const cart = cartRedux.map(item => ({
+        //         quantity: item.qty,
+        //         cart: {
+        //             id: item.detail.id,
+        //             price: item.detail.price,
+        //             name: item.detail.name
+        //         }
+        //     }));
+
+        //     data.user_id = accountRedux.id;
+        //     const order = { data, cart };
+        //     console.log(data);
+        //     const result = (await callCreateOrder(order))[0];
+        //     if (result) {
+        //         setStep(2);
+        //         message.success('Đặt hàng thành công');
+        //         setDonhang(result);
+        //         reset();
+        //         dispatch(delAllCart())
+        //     } else {
+        //         notification.error({
+        //             message: "Có lỗi xảy ra",
+        //         });
+        //     }
+        // }
 
     });
+
 
     return (
         <div >
             <BreadcrumbCom />
             <OrderStep step={step} />
-            {step === 1 && <Row justify={'center'} className='checkout-area'>
-                <Col xs={18} md={12} lg={8} className='box-checkout-address'>
-                    <form onSubmit={onSubmit} noValidate >
-                        <h2>Địa chỉ đơn hàng</h2>
-                        <Row justify={'center'} gutter={[8, 8]} >
-                            <Col xs={22} >
-                                <label className='label-text'>Họ tên : </label>
-                                <CustomInput type={'text'} register={register} name='name' placeholder='Nhập họ và tên' errorMessage={errors.name?.message} />
-                            </Col>
-                            <Col xs={22} >
-                                <label className='label-text'>Số điện thoại : </label>
-                                <CustomInput type={'text'} register={register} name='phone' placeholder='Nhập số điện thoại' errorMessage={errors.phone?.message} />
-                            </Col>
-                            <Col xs={22} >
-                                <label className='label-text'>Chọn tỉnh </label>
-                                <CustomSelect register={register} items={tinh} handleChange={handleChange} name='province' placeholder='Chọn tỉnh' errorMessage={errors.province?.message} />
-                            </Col>
-                            <Col xs={22} >
-                                <label className='label-text'>Chọn quận huyện </label>
-                                <CustomSelect register={register} items={district} handleChange={handleChange} name='district' placeholder='Chọn quận huyện' errorMessage={errors.district?.message} />
-                            </Col>
+            {step === 1 && (
+                <FormProvider {...methods}>
+                    <form onSubmit={methods.handleSubmit(onSubmit)} noValidate >
+                        <Row justify={'center'} className='checkout-area'>
+                            <Col xs={24} lg={12} className='box-checkout-address'>
+                                <h2>Địa chỉ đơn hàng</h2>
+                                <Row justify={'center'} className='box-checkout-address__row' >
+                                    <Col xs={22} >
+                                        <Col className='label-text'>Họ tên : </Col>
+                                        <CustomInputV2 type={'text'} name='name' placeholder='Nhập họ và tên' />
+                                    </Col>
+                                    <Col xs={22} >
+                                        <Col className='label-text'>Số điện thoại : </Col>
+                                        <CustomInputV2 type={'text'} name='phone' placeholder='Nhập số điện thoại' />
+                                    </Col>
+                                    {
+                                        addressDefault.default ?
+                                            <Col xs={22}>
+                                                <Col xs={24} className='my-2'><Checkbox checked={addressDefault.default} onChange={onChangeCheckAddress}> Lấy mặc định : </Checkbox></Col>
+                                                <Col xs={24}>
+                                                    <CustomTextArea name='dc' placeholder='Nhập địa chỉ' />
+                                                </Col>
+                                            </Col>
+                                            :
+                                            <>
+                                                <Col xs={22} >
+                                                    <Col className='label-text'>Chọn tỉnh </Col>
+                                                    <CustomSelectV2 options={convertOPtion(tinh)} name='province' handleChange={handleChange} placeholder='Chọn tỉnh' />
+                                                </Col>
+                                                <Col xs={22} >
+                                                    <Col className='label-text'>Chọn quận huyện </Col>
+                                                    <CustomSelectV2 options={convertOPtion(district)} name='district' handleChange={handleChange} placeholder='Chọn quận huyện' />
+                                                </Col>
 
-                            <Col xs={22}>
-                                <textarea rows="4" placeholder='Nhập địa chỉ'{...register("dc")} className='textarea-address'></textarea>
-                                <p className='color-main'>{errors.dc?.message}</p>
+                                                <Col xs={22}>
+                                                    <Col className='label-text'>Nhập địa chỉ nhà </Col>
+                                                    <CustomTextArea name='dc' placeholder='Nhập địa chỉ' />
+                                                </Col>
+                                            </>
+                                    }
+
+                                </Row>
                             </Col>
-                            <Col xs={22} className='mt-2 fl'>
-                                <div className='dot'></div> Thanh toán khi nhận hàng
-                            </Col>
-                            <Col xs={22} className='mt-2 fl-center' >
-                                <button className='btn-checkout'>Mua hàng</button>
+                            <Col xs={24} lg={12} className='p-4 '>
+                                <Row gutter={[8, 20]}>
+                                    <Col xs={24} className='title_order'> Đơn hàng</Col>
+                                    <Col xs={24} className='box__coupon '>
+                                        <Col xs={18} className='box__coupon__input'> <input type="text" /></Col>
+                                        <Col xs={6} className='box__coupon__btn'>Mã giảm giá</Col>
+
+                                    </Col>
+                                    <Col>
+                                        <Divider />
+                                        {cartRedux && cartRedux.length > 0 && (
+                                            cartRedux.map(item => {
+                                                return (
+                                                    <Row key={item.detail.id} gutter={[8, 16]} className='mt-2' >
+                                                        <Col xs={5} md={4}><img src={item.detail.thumbnail} width={90} /></Col>
+                                                        <Col xs={19} md={20} className='cart_des'>
+                                                            <Col xs={24} > {item.detail.name}</Col>
+                                                            <Col xs={24} className='cart_des__price'> {formatGia(item.detail.price)} - Số lượng :{item.qty} </Col>
+                                                        </Col>
+                                                    </Row>
+                                                )
+                                            })
+                                        )}
+                                        <Divider />
+                                    </Col>
+
+                                    <Col>
+
+                                    </Col>
+                                    <Col xs={24} className='fl'>
+                                        <Col xs={12}> Paypay</Col>
+                                        <Col xs={12}> Thanh toán khi nhận hàng </Col>
+                                    </Col>
+                                    <Col xs={24} className=' fl-center' >
+                                        <button className='btn-checkout'>Mua hàng</button>
+                                    </Col>
+                                </Row>
                             </Col>
                         </Row>
                     </form>
-                </Col>
-            </Row>}
+                </FormProvider>)}
             {step === 2 && !_.isEmpty(donhang) && <Order donhang={donhang} />}
         </div>
     )
@@ -138,22 +195,3 @@ const Checkout = () => {
 
 export default Checkout
 
-// const ip = event.target.value;
-        // if (name === 'province') {
-        //     const data = await callHuyen(ip);
-        //     setDistrict(data.districts);
-        //     if (ip.length > 0) {
-        //         clearErrors('province');
-        //     } else {
-        //         setDistrict([])
-        //         setValue('district', '')
-        //         setError('province', { type: 'custom', message: 'Vui lòng chọn tỉnh' });
-        //     }
-        // } else {
-        //     if (ip.length > 0) {
-        //         clearErrors('district');
-        //     } else {
-        //         setValue('district', '')
-        //         setError('district', { type: 'custom', message: 'Vui lòng chọn quận huyện' });
-        //     }
-        // }

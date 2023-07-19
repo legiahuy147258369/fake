@@ -14,9 +14,9 @@ const AccountUser = () => {
         <>
             <BreadcrumbCom />
             <div className='account-area'>
-                <div className='border row' >
-                    <div className='border col-left' ><MenuAccount path={path} /> </div>
-                    <div className='border col-right'>
+                <div className=' row' >
+                    <div className=' col-left' ><MenuAccount path={path} /> </div>
+                    <div className=' col-right'>
                         {path === 'info' && <Info />}
                         {path === 'history' && <History />}
                         {path === 'pass' && <Pass />}

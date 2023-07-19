@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { ImBin } from 'react-icons/im'
 import { Col, Empty, Row, } from 'antd';
-import { formatGia } from '../../utils/format';
+import { countByQty, formatGia, totalCart } from '../../utils/format';
 import QtyCart from '../../components/qty-cart';
 import { delIdCart } from '../../redux/cart/cartSlice';
 import _ from 'lodash'
@@ -14,13 +14,9 @@ import OrderStep from '../../components/order-step';
 const CartPage = () => {
     const [qty, setQty] = useState(1);
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const cart = useSelector((state) => state.cart.cart);
-    const total = (cart) => {
-        return cart.reduce((a, b) => {
-            return a + b.detail.price * b.qty
-        }, 0);
-    }
+
     return (
         <div className='cart-area'>
             <BreadcrumbCom />
@@ -38,7 +34,6 @@ const CartPage = () => {
                                             <Row className='cart-info__bot my-2'>
                                                 <Col className='fs-2' xs={0} md={5}>{formatGia(item.detail.price)}</Col>
                                                 <Col ><QtyCart setQty={setQty} qty={item.qty} id={item.detail.id} page={'cart'} /> </Col>
-
                                             </Row>
                                         </Col>
                                         <Col xs={6} md={0}> </Col>
@@ -58,19 +53,19 @@ const CartPage = () => {
                         <div className='cart-total__1'>
                             <Row className='' justify={'center'}>
                                 <Col xs={11}>Tổng sản phẩm</Col>
-                                <Col xs={11} className='text-end'> {cart.length} </Col>
+                                <Col xs={11} className='text-end'> {countByQty(cart)} </Col>
                             </Row>
                         </div>
                         <div className='cart-total__1'>
                             <Row className='' justify={'center'}>
                                 <Col xs={11}>Thành tiền</Col>
-                                <Col xs={11} className='text-end'> {formatGia(total(cart))} </Col>
+                                <Col xs={11} className='text-end'> {formatGia(totalCart(cart))} </Col>
                             </Row>
                         </div>
                         <div className='cart-total__2'>
                             <Row className='' justify={'center'}>
                                 <Col xs={11} className='fs-2'>Tổng số tiền</Col>
-                                <Col xs={11} className='text-end fs-2 color-main '> {cart?.length > 0 && formatGia(total(cart))} </Col>
+                                <Col xs={11} className='text-end fs-2 color-main '> {cart?.length > 0 && formatGia(totalCart(cart))} </Col>
                             </Row>
                         </div>
                         <div className='btn-checkout' onClick={() => cart.length > 0 && navigate('/checkout')}>

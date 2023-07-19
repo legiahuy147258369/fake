@@ -18,11 +18,11 @@ const CustomTextArea = ({ name, placeholder, ...rest }) => {
                         onBlur={onBlur}
                         onChange={onChange}
                         value={value}
-                        className='w-100'
+                        className='w-100 '
                     />
                 )}
             />
-            {errors && <div className='text-message p-2'>{errors[name]?.message}</div>}
+            {errors && <div className='text-message h-15 p-2'>{errors[name]?.message}</div>}
         </div>
 
     )

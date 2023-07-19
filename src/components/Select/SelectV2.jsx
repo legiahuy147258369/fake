@@ -5,27 +5,31 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '../../utils/rule';
 
 const { Option } = Select;
-const CustomSelectV2 = ({ name, options, ...rest }) => {
+const CustomSelectV2 = ({ name, options, placeholder, handleChange, ...rest }) => {
     const { control, formState: { errors } } = useFormContext();
+    if (options && options.length > 0) {
+        options.unshift({ label: placeholder, value: '' });
+    }
     return (
         <div className='w-100'>
             <Controller
-
                 control={control}
                 name={name}
-                defaultValue=''
+                defaultValue={''}
                 render={({ field: { onChange, onBlur, value, ref } }) => (
                     <Select
                         className='w-100'
-                        onChange={onChange}
+                        onChange={(value, option) => {
+                            onChange(value)
+                            handleChange(value, option, name)
+                        }}
                         onBlur={onBlur}
                         options={options}
                         value={value}
-
                     />
                 )}
             />
-            {errors && <div className='text-message h-15  p-2'>{errors[name]?.message}</div>}
+            {errors && <div className='text-message h-15 p-1'>{errors[name]?.message}</div>}
         </div>
     );
 };

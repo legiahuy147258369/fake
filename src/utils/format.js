@@ -29,6 +29,25 @@ export const formatTimeAgo = (timestamp) => {
     const days = now.diff(time, 'days');
     return `${days} ngày trước`;
 }
+export const convertOPtion = (params) => {
+    let data = params?.map(item => {
+        return ({
+            value: item.code,
+            label: item.name,
+        })
+    })
+    return data
+}
+export const countByQty = (cart) => {
+    return cart.reduce((a, b) => {
+        return a + b.qty
+    }, 0);
+}
+export const totalCart = (cart) => {
+    return cart.reduce((a, b) => {
+        return a + b.detail.price * b.qty
+    }, 0);
+}
 export const dataDate = () => {
     let ngay = [
         {

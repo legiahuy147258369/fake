@@ -23,7 +23,7 @@ const CustomInputV2 = ({ type, name, placeholder, ...rest }) => {
                     />
                 )}
             />
-            {errors && <div className='text-message p-2'>{errors[name]?.message}</div>}
+            {errors && <div className='text-message p-1'>{errors[name]?.message}</div>}
         </div>
 
     )

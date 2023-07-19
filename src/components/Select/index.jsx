@@ -2,8 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Select } from 'antd';
 const CustomSelect = (props) => {
     const { errorMessage, className, placeholder, name, register, handleChange, items, ...rest } = props;
-    console.log(errorMessage);
-    console.log(register(name));
+
     const options = [{ label: placeholder, value: '' }];
     for (let i = 0; i < items?.length - 1; i++) {
         options.push({
