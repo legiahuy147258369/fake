@@ -21,7 +21,9 @@ const CustomSelectV2 = ({ name, options, placeholder, handleChange, ...rest }) =
                         className='w-100'
                         onChange={(value, option) => {
                             onChange(value)
-                            handleChange(value, option, name)
+                            if (typeof handleChange === 'function') {
+                                handleChange(value, option, name);
+                            }
                         }}
                         onBlur={onBlur}
                         options={options}

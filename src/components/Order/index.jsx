@@ -39,8 +39,13 @@ const Order = (props) => {
                     <div>{formatGia(total(cart))}</div>
                 </Col>
                 <Col xs={12} lg={6}>
-                    <span>Phương thức thanh toán</span>
-                    <div>Nhận tiền khi giao</div>
+                    {donhang.payment === 1 ?
+                        <><span>Phương thức thanh toán</span>
+                            <div>Đã thanh toán</div></>
+                        :
+                        <><span>Phương thức thanh toán</span>
+                            <div>Nhận tiền khi giao</div>
+                        </>}
                 </Col>
             </Row>
             <Row className='detail-order__2' justify={'center'} gutter={[0, 20]} >

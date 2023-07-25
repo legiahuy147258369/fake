@@ -37,7 +37,6 @@ const QtyCart = (props) => {
     const handleChangeInputQty = (value, id) => {
         if (page === 'cart') {
             let t = value;
-            console.log(t);
             dispatch(updateCart({ qty: value, id: id }));
         } else {
             let t = value;

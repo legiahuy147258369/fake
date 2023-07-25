@@ -18,6 +18,11 @@ import Checkout from "./pages/checkout";
 import WishList from "./pages/wish";
 import AccountUser from "./pages/user";
 import Dashboard from "./admin/page/Dashboard";
+import ListProductAdmin from "./admin/page/Product";
+import ListCategoryAdmin from "./admin/page/category";
+import ListOrderAdmin from "./admin/page/Orders";
+import ListCommentAdmin from "./admin/page/Comment";
+import CreateProduct from "./admin/page/Product/createProduct";
 
 
 
@@ -26,20 +31,19 @@ export default function useRouteElements() {
     const isLoading = useSelector((state) => state.account.isLoading);
     const isAuthenticated = useSelector((state) => state.account.isAuthenticated);
 
-    // const getAccount = async () => {
-    //     if (isAuthenticated) {
-    //         const res = await callFetchAccount();
-    //         console.log(res);
-    //         if (res && res.success !== false) {
-    //             dispatch(getAccountAction(res));
-    //             return;
-    //         }
-    //     }
-    // };
+    const getAccount = async () => {
+        if (isAuthenticated) {
+            const res = await callFetchAccount();
+            if (res && res.success) {
+                dispatch(getAccountAction(res));
+                return;
+            }
+        }
+    };
 
-    // useEffect(() => {
-    //     getAccount();
-    // });
+    useEffect(() => {
+        getAccount();
+    }, []);
 
     const router = useRoutes([
         {
@@ -54,7 +58,6 @@ export default function useRouteElements() {
                 { path: 'wish', element: <WishList />, key: '/wish', cap: 'Danh sách yêu thích' },
                 { path: 'checkout', key: '/checkout', element: <ProtectedRoute> <Checkout /></ProtectedRoute>, cap: 'Thanh toán' },
                 { path: 'user/*', key: '/user', cap: 'Tài khoản', element: <ProtectedRoute> <AccountUser /> </ProtectedRoute> },
-
             ],
         },
         {
@@ -69,8 +72,12 @@ export default function useRouteElements() {
             path: '/admin',
             element: <RoleRoute> <AdminLayout /> </RoleRoute>,
             children: [
-                { index: true, element: <Dashboard />, key: '/' }
-
+                { index: true, element: <Dashboard />, key: '/' },
+                { path: 'product', element: <ListProductAdmin /> },
+                { path: 'create-product', element: <CreateProduct /> },
+                { path: 'category', element: <ListCategoryAdmin /> },
+                { path: 'order', element: <ListOrderAdmin /> },
+                { path: 'comment', element: <ListCommentAdmin /> },
             ],
         },
         {

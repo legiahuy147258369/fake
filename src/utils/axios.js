@@ -3,7 +3,7 @@ const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 const instance = axios.create({
     baseURL: baseUrl,
-    withCredentials: true
+    // withCredentials: true
 });
 
 const handleRefreshToken = async () => {

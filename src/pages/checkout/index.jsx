@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import BreadcrumbCom from '../../components/breadcrumb';
 import OrderStep from '../../components/order-step';
-import { Col, Row, message, notification, Switch, Checkbox, Divider } from 'antd';
-import { callCreateOrder, callHuyen, callTinh } from '../../services/api'
+import { Col, Row, message, notification, Switch, Space, Radio, Checkbox, Divider } from 'antd';
+import { callCreateOrder, callHuyen, callPaypal, callTinh } from '../../services/api'
 import CustomInput from '../../components/Input';
 import { schema } from '../../utils/rule';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -18,19 +18,24 @@ import CustomInputV2 from '../../components/Input/InputV2';
 import CustomTextArea from '../../components/TextArea';
 import { convertOPtion, formatGia } from '../../utils/format';
 import { useRef } from 'react';
+import PaypalPayment from './paypalPayment';
 
 const Checkout = () => {
     const [step, setStep] = useState(1);
     const [district, setDistrict] = useState([]);
     const cartRedux = useSelector((state) => state.cart.cart);
     const accountRedux = useSelector((state) => state.account.user);
-
+    const [methodPay, setMethodPay] = useState(1);
+    const [isFormValid, setIsFormValid] = useState(true);
     const dispatch = useDispatch();
     const [donhang, setDonhang] = useState([]);
     const [addressDefault, setAddressDefault] = useState({ default: false, rule: [] });
 
     const checkoutS = schema.pick(addressDefault.rule);
-    const methods = useForm({ resolver: yupResolver(checkoutS) });
+    const methods = useForm({
+        resolver: yupResolver(checkoutS)
+    });
+    const { isDirty, isValid } = methods.formState;
 
     const { data: tinh } = useQuery({
         queryKey: ['province'],
@@ -46,6 +51,7 @@ const Checkout = () => {
             methods.setValue('dc', accountRedux?.address);
         } else {
             setAddressDefault({ default: false, rule: ['name', 'phone', 'province', 'district', 'dc'] });
+            methods.trigger();
         }
     }
 
@@ -54,7 +60,11 @@ const Checkout = () => {
     }, [accountRedux.address, setAddressDefault, methods]);
     const onChangeCheckAddress = (checked) => {
         setAddressDefault({ default: !checked, rule: ['name', 'phone', 'province', 'district', 'dc'] });
+        methods.trigger();
         methods.setValue('dc', '');
+        methods.setValue('district', '');
+        methods.setValue('province', '');
+
     };
     const handleChange = async (value, option, name) => {
         if (name === 'province') {
@@ -67,38 +77,42 @@ const Checkout = () => {
         }
     }
 
-    const onSubmit = (async (data) => {
-        console.log(data);
-        // if (cartRedux) {
-        //     data.address = `${data.dc} , ${data.district} , ${data.province} `
-        //     const cart = cartRedux.map(item => ({
-        //         quantity: item.qty,
-        //         cart: {
-        //             id: item.detail.id,
-        //             price: item.detail.price,
-        //             name: item.detail.name
-        //         }
-        //     }));
 
-        //     data.user_id = accountRedux.id;
-        //     const order = { data, cart };
-        //     console.log(data);
-        //     const result = (await callCreateOrder(order))[0];
-        //     if (result) {
-        //         setStep(2);
-        //         message.success('Đặt hàng thành công');
-        //         setDonhang(result);
-        //         reset();
-        //         dispatch(delAllCart())
-        //     } else {
-        //         notification.error({
-        //             message: "Có lỗi xảy ra",
-        //         });
-        //     }
-        // }
-
+    const onSubmit = (async (data, type) => {
+        if (cartRedux) {
+            if (!data.province && !data.district) {
+                data.address = ` ${data.dc}`;
+            } else {
+                data.address = ` ${data.dc} , ${data.district}, ${data.province}`;
+            }
+            const cart = cartRedux.map(item => ({
+                quantity: item.qty,
+                cart: {
+                    id: item.detail.id,
+                    price: item.detail.price,
+                    name: item.detail.name
+                }
+            }));
+            data.user_id = accountRedux.id;
+            const order = { data, cart };
+            const result = (await callCreateOrder(order))[0];
+            if (result) {
+                setStep(2);
+                message.success('Đặt hàng thành công');
+                setDonhang(result);
+                methods.reset();
+                dispatch(delAllCart())
+            } else {
+                notification.error({
+                    message: "Có lỗi xảy ra",
+                });
+            }
+        }
     });
 
+    const handClickPay = (params) => {
+        setMethodPay(params);
+    }
 
     return (
         <div >
@@ -150,11 +164,7 @@ const Checkout = () => {
                             <Col xs={24} lg={12} className='p-4 '>
                                 <Row gutter={[8, 20]}>
                                     <Col xs={24} className='title_order'> Đơn hàng</Col>
-                                    <Col xs={24} className='box__coupon '>
-                                        <Col xs={18} className='box__coupon__input'> <input type="text" /></Col>
-                                        <Col xs={6} className='box__coupon__btn'>Mã giảm giá</Col>
 
-                                    </Col>
                                     <Col>
                                         <Divider />
                                         {cartRedux && cartRedux.length > 0 && (
@@ -170,18 +180,33 @@ const Checkout = () => {
                                                 )
                                             })
                                         )}
-                                        <Divider />
                                     </Col>
 
                                     <Col>
+                                        <Col xs={24}>
+                                            <Divider />
+                                            <Col className='label-text'>Hình thức thanh toán </Col>
+                                            <br />
+                                            <Col>
+                                                <Radio.Group onChange={(e) => handClickPay(e.target.value)} value={methodPay}>
+                                                    <Space direction='horizontal'>
+                                                        <Radio value={1}>Thanh toán khi nhận hàng</Radio>
+                                                        <Radio value={2}>Thanh toán Online </Radio>
+                                                    </Space>
+                                                </Radio.Group>
+                                            </Col>
+                                            <br />
+                                        </Col>
 
                                     </Col>
-                                    <Col xs={24} className='fl'>
-                                        <Col xs={12}> Paypay</Col>
-                                        <Col xs={12}> Thanh toán khi nhận hàng </Col>
-                                    </Col>
+                                    {methodPay === 2 && (
+                                        <Col xs={24} className='fl-wrap ' >
+
+                                            <Col xs={12} ><PaypalPayment setStep={setStep} setDonhang={setDonhang} methods={methods} user={accountRedux} /></Col>
+                                        </Col>
+                                    )}
                                     <Col xs={24} className=' fl-center' >
-                                        <button className='btn-checkout'>Mua hàng</button>
+                                        <button className='btn-checkout' >Mua hàng</button>
                                     </Col>
                                 </Row>
                             </Col>

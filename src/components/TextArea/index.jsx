@@ -7,7 +7,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 const CustomTextArea = ({ name, placeholder, ...rest }) => {
     const { control, formState: { errors } } = useFormContext();
     return (
-        <div className='w-100 '>
+        <div className='w-100 h-100'>
             <Controller
                 control={control}
                 name={name}
@@ -22,7 +22,7 @@ const CustomTextArea = ({ name, placeholder, ...rest }) => {
                     />
                 )}
             />
-            {errors && <div className='text-message h-15 p-2'>{errors[name]?.message}</div>}
+            {errors && <div className='text-message  p-2'>{errors[name]?.message}</div>}
         </div>
 
     )

@@ -14,25 +14,9 @@ import { callFetchAccount, callLogout, callUpdateCurrent, callUploadAvatar } fro
 import { useDispatch, useSelector } from 'react-redux';
 import { doLogoutAction, doUpdateAvatarAction } from '../../../redux/account/accountSlice';
 import _ from 'lodash';
-import { LuImagePlus } from 'react-icons/lu'
-import ImgCrop from 'antd-img-crop';
+import { LuImagePlus } from 'react-icons/lu';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-const getBase64 = (img, callback) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
-    reader.readAsDataURL(img);
-};
-const beforeUpload = (file) => {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-    if (!isJpgOrPng) {
-        message.error('You can only upload JPG/PNG file!');
-    }
-    const isLt5M = file.size / 1024 / 1024 < 5;
-    if (!isLt5M) {
-        message.error('Image must smaller than 5MB!');
-    }
-    return isJpgOrPng && isLt5M;
-};
+
 const Info = () => {
     const dispatch = useDispatch();
     const registerSchema = schema.pick(['email', 'name', 'ngay', 'thang', 'nam', 'phone', 'gender', 'address'])
@@ -86,6 +70,7 @@ const Info = () => {
 
     const handleUpdateAvatar = async ({ file, onSuccess, onError }) => {
         setLoading(true)
+        console.log(file);
         const res = await callUploadAvatar(file);
         if (res && res.url) {
             dispatch(doUpdateAvatarAction({ avatar: res.url }));
@@ -114,8 +99,6 @@ const Info = () => {
         showUploadList: false,
         customRequest: handleUpdateAvatar,
         onChange(info) {
-            if (info.file.status !== 'uploading') {
-            }
             if (info.file.status === 'done') {
                 message.success(`${info.file.name} file uploaded successfully`);
             } else if (info.file.status === 'error') {

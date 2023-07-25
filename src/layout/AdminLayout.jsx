@@ -4,11 +4,10 @@ import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
 } from '@ant-design/icons';
-
 import { Layout, Menu, Button, Avatar, theme, Badge, Col, Row } from 'antd';
 const { Header, Sider, Content } = Layout;
 import './main.scss';
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import { BsFillBellFill } from 'react-icons/bs';
 import { BiCategoryAlt } from 'react-icons/bi';
@@ -17,12 +16,21 @@ import { LiaComment } from 'react-icons/lia';
 import { FaUserFriends } from 'react-icons/fa';
 
 import { AiFillSetting, AiOutlineBook } from 'react-icons/ai';
+import Dashboard from '../admin/page/Dashboard';
+import { MdSpaceDashboard } from 'react-icons/md';
 const LayoutAdmin = () => {
+    const { pathname } = useLocation();
+    const path = pathname.split("/")[2] || '';
     const [collapsed, setCollapsed] = useState(false);
+    const navigate = useNavigate();
     const {
         token: { colorBgContainer },
     } = theme.useToken();
     const user = useSelector((state) => state.account.user);
+    const onClick = (e) => {
+        navigate(`/admin/${e.key}`);
+    };
+
 
     return (
         <Layout className='layout_admin_area'>
@@ -31,10 +39,11 @@ const LayoutAdmin = () => {
             }}>
                 <div className="demo-logo-vertical" />
                 <Menu
+                    onClick={onClick}
                     className='custom-menu'
                     theme="light"
                     mode="inline"
-                    defaultSelectedKeys={['4']}
+                    defaultSelectedKeys={[path]}
                     items={[
                         {
                             key: '0',
@@ -42,7 +51,7 @@ const LayoutAdmin = () => {
                             label: null,
                         },
                         {
-                            key: '2',
+                            key: '1',
                             icon: null,
                             label: null,
                         },
@@ -52,27 +61,32 @@ const LayoutAdmin = () => {
                             label: null,
                         },
                         {
-                            key: '4',
+                            key: '',
+                            icon: <MdSpaceDashboard />,
+                            label: 'Dashboard',
+                        },
+                        {
+                            key: 'product',
                             icon: <AiOutlineBook />,
                             label: 'Sản phẩm',
                         },
                         {
-                            key: '5',
+                            key: 'category',
                             icon: <BiCategoryAlt />,
                             label: 'Thể loại',
                         },
                         {
-                            key: '6',
+                            key: 'order',
                             icon: <RiBillLine />,
                             label: 'Đơn hàng',
                         },
                         {
-                            key: '7',
+                            key: 'comment',
                             icon: <LiaComment />,
                             label: 'Bình luận',
                         },
                         {
-                            key: '8',
+                            key: 'user',
                             icon: <FaUserFriends />,
                             label: 'Khách hàng',
                         },

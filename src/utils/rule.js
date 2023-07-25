@@ -45,8 +45,19 @@ const schema = yup.object({
     content: yup.string().required('Vui lòng nội dung ')
         .min(5, 'Độ dài kí tự từ 5-00 kí tự'),
     rate: yup.string().required('Đánh giá sao'),
-
-
+    thumbnail: yup.mixed().required("Please select a file."),
+    description: yup.string().required('Vui lòng nhập địa chỉ ')
+        .min(5, 'Độ dài kí tự từ 5-150 kí tự')
+        .max(120, 'Độ dài 5-150 kí tự'),
+    number_of_page: yup.string().required('Nhập số trang'),
+    quantity: yup.string().required('Nhập số trang'),
+    price: yup.string().required('Vui lòng giá').matches(
+        /^-?[0-9]*$/, "Vui lòng nhập số không chứa kí tự khác"
+    ),
+    category_id: yup.string().required('Chọn thể loại'),
+    author: yup.string().required('Nhập tên tác giả'),
+    publish_date: yup.string().required('Chọn ngày công bố'),
+    block: yup.string().required('Ẩn hiện sản phẩm khi tạo'),
 })
 
 

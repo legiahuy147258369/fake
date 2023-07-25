@@ -48,6 +48,17 @@ export const totalCart = (cart) => {
         return a + b.detail.price * b.qty
     }, 0);
 }
+export const block = [
+    {
+        value: '0',
+        label: 'Hiện sản phẩm',
+    },
+    {
+        value: '1',
+        label: 'Ẩn sản phẩm khi tạo',
+    }
+];
+
 export const dataDate = () => {
     let ngay = [
         {

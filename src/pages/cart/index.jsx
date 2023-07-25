@@ -33,7 +33,7 @@ const CartPage = () => {
                                             <div className='cart-info__top text-cut2'>{item.detail.name.slice(0, 80)}</div>
                                             <Row className='cart-info__bot my-2'>
                                                 <Col className='fs-2' xs={0} md={5}>{formatGia(item.detail.price)}</Col>
-                                                <Col ><QtyCart setQty={setQty} qty={item.qty} id={item.detail.id} page={'cart'} /> </Col>
+                                                <Col ><QtyCart qty={item.qty} id={item.detail.id} page={'cart'} /> </Col>
                                             </Row>
                                         </Col>
                                         <Col xs={6} md={0}> </Col>

@@ -56,7 +56,7 @@ const DetailProduct = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
         setQty(1);
-        // setPageComment({ page: 1, product_id: id })
+        setPageComment({ page: 1, product_id: id })
     }, [product]);
 
     const data = product && product[0];

@@ -58,8 +58,19 @@ export const callUploadAvatar = (fileImg) => {
         },
     });
 };
+export const callCreateProduct = (data) => {
+    return axios({
+        method: 'post',
+        url: '/api/product',
+        data: data,
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
+};
 export const callProductPagination = (query) => {
     const queryParams = { ...query };
+    console.log(queryParams);
     return axios.get('/api/product', { params: queryParams });
 };
 export const callComments = async (re) => {
@@ -83,4 +94,10 @@ export const callCreateComment = (data) => {
 };
 export const callLike = (data) => {
     return axios.post(`/api/comment/like`, data);
+};
+export const callPaypal = (orders) => {
+    return axios.post(`/api/order/paypal`, orders);
+};
+export const callCapture = (orderID) => {
+    return axios.post(`/api/order/capture`, { orderID });
 };
