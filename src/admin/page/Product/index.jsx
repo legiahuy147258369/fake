@@ -1,27 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { Popconfirm, Col, Row, Pagination, Modal, Table, Button, message, Image } from 'antd';
+import { Popconfirm, Col, Row, Pagination, Modal, Table, Button, message, Image, notification, Drawer, Space, Descriptions } from 'antd';
 import './product.scss';
-import { callProductPagination } from '../../../services/api';
+import { callCategory, callDelProduct, callProductPagination } from '../../../services/api';
 import moment from 'moment';
 import { IoMdRefresh } from 'react-icons/io';
-import { ImBin } from 'react-icons/im';
-import { AiFillEdit } from 'react-icons/ai';
+import { RiDeleteBin7Line } from 'react-icons/ri';
+import { FiEdit2 } from 'react-icons/fi';
 import { TbFileExport } from 'react-icons/tb';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { formatGia, formatNgay } from '../../../utils/format';
 import { omitBy, isEmpty } from 'lodash';
 import { useNavigate } from 'react-router-dom';
+import LoadingSnip from '../../../components/Loading/LoadingSpin';
+import EditProduct from './editProduct';
 const ListProductAdmin = () => {
+    const [loading, setLoading] = useState(false);
     const [listBook, setListBook] = useState([]);
-    const [dataViewDetail, setDataViewDetail] = useState();
-    const [openViewDetail, setOpenViewDetail] = useState(true);
-    const [openCreate, setOpenCreate] = useState(true);
+    const [dataViewDetail, setDataViewDetail] = useState({});
+    const [openViewDetail, setOpenViewDetail] = useState(false);
+    const [dataEdit, setDataEdit] = useState({});
+    const [openDrawEdit, setOpenDrawEdit] = useState(false);
     const [query, setQuery] = useState({ page: 1, created_at: 'desc' });
+    const [cat, setCat] = useState();
     const navigate = useNavigate();
     const fetchBook = async () => {
+        setLoading(true);
         const queryConfig = omitBy(query, (value) => value === '');
         let res = await callProductPagination(queryConfig);
+        let cat = (await callCategory()).map(item => ({
+            value: item.id,
+            label: item.name,
+        }))
         setListBook(res);
+        setCat(cat);
+        setLoading(false);
     };
     useEffect(() => {
         fetchBook()
@@ -61,7 +73,7 @@ const ListProductAdmin = () => {
             title: 'Tên sách ',
             dataIndex: 'name',
             key: 'name',
-            width: 500,
+            width: 400,
         },
         {
             title: 'Thể loại',
@@ -96,33 +108,47 @@ const ListProductAdmin = () => {
         {
             title: 'Chỉnh sửa',
             key: 'Chỉnh sửa',
-            // render: (text, record, index) => {
-            //     return (
-            //         <>
-            //             <div className="btn_table">
-            //                 <AiFillEdit
-            //                     className="icon-edit"
-            //                 // onClick={() => {
-            //                 //     setOpenUpdateBook(true);
-            //                 //     setDataUpdate(record);
-            //                 // }}
-            //                 />
-            //                 <Popconfirm
-            //                     // onConfirm={() => handDeleteBook(record._id)}
-            //                     placement="leftTop"
-            //                     title={'Xác nhận xóa cuốn sách này ?'}
-            //                     okText="Xác nhận"
-            //                     cancelText="Hủy"
-            //                 >
-            //                     <ImBin className="icon-delete" />
-            //                 </Popconfirm>
-            //             </div>
-            //         </>
-            //     );
-            // },
+            render: (text, record, index) => {
+                return (
+                    <>
+                        <div className="btn_table">
+                            <FiEdit2
+                                className="icon-edit"
+                                onClick={() => {
+                                    setOpenDrawEdit(true);
+                                    setDataEdit(record)
+                                }}
+                            />
+                            <Popconfirm
+                                onConfirm={() => handDeleteBook(record.id)}
+                                placement="leftTop"
+                                title={'Xác nhận xóa cuốn sách này ?'}
+                                okText="Xác nhận"
+                                cancelText="Hủy"
+                            >
+                                <RiDeleteBin7Line className="icon-delete" />
+                            </Popconfirm>
+                        </div>
+                    </>
+                );
+            },
         },
     ];
-
+    const handDeleteBook = async (id) => {
+        const res = await callDelProduct(id);
+        if (res) {
+            notification.success({ message: res });
+            fetchBook();
+        }
+    }
+    const onClose1 = () => {
+        setOpenViewDetail(false);
+        setDataViewDetail({});
+    };
+    const onClose2 = () => {
+        setOpenDrawEdit(false)
+        setDataEdit({})
+    };
     const onChange = (pagination, filters, sorter, extra) => {
         if (pagination.current !== query.page) {
             setQuery(pre => ({ ...pre, page: pagination.current }))
@@ -170,7 +196,71 @@ const ListProductAdmin = () => {
                         }}
                     />
                 </Col>
+                <Drawer
+                    title={`Chi tiết sản phẩm`}
+                    placement="right"
+                    size={'large'}
+                    onClose={onClose1}
+                    open={openViewDetail}
+                    key={'0'}
+                >
+                    {dataViewDetail && (
+                        <><Descriptions title="Thông tin sản phẩm" column={2}>
+                            <Descriptions.Item label="Tên sản phẩm">{dataViewDetail.name}</Descriptions.Item>
+                            <Descriptions.Item label="Giá">{formatGia(dataViewDetail.price)} </Descriptions.Item>
+                            <Descriptions.Item label="Mô tả">{dataViewDetail.description?.slice(0, 30)}</Descriptions.Item>
+                            <Descriptions.Item label="Ngày công bố">{formatNgay(dataViewDetail.publish_date)}</Descriptions.Item>
+                            <Descriptions.Item label="Tác giả">
+                                {dataViewDetail.author || 'Trống'}
+                            </Descriptions.Item>
+                            <Descriptions.Item label="Số lượng">
+                                {dataViewDetail.quantity}
+
+                            </Descriptions.Item>
+                            <Descriptions.Item label="Lượt bán">
+                                {dataViewDetail.sold}
+                            </Descriptions.Item>
+                            <Descriptions.Item label="Số trang">
+                                {dataViewDetail.number_of_page}
+                            </Descriptions.Item>
+                            <Descriptions.Item label="Thế loại">
+                                {dataViewDetail.name_category}
+                            </Descriptions.Item>
+                            <Descriptions.Item label="Ngày tạo">
+                                {formatNgay(dataViewDetail.created_at)}
+                            </Descriptions.Item>
+
+                        </Descriptions>
+                            <Row gutter={[10, 20]}>
+                                <Col xs={12}>Ảnh thumbnail :
+                                    <Col className='mt-3'><Image src={dataViewDetail.thumbnail} width={100} /></Col>
+                                </Col>
+
+                                {dataViewDetail?.images && <Col xs={12}>
+                                    <Row gutter={[10, 20]}>
+                                        <Col xs={24}>Ảnh phụ :</Col>
+                                        {dataViewDetail?.images && JSON.parse(dataViewDetail?.images).map(item => <Col key={item.id} xs={24}><Image src={item.url} width={100} /></Col>)}
+                                    </Row>
+
+                                </Col>
+                                }
+                            </Row>
+                        </>)}
+                </Drawer>
             </Row>
+            <Drawer
+                title="Chỉnh sửa sản phẩm"
+                placement='right'
+                onClose={onClose2}
+                open={openDrawEdit}
+                key={1}
+                width={1000}
+            >
+                <EditProduct book={dataEdit} cat={cat} setLoading={setLoading}
+                    fetchBook={fetchBook}
+                    setOpenDrawEdit={setOpenDrawEdit} />
+            </Drawer>
+            {loading && <LoadingSnip />}
         </div>
     )
 }

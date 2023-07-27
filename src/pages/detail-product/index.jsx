@@ -53,13 +53,25 @@ const DetailProduct = () => {
         }
     });
 
+
     useEffect(() => {
         window.scrollTo(0, 0);
         setQty(1);
-        setPageComment({ page: 1, product_id: id })
+        setPageComment({ page: 1, product_id: id });
+
     }, [product]);
 
     const data = product && product[0];
+    const imgSlide = (data) => {
+        const img = [data?.thumbnail];
+        const arr = data?.images && data?.images.split(',');
+        if (arr) {
+            img.push(...arr)
+        }
+        return img
+    }
+
+
     const { data: top } = useQuery({
         queryKey: ['product-top'],
         queryFn: () => {
@@ -97,7 +109,6 @@ const DetailProduct = () => {
         }
     }
     const onSubmit = async (value) => {
-        console.log(value);
         let body = { product_id: data.id, user_id: accountRedux.id, ...value, parent_id: modalComment.parent_id };
         const res = await callCreateComment(body);
         handleCancel()
@@ -107,7 +118,8 @@ const DetailProduct = () => {
         setModalComment({ parent_id: -1, show: false })
         methods.reset();
     }
-    let img = ['https://cdn0.fahasa.com/media/catalog/product/c/o/combo-9786043129359-9786043356670.jpg', 'https://cdn0.fahasa.com/media/catalog/product/z/4/z4389778470937_2bf23e326e5ca521f95725baa0fd063d.jpg']
+
+
     return (
         <div className='product-detail-area'>
             <BreadcrumbCom />
@@ -117,7 +129,7 @@ const DetailProduct = () => {
                         <Row className='layout-detail pt-2'>
                             <Col className=' fl-between' md={24} lg={10}>
                                 <Row className='box-img_row ' >
-                                    {data.thumbnail.length > 0 && <ThumbsSwiper images={img} />}
+                                    {data.thumbnail.length > 0 && <ThumbsSwiper images={imgSlide(data)} />}
                                 </Row>
                             </Col>
                             <Col xs={24} md={24} lg={14} className='bg-white'>

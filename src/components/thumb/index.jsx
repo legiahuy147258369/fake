@@ -12,7 +12,6 @@ import './thumb.scss';
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
 export default function ThumbsSwiper(props) {
     const { images } = props;
-
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const swiperRef = useRef();
 

@@ -5,10 +5,8 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { useEffect } from 'react';
 
 
-
-
-const CustomUpload = ({ name, qty, files, change }) => {
-    const { control, formState: { errors }, reset } = useFormContext();
+const CustomUploadV2 = ({ name, qty, change }) => {
+    const { control, formState: { errors }, reset, getValues, setValue, watch } = useFormContext();
     let count = qty ? 5 : 1;
 
     return (
@@ -16,32 +14,29 @@ const CustomUpload = ({ name, qty, files, change }) => {
             <Controller
                 control={control}
                 name={name}
+                defaultValue={getValues(name)}
                 render={({ field: { onChange, value } }) => (
                     <Upload
                         name={name}
                         listType="picture"
                         maxCount={count}
                         multiple={qty}
-                        defaultFileList={files ?? []}
+                        fileList={value}
                         beforeUpload={() => false}
                         onChange={(info) => {
-                            const { fileList } = info;
-                            if (qty) {
-                                onChange(fileList)
-                            } else {
-                                onChange(fileList[0]?.originFileObj);
-                            }
+                            const { fileList, file } = info;
+                            onChange(fileList)
                         }}
                         onRemove={(file) => {
-                            // if (typeof change === 'function') {
-                            //     change(file, files);
-                            // }
-                            onChange(null);
+                            if (typeof change === 'function') {
+                                change(name, file);
+                            }
                         }}
                     >
                         <div className='bg-white w-100 p-2 b-round-2'>
                             <UploadOutlined /> Upload File
                         </div>
+
                     </Upload >
                 )}
             />
@@ -51,4 +46,4 @@ const CustomUpload = ({ name, qty, files, change }) => {
     );
 };
 
-export default CustomUpload;
+export default CustomUploadV2;

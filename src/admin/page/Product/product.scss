@@ -22,3 +22,26 @@
     }
 
 }
+
+.btn_table {
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+
+    .icon-edit {
+        color: rgb(80, 7, 7);
+        font-size: 15px;
+    }
+
+    .icon-delete {
+        color: rgb(59, 59, 255);
+        font-size: 15px;
+    }
+}
+
+.cap-form {
+    margin: 20px 0px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+}

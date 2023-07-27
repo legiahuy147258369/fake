@@ -67,7 +67,7 @@ const CreateProduct = () => {
                         <Col md={24}>
                             <Row gutter={[10, 10]} className='w-100'>
                                 <Col md={5}> <Col className='mb-2'>Ngày công bố</Col> <Col> <CustomInputV2 type={'date'} name='publish_date' placeholder='Ngày công bố' /> </Col></Col>
-                                <Col md={5}> <Col className='mb-2'>Ẩn hiện sản phẩm</Col> <Col> <CustomSelectV2 name='block' placeholder='Chọn bên dưới' options={block} /> </Col></Col>
+                                <Col md={5}> <Col className='mb-2'>Ẩn hiện sản phẩm</Col> <Col> <CustomSelectV2 name='block' placeholder='Chọn bên dưới' options={block()} /> </Col></Col>
                                 <Col md={5}> <Col className='mb-2'>Thể loại</Col>  <Col> <CustomSelectV2 name='category_id' placeholder='Loại sách' options={dataCat} /> </Col></Col>
                                 <Col md={5}> <Col className='mb-2'>Số trang</Col>  <Col><CustomInputV2 type={'text'} name='number_of_page' placeholder='Số trang' /> </Col> </Col>
                                 <Col md={4}> <Col className='mb-2'>Số lượng</Col>  <Col><CustomInputV2 type={'text'} name='quantity' placeholder='Số lượng sản phẩm' /> </Col> </Col>

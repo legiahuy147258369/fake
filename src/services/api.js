@@ -59,9 +59,20 @@ export const callUploadAvatar = (fileImg) => {
     });
 };
 export const callCreateProduct = (data) => {
+
     return axios({
         method: 'post',
         url: '/api/product',
+        data: data,
+        // headers: {
+        //     'Content-Type': 'multipart/form-data',
+        // },
+    });
+};
+export const callUpdateProduct = (id, data) => {
+    return axios({
+        method: 'put',
+        url: '/api/product/' + id,
         data: data,
         headers: {
             'Content-Type': 'multipart/form-data',
@@ -70,7 +81,6 @@ export const callCreateProduct = (data) => {
 };
 export const callProductPagination = (query) => {
     const queryParams = { ...query };
-    console.log(queryParams);
     return axios.get('/api/product', { params: queryParams });
 };
 export const callComments = async (re) => {
@@ -100,4 +110,12 @@ export const callPaypal = (orders) => {
 };
 export const callCapture = (orderID) => {
     return axios.post(`/api/order/capture`, { orderID });
+};
+export const callDelProduct = (id) => {
+    return axios.delete(`/api/product/${id}`);
+};
+export const callDelProductImg = (uid, url) => {
+    let body = { uid: uid, url: url };
+    console.log(body);
+    return axios.post(`/api/product/img`, body);
 };

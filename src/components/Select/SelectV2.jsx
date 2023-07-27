@@ -1,13 +1,13 @@
-import React from 'react';
-import { Divider, Select } from 'antd';
+
+import { Select } from 'antd';
 import { useFormContext, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { schema } from '../../utils/rule';
+
 
 const { Option } = Select;
-const CustomSelectV2 = ({ name, options, placeholder, handleChange, ...rest }) => {
+const CustomSelectV2 = ({ name, options, placeholder, handleChange, value, ...rest }) => {
     const { control, formState: { errors } } = useFormContext();
-    if (options && options.length > 0) {
+    const is = options.some(option => option.value === '');
+    if (!is && options && options.length > 0) {
         options.unshift({ label: placeholder, value: '' });
     }
     return (

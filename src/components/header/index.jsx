@@ -104,17 +104,16 @@ const Header = () => {
     });
     let last = 0;
     window.addEventListener('scroll', () => {
-        let headers = document.querySelector('.header-area');
-        let scrollTop = window.scrollY || document.documentElement.scrollTop;
-        (scrollTop > last) ? headers.style.top = '-120px' : headers.style.top = '0px';
-        last = scrollTop;
+        if (!window.location.pathname.startsWith('/admin')) {
+            let headers = document.querySelector('.header-area');
+            let scrollTop = window.scrollY || document.documentElement.scrollTop;
+            (scrollTop > last) ? headers.style.top = '-120px' : headers.style.top = '0px';
+            last = scrollTop;
+        }
     });
 
     const onSubmitSearch = (e) => {
-        console.log(search);
-
         if (search.length > 0) {
-
             const config = queryConfig.sort
                 ? omit(
                     {
