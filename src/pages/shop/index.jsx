@@ -14,7 +14,6 @@ import Product from '../../components/product';
 const ShopPage = () => {
     const queryConfig = useQueryConfig();
     const navigate = useNavigate();
-    const ref = useRef([0, 500000]);
     const [minMaxPrice, setMinMaxPrice] = useState([0, 500000])
     const itemsCat = useQuery({
         queryKey: ['categories'],

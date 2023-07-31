@@ -18,6 +18,15 @@ export const callTopNew = () => {
 export const callCategory = () => {
     return axios.get(`/api/category`);
 };
+export const callCreateCategory = (data) => {
+    return axios.post(`/api/category`, data);
+};
+export const callUpdateCategory = (data) => {
+    return axios.put(`/api/category`, data);
+};
+export const callDelCategory = (id) => {
+    return axios.delete(`/api/category/` + id);
+};
 export const callChartPieProduct = () => {
     return axios.get(`/api/category/chart/pie`);
 };
@@ -47,26 +56,24 @@ export const callUpdateCurrentPass = (body) => {
 };
 export const callUploadAvatar = (fileImg) => {
     const bodyFormData = new FormData();
-    bodyFormData.append('file', fileImg);
+    bodyFormData.append('avatar', fileImg);
     return axios({
         method: 'put',
         url: '/api/user/current/avatar',
         data: bodyFormData,
         headers: {
             'Content-Type': 'multipart/form-data',
-            'upload-type': 'avatar',
         },
     });
 };
 export const callCreateProduct = (data) => {
-
     return axios({
         method: 'post',
         url: '/api/product',
         data: data,
-        // headers: {
-        //     'Content-Type': 'multipart/form-data',
-        // },
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
     });
 };
 export const callUpdateProduct = (id, data) => {
@@ -118,4 +125,26 @@ export const callDelProductImg = (uid, url) => {
     let body = { uid: uid, url: url };
     console.log(body);
     return axios.post(`/api/product/img`, body);
+};
+export const callOrderAndDetail = (query) => {
+    return axios.get(`/api/order/detail`, { params: query });
+};
+export const callDelOrder = (id) => {
+    return axios.delete(`/api/order/` + id);
+};
+export const callUpdateOrder = (data) => {
+    return axios.put(`/api/order`, data);
+};
+export const callUpdateOrderUser = (data) => {
+    return axios.put(`/api/order/user`, data);
+};
+export const callAllUser = (query) => {
+    return axios.get(`/api/user/`, { params: query });
+};
+export const callDelUser = (id) => {
+    return axios.delete(`/api/user/` + id);
+};
+export const callUpdateUserAdmin = (body) => {
+    const { id, ...data } = body;
+    return axios.put(`/api/user/` + id, data);
 };

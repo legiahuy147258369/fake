@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Col, Modal, Row, Upload, notification } from 'antd';
+import React, { useEffect } from 'react';
+import { Col, Row, notification } from 'antd';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { schema } from '../../../utils/rule';
@@ -8,7 +8,7 @@ import CustomInputV2 from '../../../components/Input/InputV2';
 import CustomTextArea from '../../../components/TextArea';
 import CustomSelectV2 from '../../../components/Select/SelectV2';
 import { block, formatNgay } from '../../../utils/format';
-import './product.scss';
+import '../../style.scss';
 import moment from 'moment';
 import _ from 'lodash'
 import CustomUploadV2 from '../../../components/CustomUpload/customV2';
@@ -43,20 +43,20 @@ const EditProduct = ({ book, cat, setLoading, setOpenDrawEdit, fetchBook }) => {
         }
 
         let res = await callUpdateProduct(book.id, formData);
+        console.log(res);
         if (res.success) {
             setOpenDrawEdit(false)
             notification.success({ message: res.mes });
             fetchBook()
             methods.reset();
         } else {
-            notification.info({ message: res.mes });
+            notification.info({ message: 'Có lỗi xảy ra' });
         }
         setLoading(false)
     }
 
 
     useEffect(() => {
-
         if (book) {
             getData()
             Object.entries(book).forEach(([name, value]) => {
@@ -74,7 +74,6 @@ const EditProduct = ({ book, cat, setLoading, setOpenDrawEdit, fetchBook }) => {
         return () => {
             methods.reset();
         };
-
     }, [book]);
 
     const getData = async () => {

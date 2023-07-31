@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Col, Modal, Row, Upload, notification } from 'antd';
+import { Col, Row, notification } from 'antd';
 import { useQuery } from '@tanstack/react-query';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
@@ -52,9 +52,9 @@ const CreateProduct = () => {
     })
     return (
         <div>
-
             <FormProvider {...methods}>
                 <form className='form-area-product' onSubmit={methods.handleSubmit(onSubmit)}  >
+                    <h2 className='cap-form'>Thêm sản phẩm</h2>
                     <Row className='row-form' justify={'start'} align={'top'} gutter={[0, 16]}>
                         <Col md={24}><Col className='mb-2'>Tên sản phẩm</Col> <CustomInputV2 type={'text'} name='name' placeholder='Tên sản phẩm' /> </Col>
                         <Col md={24}><Col className='mb-2'>Mô tả sản phẩm</Col> <CustomTextArea type={'text'} placeholder='Mô tả' name='description' /> </Col>

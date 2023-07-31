@@ -16,10 +16,11 @@
 
         .left-box-shop {
 
+            overflow: hidden;
 
             .box-container {
                 width: 95%;
-                height: 100vh;
+                height: 100%;
                 background: #ffffff;
             }
 
@@ -90,10 +91,11 @@
 
         .right-box-shop {
             overflow: hidden;
+            background: #fff;
 
             .box-area-sort {
                 align-items: center;
-                background: #fff;
+
                 padding: 10px;
                 margin-bottom: 6px;
 

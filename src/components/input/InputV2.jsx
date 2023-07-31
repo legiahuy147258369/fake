@@ -4,8 +4,9 @@
 import './input.scss'
 import { Input } from 'antd';
 import { Controller, useFormContext } from 'react-hook-form';
-const CustomInputV2 = ({ type, name, placeholder, ...rest }) => {
+const CustomInputV2 = ({ type, name, placeholder, disabled, ...rest }) => {
     const { control, formState: { errors } } = useFormContext();
+    const di = disabled ?? false
     return (
         <div className='w-100'>
             <Controller
@@ -20,6 +21,7 @@ const CustomInputV2 = ({ type, name, placeholder, ...rest }) => {
                         onChange={onChange}
                         value={value}
                         className='w-100'
+                        disabled={di}
                     />
                 )}
             />

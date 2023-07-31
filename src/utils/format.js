@@ -63,7 +63,39 @@ export const block = () => {
         }
     ];
 }
-
+export const blockCategory = () => {
+    return [
+        {
+            value: 1,
+            label: 'Hiện',
+            key: 1
+        },
+        {
+            value: 2,
+            label: 'Ẩn khi tạo',
+            key: 2
+        }
+    ];
+}
+export const gender = () => {
+    return [
+        {
+            value: 1,
+            label: 'Nam',
+            key: 1
+        },
+        {
+            value: 2,
+            label: 'Nữ',
+            key: 2
+        },
+        {
+            value: 0,
+            label: 'Khác',
+            key: 0
+        }
+    ];
+}
 export const dataDate = () => {
     let ngay = [
         {

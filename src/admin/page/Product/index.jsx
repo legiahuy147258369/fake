@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Popconfirm, Col, Row, Pagination, Modal, Table, Button, message, Image, notification, Drawer, Space, Descriptions } from 'antd';
-import './product.scss';
+import { Popconfirm, Col, Row, Table, message, Image, notification, Drawer, Descriptions } from 'antd';
+import '../../style.scss';
 import { callCategory, callDelProduct, callProductPagination } from '../../../services/api';
-import moment from 'moment';
+
 import { IoMdRefresh } from 'react-icons/io';
 import { RiDeleteBin7Line } from 'react-icons/ri';
 import { FiEdit2 } from 'react-icons/fi';
-import { TbFileExport } from 'react-icons/tb';
-import { AiOutlinePlus } from 'react-icons/ai';
+
+import { AiOutlinePlus, AiOutlineSearch } from 'react-icons/ai';
 import { formatGia, formatNgay } from '../../../utils/format';
 import { omitBy, isEmpty } from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import LoadingSnip from '../../../components/Loading/LoadingSpin';
 import EditProduct from './editProduct';
+import { FormProvider, useForm } from 'react-hook-form';
+import ExportToExcel from '../../components/ExportExcel';
 const ListProductAdmin = () => {
+    const search = useForm();
+
     const [loading, setLoading] = useState(false);
     const [listBook, setListBook] = useState([]);
     const [dataViewDetail, setDataViewDetail] = useState({});
@@ -141,6 +145,10 @@ const ListProductAdmin = () => {
             fetchBook();
         }
     }
+    const submitSearch = (params) => {
+        setQuery(pre => ({ ...pre, search: params.name }));
+        search.reset();
+    }
     const onClose1 = () => {
         setOpenViewDetail(false);
         setDataViewDetail({});
@@ -177,10 +185,24 @@ const ListProductAdmin = () => {
     return (
         <div className='product_admin_area'>
             <Row gutter={[16, 8]} justify={'start'}>
+                <Col xs={24} className='cap-form'>Danh sách sản phẩm</Col>
                 <Col xs={24}>
+                    <Col xs={4}></Col>
                     <Row justify={'space-between'}>
-                        <Col xs={6}><button className='btn_add-product' onClick={() => navigate('/admin/create-product')}>Thêm mới</button></Col>
+                        <Col xs={6}><button className='btn_add' onClick={() => navigate('/admin/create-product')}>Thêm mới</button></Col>
+                        <Col xs={18}>
+                            <div className='row-port'>
+                                <FormProvider {...search}>
+                                    <form className='form-search' onSubmit={search.handleSubmit(submitSearch)}  >
+                                        <input className='input-search' placeholder='Tên sách' type={'text'} name='name' {...search.register('name')} />
+                                        <button> <AiOutlineSearch /></button>
+                                    </form>
+                                </FormProvider >
+                                <ExportToExcel data={[]} fileName='PRODUCT' /> <button className='refresh' onClick={() => setQuery({ page: 1, created_at: 'desc' })}><IoMdRefresh /></button>
+                            </div>
+                        </Col>
                     </Row>
+
                 </Col>
                 <Col span={24}>
                     <Table

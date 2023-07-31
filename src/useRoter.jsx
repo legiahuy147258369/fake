@@ -23,6 +23,8 @@ import ListCategoryAdmin from "./admin/page/category";
 import ListOrderAdmin from "./admin/page/Orders";
 import ListCommentAdmin from "./admin/page/Comment";
 import CreateProduct from "./admin/page/Product/createProduct";
+import PolicyPage from "./pages/policy";
+import ListUserAdmin from "./admin/page/User";
 
 
 
@@ -58,6 +60,7 @@ export default function useRouteElements() {
                 { path: 'wish', element: <WishList />, key: '/wish', cap: 'Danh sách yêu thích' },
                 { path: 'checkout', key: '/checkout', element: <ProtectedRoute> <Checkout /></ProtectedRoute>, cap: 'Thanh toán' },
                 { path: 'user/*', key: '/user', cap: 'Tài khoản', element: <ProtectedRoute> <AccountUser /> </ProtectedRoute> },
+                { path: 'policy', key: '/policy', cap: 'Chính sách', element: <PolicyPage /> },
             ],
         },
         {
@@ -68,6 +71,7 @@ export default function useRouteElements() {
             path: '/register',
             element: <Register />,
         },
+
         {
             path: '/admin',
             element: <RoleRoute> <AdminLayout /> </RoleRoute>,
@@ -78,6 +82,7 @@ export default function useRouteElements() {
                 { path: 'category', element: <ListCategoryAdmin /> },
                 { path: 'order', element: <ListOrderAdmin /> },
                 { path: 'comment', element: <ListCommentAdmin /> },
+                { path: 'user', element: <ListUserAdmin /> },
             ],
         },
         {

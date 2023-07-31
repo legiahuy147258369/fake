@@ -69,8 +69,7 @@ const Info = () => {
 
 
     const handleUpdateAvatar = async ({ file, onSuccess, onError }) => {
-        setLoading(true)
-        console.log(file);
+        setLoading(true);
         const res = await callUploadAvatar(file);
         if (res && res.url) {
             dispatch(doUpdateAvatarAction({ avatar: res.url }));
@@ -111,7 +110,7 @@ const Info = () => {
             <h2 className='title-top'>Thông tin tài khoản</h2>
             <Divider />
             <Row justify={'space-evenly'}>
-                <Col md={5}>
+                <Col xs={24} md={5}>
                     <Row gutter={[0, 16]}>
                         <Col xs={24} className='text-center'>
                             Ảnh đại diện
@@ -132,24 +131,24 @@ const Info = () => {
                         </Col>
                     </Row>
                 </Col>
-                <Col md={14}>
+                <Col xs={24} md={14}>
                     <FormProvider {...methods}>
                         <form className='form-area-info' onSubmit={methods.handleSubmit(onSubmit)} >
                             <Row className='row-form' justify={'end'} align={'top'} gutter={[0, 16]}>
-                                <Col md={5}><label >Họ và tên</label></Col><Col md={18}> <CustomInputV2 type={'text'} name='name' placeholder='Nhập Họ Tên' /> </Col>
-                                <Col md={5}><label >Email</label></Col><Col md={18}><CustomInputV2 type={'text'} name='email' placeholder='Nhập email' /> </Col>
-                                <Col md={5}><label >Số điện thoại</label></Col><Col md={18}><CustomInputV2 type={'text'} name='phone' placeholder='Nhập Số Điện Thoai' />  </Col>
-                                <Col md={5}><label >Địa chỉ</label></Col><Col md={18}><CustomInputV2 type={'text'} name='address' placeholder='Nhập địa chỉ' />  </Col>
-                                <Col md={5}><label >Giới tính</label></Col>
-                                <Col md={18} className='group-gender'>
+                                <Col xs={24} md={5}><label >Họ và tên</label></Col><Col xs={24} md={18}> <CustomInputV2 type={'text'} name='name' placeholder='Nhập Họ Tên' /> </Col>
+                                <Col xs={24} md={5}><label >Email</label></Col><Col xs={24} md={18}><CustomInputV2 type={'text'} name='email' placeholder='Nhập email' /> </Col>
+                                <Col xs={24} md={5}><label >Số điện thoại</label></Col><Col xs={24} md={18}><CustomInputV2 type={'text'} name='phone' placeholder='Nhập Số Điện Thoai' />  </Col>
+                                <Col xs={24} md={5}><label >Địa chỉ</label></Col><Col xs={24} md={18}><CustomInputV2 type={'text'} name='address' placeholder='Nhập địa chỉ' />  </Col>
+                                <Col xs={24} md={5}><label >Giới tính</label></Col>
+                                <Col xs={24} md={18} className='group-gender'>
                                     <CustomRadio options={dataGender} name='gender' />
                                 </Col>
 
-                                <Col md={5}><label >Ngày sinh</label></Col>
-                                <Col md={18}>
-                                    <Col md={8}><CustomSelectV2 options={dataDate().ngay} name="ngay" /></Col>
-                                    <Col md={8}><CustomSelectV2 options={dataDate().thang} name="thang" /></Col>
-                                    <Col md={8}><CustomSelectV2 options={dataDate().nam} name="nam" /></Col>
+                                <Col xs={24} md={5}><label >Ngày sinh</label></Col>
+                                <Col xs={24} md={18}>
+                                    <Col xs={24} md={8}><CustomSelectV2 options={dataDate().ngay} name="ngay" /></Col>
+                                    <Col xs={24} md={8}><CustomSelectV2 options={dataDate().thang} name="thang" /></Col>
+                                    <Col xs={24} md={8}><CustomSelectV2 options={dataDate().nam} name="nam" /></Col>
                                 </Col>
                                 <Col span={18} offset={5}>
                                     <button className='btn-save'>Lưu</button>

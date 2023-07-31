@@ -1,7 +1,5 @@
-import { useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup";
 
+import * as yup from "yup";
 
 const handleConfirmPasswordYup = (refString) => {
     return yup
@@ -50,6 +48,8 @@ const schema = yup.object({
         .min(5, 'Độ dài kí tự từ 5-500000 kí tự')
         .max(500000, 'Độ dài 5-500000 kí tự'),
     number_of_page: yup.string().required('Nhập số trang'),
+    status: yup.string().required('Chọn giá trị'),
+    payment: yup.string().required('Chọn giá trị'),
     quantity: yup.string().required('Nhập số trang'),
     price: yup.string().required('Vui lòng giá').matches(
         /^-?[0-9]*$/, "Vui lòng nhập số không chứa kí tự khác"

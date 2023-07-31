@@ -6,7 +6,7 @@ import { useFormContext, Controller } from 'react-hook-form';
 const { Option } = Select;
 const CustomSelectV2 = ({ name, options, placeholder, handleChange, value, ...rest }) => {
     const { control, formState: { errors } } = useFormContext();
-    const is = options.some(option => option.value === '');
+    const is = options?.some(option => option.value === '');
     if (!is && options && options.length > 0) {
         options.unshift({ label: placeholder, value: '' });
     }

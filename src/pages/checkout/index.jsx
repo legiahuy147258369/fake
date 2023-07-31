@@ -26,7 +26,6 @@ const Checkout = () => {
     const cartRedux = useSelector((state) => state.cart.cart);
     const accountRedux = useSelector((state) => state.account.user);
     const [methodPay, setMethodPay] = useState(1);
-    const [isFormValid, setIsFormValid] = useState(true);
     const dispatch = useDispatch();
     const [donhang, setDonhang] = useState([]);
     const [addressDefault, setAddressDefault] = useState({ default: false, rule: [] });
@@ -35,7 +34,6 @@ const Checkout = () => {
     const methods = useForm({
         resolver: yupResolver(checkoutS)
     });
-    const { isDirty, isValid } = methods.formState;
 
     const { data: tinh } = useQuery({
         queryKey: ['province'],
@@ -51,6 +49,8 @@ const Checkout = () => {
             methods.setValue('dc', accountRedux?.address);
         } else {
             setAddressDefault({ default: false, rule: ['name', 'phone', 'province', 'district', 'dc'] });
+            methods.setValue('name', accountRedux?.name);
+            methods.setValue('phone', accountRedux?.phone);
             methods.trigger();
         }
     }
@@ -64,7 +64,6 @@ const Checkout = () => {
         methods.setValue('dc', '');
         methods.setValue('district', '');
         methods.setValue('province', '');
-
     };
     const handleChange = async (value, option, name) => {
         if (name === 'province') {

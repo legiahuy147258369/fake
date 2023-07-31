@@ -71,7 +71,7 @@ const Order = (props) => {
 
             </Row>
             <Divider />
-            <div className='btn-history' onClick={() => navigate('/history')}>Xem lịch sử đơn hàng</div>
+            <div className='btn-history' onClick={() => navigate('/user/history')}>Xem lịch sử đơn hàng</div>
         </div>
     )
 }

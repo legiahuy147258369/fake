@@ -26,7 +26,6 @@ const items = [
 const MenuAccount = (props) => {
     const navigate = useNavigate();
     const onClick = (e) => {
-        console.log(e);
         navigate(`/user/${e.key}`)
     };
     return (
@@ -34,7 +33,7 @@ const MenuAccount = (props) => {
             onClick={onClick}
             style={{
                 width: '100%',
-                height: 500
+                height: '100%'
             }}
             defaultSelectedKeys={[props.path]}
             defaultOpenKeys={['user']}

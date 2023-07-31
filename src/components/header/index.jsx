@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { doLogoutAction } from '../../redux/account/accountSlice';
 import PopoverCustom from '../popover';
 import { omit } from 'lodash';
+import { delAllCart } from '../../redux/cart/cartSlice';
 const Header = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -43,6 +44,7 @@ const Header = () => {
         const res = await callLogout();
         if (res) {
             dispatch(doLogoutAction());
+            dispatch(delAllCart())
             message.success('Đăng xuất thành công');
             navigate('/');
         }
@@ -62,11 +64,19 @@ const Header = () => {
         },
         {
             label: (
-                <label onClick={() => navigate('/history')}>
+                <label onClick={() => navigate('/user/history')}>
                     Lịch sử mua hàng
                 </label>
             ),
             key: 'history',
+        },
+        {
+            label: (
+                <label onClick={() => navigate('/user/pass')}>
+                    Đổi mật khẩu
+                </label>
+            ),
+            key: 'pass',
         },
         {
             label: (

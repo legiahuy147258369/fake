@@ -3,6 +3,9 @@ import { Tag } from 'antd';
 const StatusOrder = ({ status }) => {
     let re;
     switch (+status) {
+        case 0:
+            re = <Tag color="warning">Hủy đơn hàng</Tag>
+            break;
         case 1:
             re = <Tag color="magenta">Đơn hàng mới</Tag>
             break;
@@ -22,6 +25,23 @@ const StatusOrder = ({ status }) => {
         <>{re}</>
     )
 }
+const StatusOPtion = () => {
+    return [
+        { value: 0, label: 'Hủy đơn hàng' },
+        { value: 1, label: 'Đơn hàng mới' },
+        { value: 2, label: 'Đơn hàng đang giao' },
+        { value: 3, label: 'Đơn hàng đã giao' },
+        { value: 4, label: 'Hoàn tất đơn hàng' },
+
+    ]
+}
+const PaymentOPtion = () => {
+    return [
+        { value: 0, label: 'Chưa thanh toán' },
+        { value: 1, label: 'Đã thanh toán' },
+
+    ]
+}
 const StatusPayment = ({ payment }) => {
     let result
     if (payment === 0) {
@@ -31,4 +51,4 @@ const StatusPayment = ({ payment }) => {
     }
     return <>{result}</>
 }
-export { StatusOrder, StatusPayment } 
+export { StatusOrder, StatusPayment, StatusOPtion, PaymentOPtion };

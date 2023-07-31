@@ -25,15 +25,15 @@ const Pass = () => {
     return (
         <form onSubmit={onSubmit} noValidate>
             <Row gutter={[0, 12]} justify={'center'}>
-                <Col xs={15} className='height2 text-center mt-3 f-text'>Thay đổi mật khẩu</Col>
-                <Col xs={15}> <label>Mật khẩu hiện tại</label>  </Col>
-                <Col xs={15}><CustomInput type={'password'} register={register} name='pass_current' placeholder='Nhập mật khẩu hiện tại' errorMessage={errors.pass_current?.message} /></Col>
-                <Col xs={15}> <label>Mật khẩu Mới</label>  </Col>
-                <Col xs={15}><CustomInput type={'password'} register={register} name='password' placeholder='Nhập mật khẩu' errorMessage={errors.password?.message} /></Col>
-                <Col xs={15}> <label>Xác nhận lại mật khẩu</label>  </Col>
-                <Col xs={15}><CustomInput type={'password'} register={register} name='confirm_password' placeholder='Nhập mật khẩu' errorMessage={errors.confirm_password?.message} /></Col>
-                <Col span={10} offset={8}><button className='btn-change_pass'>Đăng kí</button> </Col>
+                <Col xs={20} md={15} className='height2 text-center mt-3 f-text'>Thay đổi mật khẩu</Col>
+                <Col xs={20} md={15}> <label>Mật khẩu hiện tại</label>  </Col>
+                <Col xs={20} md={15}><CustomInput type={'password'} register={register} name='pass_current' placeholder='Nhập mật khẩu hiện tại' errorMessage={errors.pass_current?.message} /></Col>
+                <Col xs={20} md={15}> <label>Mật khẩu Mới</label>  </Col>
+                <Col xs={20} md={15}><CustomInput type={'password'} register={register} name='password' placeholder='Nhập mật khẩu' errorMessage={errors.password?.message} /></Col>
+                <Col xs={20} md={15}> <label>Xác nhận lại mật khẩu</label>  </Col>
+                <Col xs={20} md={15}><CustomInput type={'password'} register={register} name='confirm_password' placeholder='Nhập mật khẩu' errorMessage={errors.confirm_password?.message} /></Col>
             </Row>
+            <div className='fl-center'><button className='btn-change_pass'>Xác nhận</button> </div>
             {loading && <LoadingSnip />}
         </form>
     )

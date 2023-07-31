@@ -20,17 +20,14 @@ import BreadcrumbCom from '../../components/breadcrumb';
 import CustomInputV2 from '../../components/Input/InputV2';
 import { schema } from '../../utils/rule';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { FormProvider, useForm, Controller } from 'react-hook-form';
-import { Input } from 'antd';
+import { FormProvider, useForm } from 'react-hook-form';
+
 import CustomTextArea from '../../components/TextArea';
 import CustomRate from '../../components/Rate';
 import PaginationMini from '../../components/pagination/paginationMini';
 import ShowReply from '../../components/show_reply';
 import { BiLike } from 'react-icons/bi';
 import LikeComment from '../../components/like_comment';
-
-const { TextArea } = Input;
-
 
 
 const DetailProduct = () => {
@@ -234,7 +231,7 @@ const DetailProduct = () => {
                                     })
                                 }
                                 <div className='box-pagination'>
-                                    <PaginationMini setPageComment={setPageComment} pageComment={pageComment} total={dataComment.total} />
+                                    <PaginationMini setPage={setPageComment} page={pageComment} total={dataComment.total} />
                                 </div>
                                 <Divider />
                             </div>)}
