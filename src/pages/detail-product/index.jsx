@@ -4,7 +4,7 @@ import './detail.scss';
 
 import { formatGia, formatNgay, formatTimeAgo } from '../../utils/format';
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { callComments, callCreateComment, callProductDetail, callTopView } from '../../services/api';
 import _ from 'lodash';
 import Loading from '../../components/Loading';
@@ -32,6 +32,7 @@ import LikeComment from '../../components/like_comment';
 
 const DetailProduct = () => {
     const { id } = useParams();
+    const navigate = useNavigate()
     const accountRedux = useSelector((state) => state.account.user);
     const [qty, setQty] = useState(1);
     const [pageComment, setPageComment] = useState({ page: 1, product_id: id });
@@ -55,7 +56,6 @@ const DetailProduct = () => {
         window.scrollTo(0, 0);
         setQty(1);
         setPageComment({ page: 1, product_id: id });
-
     }, [product]);
 
     const data = product && product[0];
@@ -76,6 +76,7 @@ const DetailProduct = () => {
         },
 
     });
+
     const { data: dataComment, refetch: refetchComments } = useQuery({
         queryKey: ['commnent', pageComment],
         queryFn: () => {
@@ -90,15 +91,16 @@ const DetailProduct = () => {
         setFullDescription(!showFullDescription);
     };
 
-    const handleAddToCart = (quantity, data) => {
+    const handleAddToCart = (quantity, data, type) => {
         dispatch(addToCart({ qty: quantity, detail: data }));
-        setQty(1)
+        setQty(1);
+        (type === 'now') && navigate('/cart')
     };
     const handleComment = (parent_id) => {
         const isEmpty = _.every(accountRedux, _.isEmpty);
         if (!isEmpty) {
+            parent_id !== -1 && methods.setValue('rate', 0);
             setModalComment({ parent_id: parent_id, show: true });
-
         } else {
             notification.info({
                 message: 'Hãy đăng nhập để gửi bình luận',
@@ -106,16 +108,16 @@ const DetailProduct = () => {
         }
     }
     const onSubmit = async (value) => {
+        if (modalComment.parent_id !== -1) delete value.rate;
         let body = { product_id: data.id, user_id: accountRedux.id, ...value, parent_id: modalComment.parent_id };
-        const res = await callCreateComment(body);
-        handleCancel()
+        await callCreateComment(body);
+        handleCancel();
         refetchComments();
     }
     const handleCancel = () => {
         setModalComment({ parent_id: -1, show: false })
         methods.reset();
     }
-
 
     return (
         <div className='product-detail-area'>
@@ -160,8 +162,8 @@ const DetailProduct = () => {
                                         <QtyCart qty={qty} setQty={setQty} id={data.id} page={'detail'} />
                                     </Col>
                                     <Col className='my-2 fl-between'>
-                                        <div className='add-to-cart' onClick={() => handleAddToCart(qty, data)}>Thêm vào giỏ hàng</div>
-                                        <div className='shop-now'>Mua ngay</div>
+                                        <div className='add-to-cart' onClick={() => handleAddToCart(qty, data, null)}>Thêm vào giỏ hàng</div>
+                                        <div className='shop-now' onClick={() => handleAddToCart(qty, data, 'now')}>Mua ngay</div>
                                     </Col>
                                     <Col xs={24} > <div className='add-wishlist' onClick={() => dispatch(addToWishList(data))}><AiOutlinePlus /> Danh sách yêu thích </div> </Col>
                                 </Row>
@@ -249,9 +251,10 @@ const DetailProduct = () => {
                             <Col xs={24}>
                                 <CustomTextArea name='content' placeholder='Nhập nội dung' />
                             </Col>
-                            <Col xs={modalComment.parent_id > 0 ? 0 : 24}>
+                            {modalComment.parent_id < 0 && (<Col xs={24}>
                                 <CustomRate name='rate' />
-                            </Col>
+                            </Col>)}
+
 
                             <Col xs={24}>
                                 <button className='btn-comment'>Gửi </button>
@@ -266,18 +269,3 @@ const DetailProduct = () => {
 
 export default DetailProduct;
 
-{/* <Col className='left-box' xs={6} >
-                                {data && (
-                                            <SlideshowLightbox theme='night' open={iShow} showThumbnails="false" showControls={true} className="thumbnail1 " >
-                                                <img src={data.thumbnail} />
-                                                <img src={data.thumbnail} />
-                                                <img src={data.thumbnail} />
-                                                <img src={data.thumbnail} />
-                                                <img src={data.thumbnail} />
-                                                <img src={data.thumbnail} />
-                                            </SlideshowLightbox>)
-                                        }
-                                    </Col>
-                                    <Col xs={18} className='w-100 fl-center'>
-                                        <img className="thumbnail2" onClick={handLightBox} src={data.thumbnail} />
-                                    </Col> */}

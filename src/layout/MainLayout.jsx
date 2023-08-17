@@ -13,7 +13,6 @@ const MainLayout = () => {
             <main className='container-fluid'>
                 <Outlet />
             </main>
-
             <Footer />
 
         </div>

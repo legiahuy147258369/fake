@@ -16,11 +16,11 @@ const SlideProduct = (props) => {
     const swiperRef = useRef();
     return (
         <div className='h-400'>
-
             {data && data.length > 0 && <Swiper
                 className="mySwiper2"
                 spaceBetween={10}
                 loop={true}
+                rewind={true}
                 breakpoints={{
                     640: {
                         slidesPerView: 2,

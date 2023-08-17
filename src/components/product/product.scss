@@ -17,6 +17,15 @@
     background: #fff;
     padding-bottom: 10px;
     overflow: hidden;
+    width: 100%;
+
+    img {
+        width: 200px;
+        height: 200px;
+        max-width: 200px;
+        margin: 0 auto;
+        object-fit: scale-down;
+    }
 
     p {
         color: black;

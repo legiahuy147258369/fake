@@ -109,6 +109,15 @@ export const callCreateOrder = (data) => {
 export const callCreateComment = (data) => {
     return axios.post(`/api/comment`, data);
 };
+export const callAllComment = (query) => {
+    return axios.get(`/api/comment/admin`, { params: query });
+};
+export const callDelComment = (id) => {
+    return axios.delete(`/api/comment/admin/` + id);
+};
+export const callUpdateComment = (body) => {
+    return axios.put(`/api/comment/admin/`, body);
+};
 export const callLike = (data) => {
     return axios.post(`/api/comment/like`, data);
 };
@@ -123,8 +132,7 @@ export const callDelProduct = (id) => {
 };
 export const callDelProductImg = (uid, url) => {
     let body = { uid: uid, url: url };
-    console.log(body);
-    return axios.post(`/api/product/img`, body);
+    return axios.delete(`/api/product/img`, { params: body });
 };
 export const callOrderAndDetail = (query) => {
     return axios.get(`/api/order/detail`, { params: query });

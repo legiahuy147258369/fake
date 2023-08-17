@@ -63,6 +63,20 @@ export const block = () => {
         }
     ];
 }
+export const blockComment = () => {
+    return [
+        {
+            value: 0,
+            label: 'Ẩn bài viết',
+            key: 0
+        },
+        {
+            value: 1,
+            label: 'Hiện ',
+            key: 1
+        }
+    ];
+}
 export const blockCategory = () => {
     return [
         {

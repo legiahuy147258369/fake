@@ -10,7 +10,7 @@ import './main.scss';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import { BsFillBellFill } from 'react-icons/bs';
-import { BiCategoryAlt } from 'react-icons/bi';
+import { BiCategoryAlt, BiExit } from 'react-icons/bi';
 import { RiBillLine } from 'react-icons/ri';
 import { LiaComment } from 'react-icons/lia';
 import { FaUserFriends } from 'react-icons/fa';
@@ -90,6 +90,11 @@ const LayoutAdmin = () => {
                             icon: <FaUserFriends />,
                             label: 'Khách hàng',
                         },
+                        // {
+                        //     key: 'exit',
+                        //     icon: <BiExit />,
+                        //     label: 'Khách hàng',
+                        // },
                     ]}
                 />
             </Sider>

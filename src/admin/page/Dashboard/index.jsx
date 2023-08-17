@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Row, Col, Statistic, Space, Table, Tag, Divider } from 'antd';
 import '../../style.scss';
 import { BsBook } from 'react-icons/bs';
@@ -8,10 +8,11 @@ import { FaShippingFast } from 'react-icons/fa';
 import { formatGia } from '../../../utils/format';
 import { ChartPie } from '../../components/chart';
 import { StatusOrder, StatusPayment } from '../../../components/status-order';
-import { callAllOrder } from '../../../services/api';
+import { callAllComment, callAllUser, callOrderAndDetail, callProduct } from '../../../services/api';
 import { useQuery } from '@tanstack/react-query';
 import ChartLine from '../../components/chart/chart-line';
 import ProductSold from '../../components/chart/chart-sold';
+import { useEffect } from 'react';
 
 const columns = [
     {
@@ -52,19 +53,27 @@ const columns = [
 ];
 
 const Dashboard = () => {
-    const { data: dataOrder } = useQuery({
-        queryKey: ['order_all'],
-        queryFn: () => {
-            return callAllOrder();
-        }
-    });
-    const data = dataOrder && dataOrder.map(item => {
-        let er = {
-            key: item.id, name: item.nameReceiver, phone: +item.phoneReceiver,
-            address: item.address, status: item.status, payment: item.payment
-        }
-        return er
-    })
+    const [totalData, setTotalData] = useState();
+    const [orderData, setOrderData] = useState();
+
+    const fetchData = async () => {
+        let product = await callProduct();
+        const user = await callAllUser();
+        const comment = await callAllComment({ page: 1 });
+        const order = await callOrderAndDetail();
+        const data = order && order.data?.map(item => {
+            let er = {
+                key: item.id, name: item.nameReceiver, phone: +item.phoneReceiver,
+                address: item.address, status: item.status, payment: item.payment
+            }
+            return er
+        })
+        setOrderData(data);
+        setTotalData({ product: product?.total, user: user?.total, comment: comment.total, order: order.total })
+    }
+    useEffect(() => {
+        fetchData()
+    }, [])
     return (
         <div className='dashboard-area'>
             <Card title="Dashboard" className='card-area' >
@@ -72,7 +81,7 @@ const Dashboard = () => {
                     <Col xs={6}>
                         <Card.Grid className='card-area__row__col'>
                             <Col span={17} className='col-1'>
-                                <Statistic title="Sản phẩm" value={20} />
+                                <Statistic title="Sản phẩm" value={totalData?.product || 0} />
                             </Col>
                             <Col span={7} className='col-2'>
                                 <BsBook className='icon' size={30} />
@@ -82,7 +91,7 @@ const Dashboard = () => {
                     <Col xs={6}>
                         <Card.Grid className='card-area__row__col'>
                             <Col span={17} className='col-1'>
-                                <Statistic title="Khách hàng" value={1793} />
+                                <Statistic title="Khách hàng" value={totalData?.user || 0} />
                             </Col>
                             <Col span={7} className='col-2'>
                                 <LuUsers className='icon' size={30} />
@@ -92,7 +101,7 @@ const Dashboard = () => {
                     <Col xs={6}>
                         <Card.Grid className='card-area__row__col'>
                             <Col span={17} className='col-1'>
-                                <Statistic title="Đơn hàng" value={11793} />
+                                <Statistic title="Đơn hàng" value={totalData?.order || 0} />
                             </Col>
                             <Col span={7} className='col-2'>
                                 <FaShippingFast className='icon' size={30} />
@@ -102,7 +111,7 @@ const Dashboard = () => {
                     <Col xs={6}>
                         <Card.Grid className='card-area__row__col'>
                             <Col span={17} className='col-1'>
-                                <Statistic title="Bình luận" value={13} />
+                                <Statistic title="Bình luận" value={totalData?.comment || 0} />
                             </Col>
                             <Col span={7} className='col-2'>
                                 <AiOutlineComment className='icon' size={30} />
@@ -124,7 +133,7 @@ const Dashboard = () => {
                 <Col xs={24}>
                     <Divider />
                     <div className='text-center title_chart mt-3 mb-3'>Đơn hàng gần đây</div>
-                    <Table columns={columns} dataSource={data} />
+                    <Table columns={columns} dataSource={orderData} />
                 </Col>
                 <Col xs={24} className='top_sale_product'>
                     <Divider />

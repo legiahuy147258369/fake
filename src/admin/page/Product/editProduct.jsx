@@ -31,19 +31,16 @@ const EditProduct = ({ book, cat, setLoading, setOpenDrawEdit, fetchBook }) => {
         if (slide) {
             slide.forEach((item) => {
                 if (item.originFileObj) {
-                    console.log(item.originFileObj);
                     formData.append('slide', item['originFileObj'])
                 }
             })
         }
 
         for (const item of Object.entries(rest)) {
-            console.log(item[0], item[1]);
             formData.append(item[0], item[1]);
         }
 
         let res = await callUpdateProduct(book.id, formData);
-        console.log(res);
         if (res.success) {
             setOpenDrawEdit(false)
             notification.success({ message: res.mes });
@@ -89,6 +86,7 @@ const EditProduct = ({ book, cat, setLoading, setOpenDrawEdit, fetchBook }) => {
 
     const handleChangeFile = async (name, file) => {
         if (name === 'slide') {
+            console.log(file.uid, file.url);
             await callDelProductImg(file.uid, file.url)
         }
         const data = methods.getValues(name)?.filter(item => item.uid !== file.uid);

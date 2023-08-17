@@ -65,9 +65,9 @@ const ListProductAdmin = () => {
             title: <div className='text-center'>Ảnh</div>,
             dataIndex: 'thumbnail',
             key: 'thumbnail',
-            width: 100,
+            width: '100px',
             render: (text, record, index) => {
-                return <Image
+                return <Image className='img-column'
                     src={record.thumbnail}
                     preview={{ src: record.thumbnail }}
                 />;
@@ -183,7 +183,7 @@ const ListProductAdmin = () => {
     };
 
     return (
-        <div className='product_admin_area'>
+        <div className='admin_area'>
             <Row gutter={[16, 8]} justify={'start'}>
                 <Col xs={24} className='cap-form'>Danh sách sản phẩm</Col>
                 <Col xs={24}>

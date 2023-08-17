@@ -7,7 +7,9 @@ import { CiMail } from 'react-icons/ci';
 import { LuSmartphone } from 'react-icons/lu';
 import logo from '../../assets/logo.png'
 import { Col, Row } from 'antd';
+import { useNavigate } from 'react-router';
 const Footer = () => {
+    const navigate = useNavigate();
     return (
         <div className='footer'>
 
@@ -49,7 +51,7 @@ const Footer = () => {
                             </div>
                             <div className="footer-static-content ">
                                 <ul>
-                                    <li className="first"><a >Chính sách đổi - trả - hoàn tiền</a></li>
+                                    <li className="first" onClick={() => navigate('/policy')}><a >Chính sách đổi - trả - hoàn tiền</a></li>
                                     <li><a >Chính sách bảo hành - bồi hoàn</a></li>
                                     <li><a >Chính sách vận chuyển</a></li>
                                     <li><a >Chính sách khách sỉ</a></li>

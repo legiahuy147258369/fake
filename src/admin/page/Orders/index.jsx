@@ -199,11 +199,11 @@ const ListOrderAdmin = () => {
         search.reset();
     }
     return (
-        <div className='order_admin_area'>
+        <div className='admin_area'>
             <div className='mb-3'>
-                <div className='cap-form'> Danh sách đơn hàng</div>
-                <div>
-                    <div className='row-port'>
+                <Row justify={'space-between'} align={'middle'}>
+                    <Col xs={6} className='cap-form'> Danh sách đơn hàng</Col>
+                    <Col xs={16} className='row-port'>
                         <FormProvider {...search}>
                             <form className='form-search' onSubmit={search.handleSubmit(submitSearch)}  >
                                 <input className='input-search' placeholder='Tên , sđt , địa chỉ' type={'text'} name='name' {...search.register('name')} />
@@ -211,8 +211,8 @@ const ListOrderAdmin = () => {
                             </form>
                         </FormProvider >
                         <ExportToExcel data={listAllOrder} fileName='ORDER' /> <button className='refresh' onClick={() => setQuery({ page: 1, limit: 10, sort_created_at: 'desc' })}><IoMdRefresh /></button>
-                    </div>
-                </div>
+                    </Col>
+                </Row>
             </div>
             <Table columns={columns} dataSource={listOrder}
                 rowKey={'id'} onChange={onChange}

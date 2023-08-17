@@ -152,8 +152,6 @@ const ShopPage = () => {
                                 products && products.data && products.data.map((item, i) => {
                                     return (
                                         <Col xs={12} md={6} key={i}><Product item={item} /></Col>
-
-
                                     )
                                 })
                             }

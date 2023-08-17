@@ -166,16 +166,20 @@ const ListUserAdmin = () => {
     return (
         <div className='user_admin_area'>
             <Row gutter={[0, 16]}>
-                <Col xs={24} className='cap-form'>Danh sách tài khoản</Col>
                 <Col xs={24} >
-                    <Row className='row-port'>
-                        <FormProvider {...search}>
-                            <form className='form-search' onSubmit={search.handleSubmit(submitSearch)}  >
-                                <input className='input-search' placeholder='Tên , sđt , email' type={'text'} name='name' {...search.register('name')} />
-                                <button> <AiOutlineSearch /></button>
-                            </form>
-                        </FormProvider >
-                        <ExportToExcel data={listUser.export} fileName='USER' /> <button className='refresh' onClick={() => setQuery({ page: 1 })}><IoMdRefresh /></button>
+                    <Row align={'middle'}>
+                        <Col xs={6} className='cap-form'>Danh sách tài khoản</Col>
+                        <Col xs={18} className='row-port'>
+                            <div></div>
+                            <FormProvider {...search}>
+                                <form className='form-search' onSubmit={search.handleSubmit(submitSearch)}  >
+                                    <input className='input-search' placeholder='Tên , sđt , email' type={'text'} name='name' {...search.register('name')} />
+                                    <button> <AiOutlineSearch /></button>
+                                </form>
+                            </FormProvider >
+                            <ExportToExcel data={listUser.export} fileName='USER' />
+                            <button className='refresh' onClick={() => setQuery({ page: 1 })}><IoMdRefresh /></button>
+                        </Col>
                     </Row>
                 </Col>
                 <Col xs={24}>
