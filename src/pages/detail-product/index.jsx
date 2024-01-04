@@ -233,13 +233,13 @@ const DetailProduct = () => {
                                     })
                                 }
                                 <div className='box-pagination'>
+                                    {console.log(dataComment,)}
                                     <PaginationMini setPage={setPageComment} page={pageComment} total={dataComment.total} />
                                 </div>
                                 <Divider />
                             </div>)}
                         </div>
                     </div>
-
                 </>
             }
             <Modal title="Bình luận" open={modalComment.show} onCancel={handleCancel} footer={null}>
@@ -254,8 +254,6 @@ const DetailProduct = () => {
                             {modalComment.parent_id < 0 && (<Col xs={24}>
                                 <CustomRate name='rate' />
                             </Col>)}
-
-
                             <Col xs={24}>
                                 <button className='btn-comment'>Gửi </button>
                             </Col>

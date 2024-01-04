@@ -28,7 +28,7 @@ const CartPage = () => {
                             {cart.map((item, i) => {
                                 return (
                                     <Row className='box-cart ' key={i}>
-                                        <Col className='fl-center' xs={6} md={4}> <Link to={`/book/${item.detail.id}`}> <img src={item.detail.thumbnail} width={100} /></Link></Col>
+                                        <Col className='fl-center ' xs={6} md={4}> <Link to={`/book/${item.detail.id}`} className='box-cart_col_img'> <img src={item.detail.thumbnail} /></Link></Col>
                                         <Col className='cart-info ' xs={18} md={13}>
                                             <div className='cart-info__top text-cut2'>{item.detail.name.slice(0, 80)}</div>
                                             <Row className='cart-info__bot my-2'>
@@ -77,7 +77,6 @@ const CartPage = () => {
                     <Empty />
                     <h2>Chưa có sản phẩm trong giỏ hàng</h2>
                     <Link to={'/shop'}>Quay lại trang sản phẩm</Link>
-
                 </div>}
 
         </div>

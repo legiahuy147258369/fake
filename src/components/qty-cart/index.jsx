@@ -36,14 +36,12 @@ const QtyCart = (props) => {
 
     const handleChangeInputQty = (value, id) => {
         if (page === 'cart') {
-            let t = value;
             dispatch(updateCart({ qty: value, id: id }));
         } else {
             let t = value;
             if (t > +20) setQty(20);
             setQty(t);
         }
-
     }
 
 

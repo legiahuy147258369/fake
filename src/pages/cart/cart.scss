@@ -1,4 +1,6 @@
 .cart-area {
+    margin-bottom: 20px;
+
     .cart-container {
         min-height: 300px;
         background: white;
@@ -8,6 +10,18 @@
         .box-cart {
             padding: 10px 0px;
             border-bottom: 2px solid rgb(214, 221, 227);
+
+            &_col_img {
+                width: 100%;
+                height: 150px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                    object-fit: scale-down;
+                }
+            }
 
             &:last-child {
                 border: 0;
