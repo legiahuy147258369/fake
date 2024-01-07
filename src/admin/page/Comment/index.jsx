@@ -8,7 +8,7 @@ import { formatNgay, blockComment } from '../../../utils/format';
 import { FormProvider, useForm } from 'react-hook-form';
 import { schema } from '../../../utils/rule';
 import { yupResolver } from '@hookform/resolvers/yup';
-import CustomInputV2 from '../../../components/input/input-v2';
+import CustomInputV2 from '../../../components/input-custom/input-v2';
 import CustomSelectV2 from '../../../components/select/select-v2';
 import CustomRate from '../../../components/rate'
 const vert = (item, index) => {

@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 import { delAllCart } from '../../redux/cart/cartSlice';
 import CustomSelectV2 from '../../components/select/select-v2';
-import CustomInputV2 from '../../components/input/input-v2';
+import CustomInputV2 from '../../components/input-custom/input-v2';
 import CustomTextArea from '../../components/textarea';
 import { convertOPtion, formatGia } from '../../utils/format';
 import { useRef } from 'react';

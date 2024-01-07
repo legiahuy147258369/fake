@@ -8,7 +8,7 @@ import { FiEdit2 } from 'react-icons/fi';
 import { schema } from '../../../utils/rule';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import CustomInputV2 from '../../../components/input/input-v2';
+import CustomInputV2 from '../../../components/input-custom/input-v2';
 import CustomSelectV2 from '../../../components/select/select-v2';
 
 const ListCategoryAdmin = () => {

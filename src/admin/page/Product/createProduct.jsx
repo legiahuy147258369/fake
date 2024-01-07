@@ -5,7 +5,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { schema } from '../../../utils/rule';
 import { yupResolver } from '@hookform/resolvers/yup';
-import CustomInputV2 from '../../../components/input/input-v2';
+import CustomInputV2 from '../../../components/input-custom/input-v2';
 import CustomTextArea from '../../../components/textarea';
 import { callCategory, callCreateProduct } from '../../../services/api';
 import CustomUpload from '../../../components/custom-upload';

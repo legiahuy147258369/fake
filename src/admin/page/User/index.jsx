@@ -7,7 +7,7 @@ import { RiDeleteBin7Line } from 'react-icons/ri';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
 import { schema } from '../../../utils/rule';
-import CustomInputV2 from '../../../components/input/input-v2';
+import CustomInputV2 from '../../../components/input-custom/input-v2';
 import CustomSelectV2 from '../../../components/select/select-v2';
 import ExportToExcel from '../../components/ExportExcel';
 import { AiOutlineSearch } from 'react-icons/ai';

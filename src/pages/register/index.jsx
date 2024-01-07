@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Header from '../../components/header';
 import './register.scss';
 import { Col, Row } from 'antd';
-import CustomInput from '../../components/Input';
+import CustomInput from '../../components/input-custom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '../../utils/rule';

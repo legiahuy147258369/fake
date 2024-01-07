@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import CustomSelectV2 from '../../../components/select/select-v2';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import CustomInputV2 from '../../../components/input/input-v2';
+import CustomInputV2 from '../../../components/input-custom/input-v2';
 import CustomRadio from '../../../components/radio';
 import { convertDate, formatNgay, dataDate } from '../../../utils/format';
 import { callFetchAccount, callLogout, callUpdateCurrent, callUploadAvatar } from '../../../services/api';
