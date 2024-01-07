@@ -23,7 +23,7 @@ import ListCategoryAdmin from "./admin/page/Category";
 import ListOrderAdmin from "./admin/page/Orders";
 import ListCommentAdmin from "./admin/page/Comment";
 import CreateProduct from "./admin/page/Product/createProduct";
-import PolicyPage from "./pages/Policy";
+import PolicyPage from "./pages/policy";
 import ListUserAdmin from "./admin/page/User";
 
 
