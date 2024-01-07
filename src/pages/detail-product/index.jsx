@@ -23,10 +23,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import CustomTextArea from '../../components/textarea';
-import CustomRate from '../../components/Rate';
+import CustomRate from '../../components/rate';
 import PaginationMini from '../../components/pagination/paginationMini';
 import ShowReply from '../../components/show_reply';
-import { BiLike } from 'react-icons/bi';
 import LikeComment from '../../components/like_comment';
 
 
