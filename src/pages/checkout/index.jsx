@@ -3,7 +3,6 @@ import BreadcrumbCom from '../../components/breadcrumb';
 import OrderStep from '../../components/order-step';
 import { Col, Row, message, notification, Switch, Space, Radio, Checkbox, Divider } from 'antd';
 import { callCreateOrder, callHuyen, callPaypal, callTinh } from '../../services/api'
-import CustomInput from '../../components/Input';
 import { schema } from '../../utils/rule';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
