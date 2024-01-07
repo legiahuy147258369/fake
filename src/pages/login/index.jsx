@@ -10,7 +10,7 @@ import { schema } from '../../utils/rule'
 import { Link, useNavigate } from 'react-router-dom';
 import { callLogin } from '../../services/api';
 import { useDispatch } from 'react-redux';
-import LoadingSnip from '../../components/loading/loading-spin';
+import LoadingSnip from '../../components/loading-custom/loading-spin';
 import { doLoginAction } from '../../redux/account/accountSlice';
 const Login = () => {
     const navigate = useNavigate();

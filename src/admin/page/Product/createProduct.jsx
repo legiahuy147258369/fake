@@ -11,7 +11,7 @@ import { callCategory, callCreateProduct } from '../../../services/api';
 import CustomUpload from '../../../components/custom-upload';
 import CustomSelectV2 from '../../../components/select/select-v2';
 import { block } from '../../../utils/format';
-import LoadingSnip from '../../../components/loading/loading-spin';
+import LoadingSnip from '../../../components/loading-custom/loading-spin';
 const CreateProduct = () => {
     const registerSchema = schema.pick(['name', 'description', 'thumbnail', 'quantity', 'publish_date', 'number_of_page', 'author', 'block', 'price', 'category_id', 'slide']);
     const methods = useForm({ resolver: yupResolver(registerSchema) });

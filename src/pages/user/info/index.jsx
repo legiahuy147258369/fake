@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import '../account.scss';
 import { Divider, Button, Radio, Form, Input, Row, Col, message, notification, Avatar, Upload, Image } from 'antd';
 import { ruleAnt, schema } from '../../../utils/rule';
-import LoadingSnip from '../../../components/loading/loading-spin';
+import LoadingSnip from '../../../components/loading-custom/loading-spin';
 import { Link, useNavigate } from 'react-router-dom';
 import CustomSelectV2 from '../../../components/select/select-v2';
 import { FormProvider, useForm } from 'react-hook-form';
