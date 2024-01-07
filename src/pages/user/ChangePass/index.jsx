@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '../../../utils/rule';
 import '../account.scss';
 import { callUpdateCurrentPass } from '../../../services/api';
-import LoadingSnip from '../../../components/Loading/LoadingSpin';
+import LoadingSnip from '../../../components/loading/loading-spin';
 const Pass = () => {
     const [loading, setLoading] = useState(false);
     const registerSchema = schema.pick(['pass_current', 'password', 'confirm_password']);

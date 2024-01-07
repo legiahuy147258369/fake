@@ -5,13 +5,13 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { schema } from '../../../utils/rule';
 import { yupResolver } from '@hookform/resolvers/yup';
-import CustomInputV2 from '../../../components/Input/InputV2';
-import CustomTextArea from '../../../components/TextArea';
+import CustomInputV2 from '../../../components/input/input-v2';
+import CustomTextArea from '../../../components/textarea';
 import { callCategory, callCreateProduct } from '../../../services/api';
-import CustomUpload from '../../../components/CustomUpload';
-import CustomSelectV2 from '../../../components/Select/SelectV2';
+import CustomUpload from '../../../components/custom-upload';
+import CustomSelectV2 from '../../../components/select/select-v2';
 import { block } from '../../../utils/format';
-import LoadingSnip from '../../../components/Loading/LoadingSpin';
+import LoadingSnip from '../../../components/loading/loading-spin';
 const CreateProduct = () => {
     const registerSchema = schema.pick(['name', 'description', 'thumbnail', 'quantity', 'publish_date', 'number_of_page', 'author', 'block', 'price', 'category_id', 'slide']);
     const methods = useForm({ resolver: yupResolver(registerSchema) });

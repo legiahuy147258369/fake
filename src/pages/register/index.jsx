@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '../../utils/rule';
 import { Link, useNavigate } from 'react-router-dom';
-import LoadingSnip from '../../components/Loading/LoadingSpin';
+import LoadingSnip from '../../components/loading/loading-spin';
 import { callRegister } from '../../services/api';
 import { Button, message, Space } from 'antd';
 import omit from 'lodash/omit';

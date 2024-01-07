@@ -8,11 +8,11 @@ import { RiDeleteBin7Line } from 'react-icons/ri';
 import { FiEdit2 } from 'react-icons/fi';
 import { callAllOrder, callDelOrder, callOrderAndDetail, callUpdateOrder } from '../../../services/api';
 import { StatusOrder, StatusPayment, StatusOPtion, PaymentOPtion } from '../../../components/status-order';
-import CustomSelectV2 from '../../../components/Select/SelectV2';
+import CustomSelectV2 from '../../../components/select/select-v2';
 import { schema } from '../../../utils/rule';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import CustomInputV2 from '../../../components/Input/InputV2';
+import CustomInputV2 from '../../../components/input/input-v2';
 
 import ExportToExcel from '../../components/ExportExcel';
 

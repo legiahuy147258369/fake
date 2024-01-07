@@ -4,14 +4,14 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { schema } from '../../../utils/rule';
 import { yupResolver } from '@hookform/resolvers/yup';
-import CustomInputV2 from '../../../components/Input/InputV2';
-import CustomTextArea from '../../../components/TextArea';
-import CustomSelectV2 from '../../../components/Select/SelectV2';
+import CustomInputV2 from '../../../components/input/input-v2';
+import CustomTextArea from '../../../components/textarea';
+import CustomSelectV2 from '../../../components/select/select-v2';
 import { block, formatNgay } from '../../../utils/format';
 import '../../style.scss';
 import moment from 'moment';
 import _ from 'lodash'
-import CustomUploadV2 from '../../../components/CustomUpload/customV2';
+import CustomUploadV2 from '../../../components/custom-upload/custom-v2';
 import { callDelProductImg, callUpdateProduct } from '../../../services/api';
 const EditProduct = ({ book, cat, setLoading, setOpenDrawEdit, fetchBook }) => {
 

@@ -17,12 +17,12 @@ import ThumbsSwiper from '../../components/thumb';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { addToWishList } from '../../redux/wish/wishSlide';
 import BreadcrumbCom from '../../components/breadcrumb';
-import CustomInputV2 from '../../components/Input/InputV2';
+import CustomInputV2 from '../../components/input/input-v2';
 import { schema } from '../../utils/rule';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import CustomTextArea from '../../components/TextArea';
+import CustomTextArea from '../../components/textarea';
 import CustomRate from '../../components/Rate';
 import PaginationMini from '../../components/pagination/paginationMini';
 import ShowReply from '../../components/show_reply';

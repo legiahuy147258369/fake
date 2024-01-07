@@ -11,7 +11,7 @@ import { AiOutlinePlus, AiOutlineSearch } from 'react-icons/ai';
 import { formatGia, formatNgay } from '../../../utils/format';
 import { omitBy, isEmpty } from 'lodash';
 import { useNavigate } from 'react-router-dom';
-import LoadingSnip from '../../../components/Loading/LoadingSpin';
+import LoadingSnip from '../../../components/loading/loading-spin';
 import EditProduct from './editProduct';
 import { FormProvider, useForm } from 'react-hook-form';
 import ExportToExcel from '../../components/ExportExcel';
