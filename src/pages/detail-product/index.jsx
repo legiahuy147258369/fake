@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useNavigate, useParams } from "react-router-dom";
 import { callComments, callCreateComment, callProductDetail, callTopView } from '../../services/api';
 import _ from 'lodash';
-import Loading from '../../components/Loading';
+import Loading from '../../components/loading-custom';
 import SlideProduct from '../../components/slide-product';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
