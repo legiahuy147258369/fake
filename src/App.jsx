@@ -2,7 +2,7 @@
 
 import './App.scss';
 import useRouteElements from './useRoter';
-import ScrollToTop from './components/onscrollTop';
+import ScrollToTop from './components/OnscrollTop';
 
 
 function App() {
