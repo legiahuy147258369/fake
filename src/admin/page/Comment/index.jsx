@@ -9,7 +9,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { schema } from '../../../utils/rule';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomInputV2 from '../../../components/input-custom/input-v2';
-import CustomSelectV2 from '../../../components/select/select-v2';
+import CustomSelectV2 from '../../../components/select-custom/select-v2';
 import CustomRate from '../../../components/rate-custom'
 const vert = (item, index) => {
     let va = {

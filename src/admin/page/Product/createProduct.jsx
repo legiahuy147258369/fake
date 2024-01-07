@@ -9,7 +9,7 @@ import CustomInputV2 from '../../../components/input-custom/input-v2';
 import CustomTextArea from '../../../components/text-area';
 import { callCategory, callCreateProduct } from '../../../services/api';
 import CustomUpload from '../../../components/custom-upload';
-import CustomSelectV2 from '../../../components/select/select-v2';
+import CustomSelectV2 from '../../../components/select-custom/select-v2';
 import { block } from '../../../utils/format';
 import LoadingSnip from '../../../components/loading-custom/loading-spin';
 const CreateProduct = () => {

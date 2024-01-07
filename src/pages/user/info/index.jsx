@@ -4,7 +4,7 @@ import { Divider, Button, Radio, Form, Input, Row, Col, message, notification, A
 import { ruleAnt, schema } from '../../../utils/rule';
 import LoadingSnip from '../../../components/loading-custom/loading-spin';
 import { Link, useNavigate } from 'react-router-dom';
-import CustomSelectV2 from '../../../components/select/select-v2';
+import CustomSelectV2 from '../../../components/select-custom/select-v2';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomInputV2 from '../../../components/input-custom/input-v2';

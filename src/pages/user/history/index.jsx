@@ -5,7 +5,7 @@ import { StatusOPtion } from '../../../components/status-order';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { callOrderAndDetail, callUpdateOrderUser } from '../../../services/api';
-import CustomSelectV2 from '../../../components/select/select-v2';
+import CustomSelectV2 from '../../../components/select-custom/select-v2';
 import PaginationMini from '../../../components/pagination/paginationMini'
 import { formatGia, formatNgay } from '../../../utils/format';
 import moment from 'moment';

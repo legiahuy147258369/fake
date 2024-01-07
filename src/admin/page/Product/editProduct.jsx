@@ -6,7 +6,7 @@ import { schema } from '../../../utils/rule';
 import { yupResolver } from '@hookform/resolvers/yup';
 import CustomInputV2 from '../../../components/input-custom/input-v2';
 import CustomTextArea from '../../../components/text-area';
-import CustomSelectV2 from '../../../components/select/select-v2';
+import CustomSelectV2 from '../../../components/select-custom/select-v2';
 import { block, formatNgay } from '../../../utils/format';
 import '../../style.scss';
 import moment from 'moment';
