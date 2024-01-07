@@ -19,11 +19,11 @@ import WishList from "./pages/wish";
 import AccountUser from "./pages/user";
 import Dashboard from "./admin/page/Dashboard";
 import ListProductAdmin from "./admin/page/Product";
-import ListCategoryAdmin from "./admin/page/category";
+import ListCategoryAdmin from "./admin/page/Category";
 import ListOrderAdmin from "./admin/page/Orders";
 import ListCommentAdmin from "./admin/page/Comment";
 import CreateProduct from "./admin/page/Product/createProduct";
-import PolicyPage from "./pages/policy";
+import PolicyPage from "./pages/Policy";
 import ListUserAdmin from "./admin/page/User";
 
 
