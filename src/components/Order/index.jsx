@@ -2,7 +2,8 @@ import React from 'react'
 import { Button, Col, Divider, Result, Row } from 'antd';
 import './order.scss';
 import { formatGia } from '../../utils/format';
-import moment from 'moment';
+import moment from 'moment-timezone';
+moment.tz.setDefault('Asia/Bangkok');
 import { useNavigate } from 'react-router';
 const Order = (props) => {
     const { donhang } = props;

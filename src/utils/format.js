@@ -1,5 +1,6 @@
-import moment from 'moment';
 
+import moment from 'moment-timezone';
+moment.tz.setDefault('Asia/Bangkok');
 
 export const formatGia = (params) => {
     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(params)

@@ -9,7 +9,8 @@ import CustomTextArea from '../../../components/text-area';
 import CustomSelectV2 from '../../../components/select-custom/select-v2';
 import { block, formatNgay } from '../../../utils/format';
 import '../../style.scss';
-import moment from 'moment';
+import moment from 'moment-timezone';
+moment.tz.setDefault('Asia/Bangkok');
 import _ from 'lodash'
 import CustomUploadV2 from '../../../components/custom-upload/custom-v2';
 import { callDelProductImg, callUpdateProduct } from '../../../services/api';
