@@ -202,7 +202,7 @@ const DetailProduct = () => {
                             <h2 className='fs-25'>Đánh giá sản phẩm</h2>
                             <Row className="box-review">
                                 <Col xs={10} className='box-review__detail'>  <span><b>5</b>/5</span> <span><Rate value={5} /></span>
-                                    ({dataComment.total} lượt đánh giá) </Col>
+                                    ({dataComment?.total || 0} lượt đánh giá) </Col>
                                 <Col xs={14} className='btn-review' onClick={() => handleComment(-1)}> <div>Viết đánh giá</div></Col>
                             </Row>
                         </div>
@@ -234,7 +234,7 @@ const DetailProduct = () => {
                                 }
                                 <div className='box-pagination'>
 
-                                    <PaginationMini setPage={setPageComment} page={pageComment} total={dataComment.total} />
+                                    <PaginationMini setPage={setPageComment} page={pageComment} total={dataComment?.total || 0} />
                                 </div>
                                 <Divider />
                             </div>)}
