@@ -11,7 +11,6 @@ export const cartSlice = createSlice({
         addToCart: (state, action) => {
             let cart = state.cart;
             const { detail, qty } = action.payload;
-            console.log(detail, qty);
             const index = cart.findIndex(item => item.detail.id === detail.id);
             if (index > -1) {
                 cart[index].qty = cart[index].qty + qty;
